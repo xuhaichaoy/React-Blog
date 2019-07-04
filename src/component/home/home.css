@@ -1,0 +1,51 @@
+.homeList {
+    text-align: left;
+}
+.cards {
+    width: 100%;
+    text-align: left;
+    border-radius: 10px!important;
+}
+.listStyle {
+    margin-bottom: 30px!important;
+}
+.listStyle .ant-list-items li{
+    padding: 0!important;
+    margin-bottom: 16px!important;
+    border: none!important;
+}
+.cards .title {
+    font-size: 22px;
+    display: inline-block;
+}
+.cards .ant-card-meta-description {
+    text-align: right;
+    margin-bottom: 16px;
+}
+.cardsMessage ul {
+    padding: 0;
+    overflow: hidden;
+    height: 36px;
+    line-height: 36px;
+}
+.cardsMessage ul li {
+    float: left;
+    list-style: none;
+    margin-right: 20px;
+}
+.shuline {
+    margin: 0px!important;
+    margin-top: 20px!important;
+    margin-bottom: 10px!important;
+}
+.cards:hover {
+    background: #f0fafd;
+}
+.cardsMessage .messageNum {
+    margin-left: 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.listFoot {
+    text-align: left;
+}

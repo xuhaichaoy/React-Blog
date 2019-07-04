@@ -1,0 +1,74 @@
+.sidebar > .header{
+    padding-top: 26px;
+    padding-bottom: 60px;
+    border-right: 1px solid rgb(232, 232, 232); 
+}
+.header > .name {
+    margin: 16px;
+    margin-top: 16px;
+    font-weight: normal;
+}
+.header > .tips {
+    display: inline-block;
+    width: 66%;
+    text-align: center;
+    word-wrap: break-word; 
+    word-break: normal; 
+    
+}
+.brand .anticon {
+    margin-right: 6px;
+    display: inline-block;
+    vertical-align: middle!important;
+}
+.brand > ul{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+.brand > ul >li {
+    list-style: none;
+}
+.marginRight {
+    margin-right: 16px;
+}
+.brand > ul >li > span {
+    display: inline-block;
+    vertical-align: middle;
+}
+.currentArtical {
+    margin-top: -28px;
+    border-right: 1px solid rgb(232, 232, 232); 
+}
+.lists {
+    text-align: left;
+    padding-bottom: 46px!important;
+}
+.lis {
+    box-sizing: border-box;
+    padding-left: 20px!important;
+    padding-right: 10px!important;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.lis:hover {
+    background: #1890ff;
+    color: white;
+    cursor: pointer;
+}
+.sidebar > .tips {
+    margin-top: -28px!important;
+    border-right: 1px solid rgb(232, 232, 232); 
+    margin-bottom: 110px;
+}
+.tipsBlock {
+    margin: 6px!important;
+}
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background-color: transparent;
+  } 
+  

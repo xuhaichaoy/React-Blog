@@ -1,0 +1,87 @@
+h1 {
+    margin: 0!important;
+}
+.haichao {
+   height: 70px;
+   line-height: 70px; 
+}
+.input {
+    height: 70px;
+    line-height: 70px;
+    text-align: left;
+}
+.inputValue > input, .inputValue > input:focus{
+    border: none;
+    border-bottom: 1px solid white !important;
+    box-shadow: none;
+}
+.input > .verLine {
+    display: inline-block;
+    margin: 0!important;
+    margin-right: 8px!important;
+    margin-left: -2px!important;
+}
+.menu {
+    text-align: right;
+}
+.menu > .ant-menu-horizontal{
+    border-bottom: none;
+}
+.menu .ant-menu-item {
+    border-top: 2px solid transparent!important;
+    border-bottom: 2px solid transparent!important;
+}
+.menu .ant-menu-item-active {
+    border-top: 2px solid #1890ff!important;
+    border-bottom: 2px solid transparent!important;
+}
+.menu .ant-menu-item-selected {
+    border-top: 2px solid #1890ff!important;
+    border-bottom: 2px solid transparent!important;
+}
+.user {
+    height: 70px;
+    line-height: 70px;
+    text-align: right;
+    padding-right: 80px;
+}
+.login {
+    margin-right: 20px;
+}
+
+.fixed {
+    width: 100%;
+    position: fixed!important;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 8px #f0f1f2;
+    z-index: 99;
+}
+.header {
+    background: white;
+}
+.topHeader {
+    height: 90px;
+}
+.bell {
+    font-size: 20px;
+    vertical-align: middle!important;
+    display: inline-block;
+}
+.avatar {
+    margin-left: 20px!important;
+    vertical-align: middle;
+    display: inline-block;
+}
+.input .ant-input-affix-wrapper .ant-input:not(:first-child) {
+    padding-left: 38px;
+}
+.fixedBac {
+    height: 90px;
+    background: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 98;
+}

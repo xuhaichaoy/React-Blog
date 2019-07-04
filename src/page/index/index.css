@@ -1,0 +1,10 @@
+.barFixed {
+    position: fixed!important;
+    top: 90px;
+    left: 0;
+    height: 100vh;
+    overflow: auto;
+}
+.pageContent {
+    padding-left: 40px;
+}
