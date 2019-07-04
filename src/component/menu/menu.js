@@ -1,16 +1,16 @@
 import React from "react";
 import { Menu, Icon, Input, Row, Col, Divider, Avatar, Dropdown } from "antd";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./menu.css";
 // const { Search } = Input;
 const { SubMenu } = Menu;
 
 class App extends React.Component {
   state = {
-    current: "home"
+    current: "index"
   };
 
   handleClick = e => {
-    console.log("click ", e);
     this.setState({
       current: e.key
     });
@@ -59,10 +59,18 @@ class App extends React.Component {
                   mode="horizontal"
                   style={{ height: 70, lineHeight: "65px" }}
                 >
-                  <Menu.Item key="home">Home</Menu.Item>
-                  <Menu.Item key="pigeonhole">Pigeonhole</Menu.Item>
-                  <Menu.Item key="category">Category</Menu.Item>
-                  <Menu.Item key="alipay">Link</Menu.Item>
+                  <Menu.Item key="index">
+                    <Link to="/index">首页</Link>
+                  </Menu.Item>
+                  <Menu.Item key="time">
+                    <Link to="/time">时间轴</Link>
+                  </Menu.Item>
+                  <Menu.Item key="category">
+                    <Link to="/category">分类</Link>
+                  </Menu.Item>
+                  <Menu.Item key="intro">
+                    <Link to="/intro">介绍</Link>
+                  </Menu.Item>
                 </Menu>
               </div>
             </Col>
@@ -79,9 +87,7 @@ class App extends React.Component {
             </Col>
           </Row>
         </div>
-        <div className="fixedBac">
-        
-        </div>
+        <div className="fixedBac" />
 
         <div className="topHeader" />
       </div>

@@ -1,10 +1,9 @@
 import React from "react";
 import SideBar from "../../component/sidebar/sidebar";
-import Home from "../../component/home/home";
-import Anchor from "../../component/anchor/anchor";
+import Shaft from "../../component/shaft/shaft";
 import { Row, Col } from "antd";
 
-import "./index.css";
+import "./time.css";
 
 class App extends React.Component {
   render() {
@@ -18,14 +17,9 @@ class App extends React.Component {
               </div>
             </Col>
             <Col className="gutter-row" xs={6} sm={6} md={8} lg={5} xl={5}></Col>
-            <Col className="gutter-row" xs={14} sm={14} md={14} lg={15} xl={15}>
+            <Col className="gutter-row" xs={18} sm={18} md={16} lg={19} xl={19}>
               <div className="gutter-box" className="pageContent">
-                <Home></Home>
-              </div>
-            </Col>
-            <Col className="gutter-row" xs={4} sm={4} md={4} lg={4} xl={4}>
-              <div className="gutter-box" style={{paddingLeft: "40px"}}>
-                <Anchor></Anchor>
+                <Shaft></Shaft>
               </div>
             </Col>
           </Row>

@@ -1,0 +1,19 @@
+.timeline {
+    text-align: left;
+}
+.year {
+    font-size: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 50px;
+}
+.totalArctical {
+    display: inline-block;
+    height: 50px;
+    font-size: 16px;
+
+}
+.pagin {
+    text-align: left;
+    display: none; 
+}
