@@ -1,14 +1,31 @@
 import React from "react";
 import { Menu, Icon, Input, Row, Col, Divider, Avatar, Dropdown } from "antd";
+import Login from "../login/login";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./menu.css";
 // const { Search } = Input;
 const { SubMenu } = Menu;
 
+const menu = (
+  <Menu>
+    <Menu.Item>1st menu item</Menu.Item>
+    <Menu.Item>2nd menu item</Menu.Item>
+    <SubMenu title="sub menu">
+      <Menu.Item>3rd menu item</Menu.Item>
+      <Menu.Item>4th menu item</Menu.Item>
+    </SubMenu>
+    <SubMenu title="disabled sub menu" disabled>
+      <Menu.Item>5d menu item</Menu.Item>
+      <Menu.Item>6th menu item</Menu.Item>
+    </SubMenu>
+  </Menu>
+);
 class App extends React.Component {
   state = {
-    current: "index"
+    current: "index",
+    logined: false
   };
+  
 
   handleClick = e => {
     this.setState({
@@ -16,21 +33,30 @@ class App extends React.Component {
     });
   };
 
+  userInfo() {
+    if (this.state.logined) {
+      return (
+        <div className="user">
+          <Icon type="bell" className="bell" />
+          <Dropdown overlay={menu} trigger={["click"]}>
+            <Avatar
+              className="avatar ant-dropdown-link"
+              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            />
+          </Dropdown>
+        </div>
+      );
+    } else {
+      return (
+        <div className="user">
+          <Login />
+        </div>
+      );
+    }
+  }
+
   render() {
-    const menu = (
-      <Menu>
-        <Menu.Item>1st menu item</Menu.Item>
-        <Menu.Item>2nd menu item</Menu.Item>
-        <SubMenu title="sub menu">
-          <Menu.Item>3rd menu item</Menu.Item>
-          <Menu.Item>4th menu item</Menu.Item>
-        </SubMenu>
-        <SubMenu title="disabled sub menu" disabled>
-          <Menu.Item>5d menu item</Menu.Item>
-          <Menu.Item>6th menu item</Menu.Item>
-        </SubMenu>
-      </Menu>
-    );
+    
     return (
       <div className="top">
         <div className="fixed">
@@ -75,15 +101,7 @@ class App extends React.Component {
               </div>
             </Col>
             <Col xs={2} sm={4} md={4} lg={4} xl={4}>
-              <div className="user">
-                <Icon type="bell" className="bell" />
-                <Dropdown overlay={menu} trigger={["click"]}>
-                  <Avatar
-                    className="avatar ant-dropdown-link"
-                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                  />
-                </Dropdown>
-              </div>
+              {this.userInfo()}
             </Col>
           </Row>
         </div>
