@@ -17,10 +17,15 @@ var UserController = /** @class */ (function () {
     function UserController() {
     }
     UserController.prototype.getAll = function () {
-        return "This action returns all users";
+        return [
+            { id: 1, name: "First user!" },
+            { id: 2, name: "Second user!" }
+        ];
     };
     UserController.prototype.getOne = function (id) {
-        return "This action returns user #" + id;
+        return {
+            user: id
+        };
     };
     UserController.prototype.post = function (user) {
         return "Saving user...";
