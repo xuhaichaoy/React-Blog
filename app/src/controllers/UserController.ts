@@ -1,18 +1,21 @@
 import { Controller, Param, Body, Get, Post, Put, Delete } from "routing-controllers";
-
+import Users from '../models/Users'
 @Controller()
 export class UserController {
 
    @Get("/users")
    getAll() {
-      return [
-         { id: 1, name: "First user!" },
-         { id: 2, name: "Second user!" }
-      ];
+      console.log(Users)
+      Users.build()
+      // return [
+      //    { id: 1, name: "First user!" },
+      //    { id: 2, name: "Second user!" }
+      // ];
    }
 
    @Get("/users/:id")
    getOne(@Param("id") id: number) {
+      
       return {
          user: id
       };

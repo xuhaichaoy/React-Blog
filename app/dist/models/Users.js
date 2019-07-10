@@ -5,6 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var mysql_1 = __importDefault(require("../config/mysql"));
 var UserModel = mysql_1.default.sequelize.define('user', {
+    // id: { type: obj.Sequelize.INTEGER, autoIncrement: true, primaryKeys: true, unique: true },
+    // username: { type: obj.Sequelize.STRING, allowNull: false },
+    // password: { type: obj.Sequelize.STRING, allowNull: false },
     id: {
         type: mysql_1.default.Sequelize.INTEGER(11),
         primaryKey: true,
@@ -16,6 +19,11 @@ var UserModel = mysql_1.default.sequelize.define('user', {
     updatedAt: mysql_1.default.Sequelize.BIGINT,
 }, {
     timestamps: false
+});
+UserModel.sync().on('success', function () {
+    console.log('aa..');
+}).on('failure', function () {
+    console.log('bb..');
 });
 exports.default = UserModel;
 //# sourceMappingURL=Users.js.map

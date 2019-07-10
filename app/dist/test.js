@@ -1,12 +1,12 @@
-function reverseLinkedList(head) {
-  // Start from here.
-  if (!head || !head.next) return head;
-  var p = head;
-  head = reverseLinkedList(p.next);
-  p.next.next = p;
-  p.next = null;
-  return head;
-}
+// function reverseLinkedList(head) {
+//   // Start from here.
+//   if (!head || !head.next) return head;
+//   var p = head;
+//   head = reverseLinkedList(p.next);
+//   p.next.next = p;
+//   p.next = null;
+//   return head;
+// }
 
 function rotateMitrix(mitrix) {
   let arr = mitrix;
@@ -31,7 +31,6 @@ function reverseLinkedList(head) {
   var q = null;
 
   if (p === null)
-    //做个判断啊！！非常傻的一个错呜呜呜
     return null;
 
   while (p.next !== null) {
@@ -41,11 +40,22 @@ function reverseLinkedList(head) {
     list = q;
   }
   return list;
-  // head -> 1 -> 2 -> 3 -> 4
-  // list
-  // p       
-  //         q 
-  //         2    list 
-  //         2    1    3    4 
-   
 }
+console.log(reverseLinkedList([1,2,3,4,5]))
+
+function throttle(fn) {
+  let canRun = true; // 通过闭包保存一个标记
+  return function () {
+    if (!canRun) return; // 在函数开头判断标记是否为true，不为true则return
+    canRun = false; // 立即设置为false
+    setTimeout(() => { // 将外部传入的函数的执行放在setTimeout中
+      fn.apply(this, arguments);
+      // 最后在setTimeout执行完毕后再把标记设置为true(关键)表示可以执行下一次循环了。当定时器没有执行的时候标记永远是false，在开头被return掉
+      canRun = true;
+    }, 500);
+  };
+}
+function sayHi(e) {
+  console.log(e.target.innerWidth, e.target.innerHeight);
+}
+window.addEventListener('resize', throttle(sayHi));

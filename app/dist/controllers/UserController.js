@@ -11,16 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var routing_controllers_1 = require("routing-controllers");
+var Users_1 = __importDefault(require("../models/Users"));
 var UserController = /** @class */ (function () {
     function UserController() {
     }
     UserController.prototype.getAll = function () {
-        return [
-            { id: 1, name: "First user!" },
-            { id: 2, name: "Second user!" }
-        ];
+        console.log(Users_1.default);
+        Users_1.default.build();
+        // return [
+        //    { id: 1, name: "First user!" },
+        //    { id: 2, name: "Second user!" }
+        // ];
     };
     UserController.prototype.getOne = function (id) {
         return {
