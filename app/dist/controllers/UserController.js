@@ -21,12 +21,12 @@ var UserController = /** @class */ (function () {
     function UserController() {
     }
     UserController.prototype.getAll = function () {
-        console.log(Users_1.default);
+        console.log(Users_1.default, 888888);
         Users_1.default.build();
-        // return [
-        //    { id: 1, name: "First user!" },
-        //    { id: 2, name: "Second user!" }
-        // ];
+        return [
+            { id: 1, name: "First user!" },
+            { id: 2, name: "Second user!" }
+        ];
     };
     UserController.prototype.getOne = function (id) {
         return {

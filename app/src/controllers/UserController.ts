@@ -5,12 +5,12 @@ export class UserController {
 
    @Get("/users")
    getAll() {
-      console.log(Users)
+      console.log(Users, 888888)
       Users.build()
-      // return [
-      //    { id: 1, name: "First user!" },
-      //    { id: 2, name: "Second user!" }
-      // ];
+      return [
+         { id: 1, name: "First user!" },
+         { id: 2, name: "Second user!" }
+      ];
    }
 
    @Get("/users/:id")
