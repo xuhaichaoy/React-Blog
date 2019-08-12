@@ -1,8 +1,6 @@
 import obj from '../config/mysql'
+import { async } from 'q';
 const UserModel = obj.sequelize.define('user', {
-    // id: { type: obj.Sequelize.INTEGER, autoIncrement: true, primaryKeys: true, unique: true },
-    // username: { type: obj.Sequelize.STRING, allowNull: false },
-    // password: { type: obj.Sequelize.STRING, allowNull: false },
     uid: {
         type: obj.Sequelize.INTEGER(11),
         primaryKey: true,            // 主键
@@ -19,25 +17,21 @@ const UserModel = obj.sequelize.define('user', {
 }, {
         timestamps: false
 })
-// UserModel.sync()
+UserModel.sync();
+
 (async () => {
-    const user = await UserModel.create({
-        uid: 1,
+    const user = await UserModel.findAll({
+        uid: 3,
         nickName: 'chao',
         userName: 'haichao',
         passWord: '1234'
     }).then(function (result: any) {
-        console.log("ok")
+        console.log(result.dataValues, "333333333333333")
     }).catch(function (err: any) {
-        console.log("no")
+        console.log(err, "44444444444")
     })
-})()
-// UserModel.sync()
-// .on('success', function () {
-//     console.log('aa..');
-// }).on('failure', function () {
-//     console.log('bb..');
-// });
+})();
+
 export default UserModel
 
 

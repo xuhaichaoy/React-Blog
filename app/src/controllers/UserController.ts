@@ -5,7 +5,6 @@ export class UserController {
 
    @Get("/users")
    getAll() {
-      console.log(Users, 888888)
       Users.build()
       return [
          { id: 1, name: "First user!" },

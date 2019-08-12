@@ -41,9 +41,6 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var mysql_1 = __importDefault(require("../config/mysql"));
 var UserModel = mysql_1.default.sequelize.define('user', {
-    // id: { type: obj.Sequelize.INTEGER, autoIncrement: true, primaryKeys: true, unique: true },
-    // username: { type: obj.Sequelize.STRING, allowNull: false },
-    // password: { type: obj.Sequelize.STRING, allowNull: false },
     uid: {
         type: mysql_1.default.Sequelize.INTEGER(11),
         primaryKey: true,
@@ -59,19 +56,21 @@ var UserModel = mysql_1.default.sequelize.define('user', {
     admin: mysql_1.default.Sequelize.BIGINT,
 }, {
     timestamps: false
-})(function () { return __awaiter(_this, void 0, void 0, function () {
+});
+UserModel.sync();
+(function () { return __awaiter(_this, void 0, void 0, function () {
     var user;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, UserModel.create({
-                    uid: 1,
+            case 0: return [4 /*yield*/, UserModel.findAll({
+                    uid: 3,
                     nickName: 'chao',
                     userName: 'haichao',
                     passWord: '1234'
                 }).then(function (result) {
-                    console.log("ok");
+                    console.log(result.dataValues, "333333333333333");
                 }).catch(function (err) {
-                    console.log("no");
+                    console.log(err, "44444444444");
                 })];
             case 1:
                 user = _a.sent();
@@ -79,11 +78,5 @@ var UserModel = mysql_1.default.sequelize.define('user', {
         }
     });
 }); })();
-// UserModel.sync()
-// .on('success', function () {
-//     console.log('aa..');
-// }).on('failure', function () {
-//     console.log('bb..');
-// });
 exports.default = UserModel;
 //# sourceMappingURL=Users.js.map
