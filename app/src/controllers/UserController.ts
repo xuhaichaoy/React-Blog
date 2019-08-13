@@ -4,12 +4,11 @@ import Users from '../models/Users'
 export class UserController {
 
    @Get("/users")
-   getAll() {
-      Users.build()
-      return [
-         { id: 1, name: "First user!" },
-         { id: 2, name: "Second user!" }
-      ];
+   async getAll() {
+      const r = await Users.fetch() 
+      return {
+         code: r
+      }
    }
 
    @Get("/users/:id")

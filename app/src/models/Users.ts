@@ -18,19 +18,25 @@ const UserModel = obj.sequelize.define('user', {
         timestamps: false
 })
 UserModel.sync();
-
-(async () => {
+UserModel.fetch = async function () {
+    var r = {}
     const user = await UserModel.findAll({
         uid: 3,
         nickName: 'chao',
         userName: 'haichao',
         passWord: '1234'
     }).then(function (result: any) {
-        console.log(result.dataValues, "333333333333333")
+        r = result
+        // r = {
+        //     name: 1,
+        //     data: JSON.stringify(result)
+        // }
     }).catch(function (err: any) {
-        console.log(err, "44444444444")
+        r = err
     })
-})();
+    return r
+};
+
 
 export default UserModel
 
