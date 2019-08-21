@@ -1,5 +1,4 @@
 import obj from '../config/mysql'
-import { async } from 'q';
 const UserModel = obj.sequelize.define('user', {
     uid: {
         type: obj.Sequelize.INTEGER(11),
@@ -19,20 +18,25 @@ const UserModel = obj.sequelize.define('user', {
 })
 UserModel.sync();
 UserModel.fetch = async function () {
-    var r = {}
-    const user = await UserModel.findAll({
-        uid: 3,
-        nickName: 'chao',
-        userName: 'haichao',
-        passWord: '1234'
+    let r = {}
+    await UserModel.findAll({
+        where: {
+            nickName: 'chao',
+            userName: '111',
+            passWord: '1234'
+        }
     }).then(function (result: any) {
-        r = result
-        // r = {
-        //     name: 1,
-        //     data: JSON.stringify(result)
-        // }
+        r = {
+            status: 1,
+            msg: "success",
+            data: JSON.parse(JSON.stringify(result))  // 正常
+        }
     }).catch(function (err: any) {
-        r = err
+        r = {
+            status: -1000,
+            msg: "error",
+            data: err  // 正常
+        }
     })
     return r
 };
