@@ -1,12 +1,13 @@
 import React from "react";
 import { Form, Icon, Input, Button, Checkbox, Modal } from "antd";
+import api from '../../config/http'
 import "./login.css";
 
 class NormalLoginForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      
+
     }
     // 为了在回调函数中使用 this 绑定 this 必不可少
     // this.handleClick = this.handleClick.bind(this)
@@ -20,14 +21,10 @@ class NormalLoginForm extends React.Component {
     });
   };
 
-  showReg= () => {
-    console.log(this.state,111111)
-    this.setState({
-      regvisible: true,
-      loginvisible: false,
-    });
+  showReg = () => {
+    this.props.showRegModal()
   }
-  
+
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -76,7 +73,7 @@ class NormalLoginForm extends React.Component {
                 valuePropName: "checked",
                 initialValue: true
               })(<Checkbox>Remember me</Checkbox>)}
-              <a className="login-form-forgot forget" href="">
+              <a className="login-form-forgot forget" href="javascript:;">
                 Forgot password
               </a>
               <Button
@@ -108,7 +105,9 @@ class NormalRegForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        api.reg(values, function(res) {
+          console.log(res)
+        })
       }
     });
   };
@@ -134,11 +133,7 @@ class NormalRegForm extends React.Component {
     callback();
   };
   showLog = () => {
-    console.log(2222222)
-    this.setState({
-      regvisible: false,
-      loginvisible: true,
-    });
+    this.props.showModal()
   }
 
   render() {
@@ -235,22 +230,23 @@ const WrappedNormalRegForm = Form.create({ name: "normal_reg" })(NormalRegForm);
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loginvisible: false,
+      regvisible: false
+    };
   }
-  state = {
-    loginvisible: false,
-    regvisible: false
-  };
 
   showModal = () => {
     this.setState({
+      regvisible: false,
       loginvisible: true
     });
   };
 
   showRegModal = () => {
     this.setState({
-      regvisible: true
+      regvisible: true,
+      loginvisible: false
     });
   };
 
@@ -298,7 +294,7 @@ class App extends React.Component {
           onCancel={this.handleloginCancel}
           footer={null}
         >
-          <WrappedNormalLoginForm />
+          <WrappedNormalLoginForm showRegModal={this.showRegModal} />
         </Modal>
         <Modal
           title="注册"
@@ -307,7 +303,7 @@ class App extends React.Component {
           onCancel={this.handleregCancel}
           footer={null}
         >
-          <WrappedNormalRegForm />
+          <WrappedNormalRegForm showModal={this.showModal} />
         </Modal>
       </div>
     );

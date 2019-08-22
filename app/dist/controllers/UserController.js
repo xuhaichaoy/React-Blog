@@ -75,8 +75,10 @@ var UserController = /** @class */ (function () {
             user: id
         };
     };
-    UserController.prototype.post = function (user) {
-        return "Saving user...";
+    UserController.prototype.post = function () {
+        return {
+            data: 1
+        };
     };
     UserController.prototype.put = function (id, user) {
         return "Updating a user...";
@@ -98,10 +100,9 @@ var UserController = /** @class */ (function () {
         __metadata("design:returntype", void 0)
     ], UserController.prototype, "getOne", null);
     __decorate([
-        routing_controllers_1.Post("/users"),
-        __param(0, routing_controllers_1.Body()),
+        routing_controllers_1.Post("/regUser"),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
+        __metadata("design:paramtypes", []),
         __metadata("design:returntype", void 0)
     ], UserController.prototype, "post", null);
     __decorate([

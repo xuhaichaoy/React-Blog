@@ -1,6 +1,6 @@
 import React from "react";
 import { List, Card, Divider, Icon, Tag } from "antd";
-import axios from "axios"
+import axios from '../../config/axios';
 import "./home.css";
 
 const { Meta } = Card;

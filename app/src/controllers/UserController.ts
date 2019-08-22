@@ -19,9 +19,11 @@ export class UserController {
       };
    }
 
-   @Post("/users")
-   post(@Body() user: any) {
-      return "Saving user...";
+   @Post("/regUser")
+   post() {
+      return {
+         data: 1
+      }
    }
 
    @Put("/users/:id")
