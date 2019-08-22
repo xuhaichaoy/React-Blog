@@ -1,6 +1,7 @@
 import "reflect-metadata"; // this shim is required
 import { createExpressServer } from "routing-controllers";
 import { UserController } from "./controllers/UserController";
+import { ArticalController } from "./controllers/ArticalController";
 
 const app = createExpressServer({
    defaults: {
@@ -16,7 +17,8 @@ const app = createExpressServer({
          required: true
       }
    },
-   controllers: [UserController]
+   cors: true, // CORS 模块跨域
+   controllers: [UserController, ArticalController]
 });
 
 app.listen(3000);
