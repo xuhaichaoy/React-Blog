@@ -1,13 +1,14 @@
 import { Controller, Param, Body, Get, Post, Put, Delete } from "routing-controllers";
-import Users from '../models/Users'
+import Artical from '../models/Articals'
 @Controller()
-export class UserController {
+export class ArticalController {
 
-   @Get("/users")
+   @Get("/allArticals")
    async getAll() {
-      const r = await Users.fetch() 
+      // 获取所有文章信息
+      const r = await Artical.fetch() 
       return {
-         code: r
+         data: r
       }
    }
 
@@ -19,12 +20,9 @@ export class UserController {
       };
    }
 
-   @Post("/regUser")
-   post(@Param("email") email: any) {
-      console.log(email)
-      return {
-         data: email
-      }
+   @Post("/users")
+   post(@Body() user: any) {
+      return "Saving user...";
    }
 
    @Put("/users/:id")

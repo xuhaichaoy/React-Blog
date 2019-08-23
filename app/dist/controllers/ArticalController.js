@@ -51,80 +51,77 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var routing_controllers_1 = require("routing-controllers");
-var Users_1 = __importDefault(require("../models/Users"));
-var UserController = /** @class */ (function () {
-    function UserController() {
+var Articals_1 = __importDefault(require("../models/Articals"));
+var ArticalController = /** @class */ (function () {
+    function ArticalController() {
     }
-    UserController.prototype.getAll = function () {
+    ArticalController.prototype.getAll = function () {
         return __awaiter(this, void 0, void 0, function () {
             var r;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Users_1.default.fetch()];
+                    case 0: return [4 /*yield*/, Articals_1.default.fetch()];
                     case 1:
                         r = _a.sent();
                         return [2 /*return*/, {
-                                code: r
+                                data: r
                             }];
                 }
             });
         });
     };
-    UserController.prototype.getOne = function (id) {
+    ArticalController.prototype.getOne = function (id) {
         return {
             user: id
         };
     };
-    UserController.prototype.post = function (email) {
-        console.log(email);
-        return {
-            data: email
-        };
+    ArticalController.prototype.post = function (user) {
+        return "Saving user...";
     };
-    UserController.prototype.put = function (id, user) {
+    ArticalController.prototype.put = function (id, user) {
         return "Updating a user...";
     };
-    UserController.prototype.remove = function (id) {
+    ArticalController.prototype.remove = function (id) {
         return "Removing user...";
     };
     __decorate([
-        routing_controllers_1.Get("/users"),
+        routing_controllers_1.Get("/allArticals"),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", Promise)
-    ], UserController.prototype, "getAll", null);
+    ], ArticalController.prototype, "getAll", null);
     __decorate([
         routing_controllers_1.Get("/users/:id"),
         __param(0, routing_controllers_1.Param("id")),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Number]),
         __metadata("design:returntype", void 0)
-    ], UserController.prototype, "getOne", null);
+    ], ArticalController.prototype, "getOne", null);
     __decorate([
-        routing_controllers_1.Post("/regUser"),
-        __param(0, routing_controllers_1.Param("email")),
+        routing_controllers_1.Post("/users"),
+        __param(0, routing_controllers_1.Body()),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
-    ], UserController.prototype, "post", null);
+    ], ArticalController.prototype, "post", null);
     __decorate([
         routing_controllers_1.Put("/users/:id"),
         __param(0, routing_controllers_1.Param("id")), __param(1, routing_controllers_1.Body()),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Number, Object]),
         __metadata("design:returntype", void 0)
-    ], UserController.prototype, "put", null);
+    ], ArticalController.prototype, "put", null);
     __decorate([
         routing_controllers_1.Delete("/users/:id"),
         __param(0, routing_controllers_1.Param("id")),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Number]),
         __metadata("design:returntype", void 0)
-    ], UserController.prototype, "remove", null);
-    UserController = __decorate([
+    ], ArticalController.prototype, "remove", null);
+    ArticalController = __decorate([
         routing_controllers_1.Controller()
-    ], UserController);
-    return UserController;
+    ], ArticalController);
+    return ArticalController;
 }());
-exports.UserController = UserController;
-//# sourceMappingURL=UserController.js.map
+exports.ArticalController = ArticalController;
+//# sourceMappingURL=ArticalController.js.map

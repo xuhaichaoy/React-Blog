@@ -49,3 +49,11 @@
 .listFoot {
     text-align: left;
 }
+.articalContent {
+    word-wrap: break-word; 
+    word-break: normal; 
+    display: block;
+    max-height: 260px;
+    overflow: hidden;
+    min-height: 120px;
+}

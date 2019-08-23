@@ -1,56 +1,59 @@
 import React from "react";
 import { List, Card, Divider, Icon, Tag } from "antd";
+import axios from '../../config/axios';
 import "./home.css";
 
 const { Meta } = Card;
-const data = [
-  "Racing car sprays burning fuel into crowd.",
-  "Japanese princess to wed commoner.",
-  "Australian walks 100km after outback crash.",
-  "Man charged over missing wedding girl.",
-  "Los Angeles battles huge wildfires."
-];
 
 class App extends React.Component {
-  state = {};
+  state = {
+    allData: []
+  };
+  componentDidMount() {
+    const _this = this
+    axios.get('http://localhost:3000/allArticals')
+      .then(function (r) {
+        const { data } = r
+        const res = data.data
+        if (res.status === 1) {
+          _this.setState({
+            allData: res.list
+          });
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+
+      })
+  }
 
   render() {
     return (
       <List
         className="listStyle"
-        dataSource={data}
+        dataSource={this.state.allData}
         pagination={{
-            onChange: page => {
-              console.log(page);
-            },
-            pageSize: 3,
-          }}
-          footer={
-            <div className="listFoot">
-              <b>ant design</b> footer part
-            </div>
-          }
+          onChange: page => {
+            console.log(page);
+          },
+          pageSize: 6,
+        }}
+        footer={
+          <div className="listFoot">
+            <b>haichao</b> 2019
+          </div>
+        }
         renderItem={item => (
           <List.Item>
             <Card hoverable={true} className="cards">
               <Divider orientation="left">
-                <span className="title">ES6 + TypeScript</span>
+                <span className="title">{item.artical_name}</span>
               </Divider>
-              <Meta description="2019-07-01" />
-              <p>
-                Card contentCard contentCard contentCard contentCard contentCard
-                contentCard contentCard contentCard contentCard contentCard
-                content
+              <Meta description={item.Date} />
+              <p className="articalContent">
+               {item.content}
               </p>
-              <p>
-                Card contentCard contentCard contentCard contentCard contentCard
-                contentCard contentCard contentCard contentCard contentCard
-                content
-              </p>
-              <p>Card content</p>
-              <p>Card content</p>
-              <p>Card content</p>
-              <p>Card content</p>
+             
               <Divider className="shuline" />
               <div className="cardsMessage">
                 <ul>

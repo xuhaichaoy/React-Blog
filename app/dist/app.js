@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata"); // this shim is required
 var routing_controllers_1 = require("routing-controllers");
 var UserController_1 = require("./controllers/UserController");
+var ArticalController_1 = require("./controllers/ArticalController");
 var app = routing_controllers_1.createExpressServer({
     defaults: {
         //with this option, null will return 404 by default
@@ -14,7 +15,8 @@ var app = routing_controllers_1.createExpressServer({
             required: true
         }
     },
-    controllers: [UserController_1.UserController]
+    cors: true,
+    controllers: [UserController_1.UserController, ArticalController_1.ArticalController]
 });
 app.listen(3000);
 console.log("启动成功！！！");
