@@ -75,9 +75,10 @@ var UserController = /** @class */ (function () {
             user: id
         };
     };
-    UserController.prototype.post = function () {
+    UserController.prototype.post = function (email) {
+        console.log(email);
         return {
-            data: 1
+            data: email
         };
     };
     UserController.prototype.put = function (id, user) {
@@ -101,8 +102,9 @@ var UserController = /** @class */ (function () {
     ], UserController.prototype, "getOne", null);
     __decorate([
         routing_controllers_1.Post("/regUser"),
+        __param(0, routing_controllers_1.Param("email")),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
+        __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], UserController.prototype, "post", null);
     __decorate([

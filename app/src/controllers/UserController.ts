@@ -20,9 +20,10 @@ export class UserController {
    }
 
    @Post("/regUser")
-   post() {
+   post(@Param("email") email: any) {
+      console.log(email)
       return {
-         data: 1
+         data: email
       }
    }
 

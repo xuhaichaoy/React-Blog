@@ -15,7 +15,7 @@ const UserModel = obj.sequelize.define('user', {
     admin: obj.Sequelize.BIGINT,
 }, {
         timestamps: false
-})
+}) 
 UserModel.sync();
 UserModel.fetch = async function () {
     let r = {}
