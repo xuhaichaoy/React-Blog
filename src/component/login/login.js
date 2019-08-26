@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Icon, Input, Button, Checkbox, Modal } from "antd";
+import { Form, Icon, Input, Button, Checkbox, Modal, message } from "antd";
 import api from '../../config/http'
 import "./login.css";
 
@@ -13,10 +13,19 @@ class NormalLoginForm extends React.Component {
     // this.handleClick = this.handleClick.bind(this)
   }
   handleSubmit = e => {
+    const that = this
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        api.login(values, function(res) {
+          const {data} = res.data
+          if(data.status === 1) {
+            message.success('登录成功')
+            that.props.hideModal()
+          }else {
+            message.warning('用户名或密码错误')
+          }
+        })
       }
     });
   };
@@ -102,11 +111,18 @@ class NormalRegForm extends React.Component {
     autoCompleteResult: []
   };
   handleSubmit = e => {
+    const that = this
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         api.reg(values, function(res) {
-          console.log(res)
+          const {data} = res.data
+          if(data.status === 1) {
+            message.success('注册成功')
+            that.props.hideModal()
+          }else {
+            message.warning('用户名已存在')
+          }
         })
       }
     });
@@ -243,6 +259,13 @@ class App extends React.Component {
     });
   };
 
+  hideModal = () => {
+    this.setState({
+      regvisible: false,
+      loginvisible: false
+    });
+  };
+
   showRegModal = () => {
     this.setState({
       regvisible: true,
@@ -294,7 +317,7 @@ class App extends React.Component {
           onCancel={this.handleloginCancel}
           footer={null}
         >
-          <WrappedNormalLoginForm showRegModal={this.showRegModal} />
+          <WrappedNormalLoginForm showRegModal={this.showRegModal} hideModal={this.hideModal}/>
         </Modal>
         <Modal
           title="注册"
@@ -303,7 +326,7 @@ class App extends React.Component {
           onCancel={this.handleregCancel}
           footer={null}
         >
-          <WrappedNormalRegForm showModal={this.showModal} />
+          <WrappedNormalRegForm showModal={this.showModal} hideModal={this.hideModal}/>
         </Modal>
       </div>
     );

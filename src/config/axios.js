@@ -10,11 +10,11 @@ const apiURL = "http://localhost:3000"
 // axios默认配置
 Axios.defaults.timeout = 10000 // 超时时间
 Axios.defaults.baseURL = apiURL // 默认地址
-Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+Axios.defaults.headers.post['Content-Type'] = 'application/json'
 //整理数据
 Axios.defaults.transformRequest = function (data) {
-  data = Qs.stringify(data)
-  // data = JSON.stringify(data)
+  // data = Qs.stringify(data)
+  data = JSON.stringify(data)
   return data
 };
 
@@ -42,7 +42,7 @@ Axios.interceptors.request.use(
 // http response 拦截器
 Axios.interceptors.response.use(
   response => {
-    if (response.data.resultCode == "404") {
+    if (response.data.resultCode === "404") {
       // console.log("response.data.resultCode是404")
       // 返回 错误代码-1 清除ticket信息并跳转到登录页面
       //      cookie.del("ticket")

@@ -70,16 +70,35 @@ var UserController = /** @class */ (function () {
             });
         });
     };
-    UserController.prototype.getOne = function (id) {
-        return {
-            user: id
-        };
+    UserController.prototype.login = function (user) {
+        return __awaiter(this, void 0, void 0, function () {
+            var r;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Users_1.default.login(user)];
+                    case 1:
+                        r = _a.sent();
+                        return [2 /*return*/, {
+                                data: r
+                            }];
+                }
+            });
+        });
     };
-    UserController.prototype.post = function (email) {
-        console.log(email);
-        return {
-            data: email
-        };
+    UserController.prototype.reg = function (user) {
+        return __awaiter(this, void 0, void 0, function () {
+            var r;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Users_1.default.reg(user)];
+                    case 1:
+                        r = _a.sent();
+                        return [2 /*return*/, {
+                                data: r
+                            }];
+                }
+            });
+        });
     };
     UserController.prototype.put = function (id, user) {
         return "Updating a user...";
@@ -94,19 +113,19 @@ var UserController = /** @class */ (function () {
         __metadata("design:returntype", Promise)
     ], UserController.prototype, "getAll", null);
     __decorate([
-        routing_controllers_1.Get("/users/:id"),
-        __param(0, routing_controllers_1.Param("id")),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Number]),
-        __metadata("design:returntype", void 0)
-    ], UserController.prototype, "getOne", null);
-    __decorate([
-        routing_controllers_1.Post("/regUser"),
-        __param(0, routing_controllers_1.Param("email")),
+        routing_controllers_1.Post("/loginUser"),
+        __param(0, routing_controllers_1.Body()),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], UserController.prototype, "post", null);
+        __metadata("design:returntype", Promise)
+    ], UserController.prototype, "login", null);
+    __decorate([
+        routing_controllers_1.Post("/regUser"),
+        __param(0, routing_controllers_1.Body()),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", Promise)
+    ], UserController.prototype, "reg", null);
     __decorate([
         routing_controllers_1.Put("/users/:id"),
         __param(0, routing_controllers_1.Param("id")), __param(1, routing_controllers_1.Body()),
@@ -122,7 +141,7 @@ var UserController = /** @class */ (function () {
         __metadata("design:returntype", void 0)
     ], UserController.prototype, "remove", null);
     UserController = __decorate([
-        routing_controllers_1.Controller()
+        routing_controllers_1.JsonController()
     ], UserController);
     return UserController;
 }());

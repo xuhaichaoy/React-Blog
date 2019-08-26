@@ -40,45 +40,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var mysql_1 = __importDefault(require("../config/mysql"));
 var UserModel = mysql_1.default.sequelize.define('user', {
-<<<<<<< HEAD
-    // id: { type: obj.Sequelize.INTEGER, autoIncrement: true, primaryKeys: true, unique: true },
-    // username: { type: obj.Sequelize.STRING, allowNull: false },
-    // password: { type: obj.Sequelize.STRING, allowNull: false },
-=======
->>>>>>> 0a2842895a050d4b95061f6eb8e0d13a1fff931d
     uid: {
         type: mysql_1.default.Sequelize.INTEGER(11),
         primaryKey: true,
         autoIncrement: true,
     },
     nickName: mysql_1.default.Sequelize.STRING(100),
-    userName: mysql_1.default.Sequelize.STRING(100),
-<<<<<<< HEAD
-    passWord: mysql_1.default.Sequelize.BIGINT,
-    Info: mysql_1.default.Sequelize.BIGINT,
-    Github: mysql_1.default.Sequelize.BIGINT,
-    image: mysql_1.default.Sequelize.BIGINT,
-=======
+    userName: {
+        type: mysql_1.default.Sequelize.STRING(100),
+        unique: true
+    },
     passWord: mysql_1.default.Sequelize.STRING(100),
     Info: mysql_1.default.Sequelize.STRING(100),
     Github: mysql_1.default.Sequelize.STRING(100),
     image: mysql_1.default.Sequelize.STRING(100),
->>>>>>> 0a2842895a050d4b95061f6eb8e0d13a1fff931d
     Date: mysql_1.default.Sequelize.BIGINT,
     admin: mysql_1.default.Sequelize.BIGINT,
 }, {
     timestamps: false
 });
-<<<<<<< HEAD
-UserModel
-    .sync()
-    .then(function () {
-    console.log('table初始化完成！');
-})
-    .catch(function () {
-    console.log('init db error');
-});
-=======
 UserModel.sync();
 UserModel.fetch = function () {
     return __awaiter(this, void 0, void 0, function () {
@@ -113,6 +93,86 @@ UserModel.fetch = function () {
         });
     });
 };
->>>>>>> 0a2842895a050d4b95061f6eb8e0d13a1fff931d
+UserModel.reg = function (data) {
+    return __awaiter(this, void 0, void 0, function () {
+        var r;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    r = {};
+                    return [4 /*yield*/, UserModel.create({
+                            userName: data.email,
+                            passWord: data.password
+                        }).then(function (result) {
+                            r = {
+                                status: 1,
+                                msg: "success",
+                                data: {
+                                    message: "注册成功"
+                                } // 正常
+                            };
+                        }).catch(function (err) {
+                            r = {
+                                status: -1000,
+                                msg: "error",
+                                data: {
+                                    message: "用户名已存在"
+                                } // 正常
+                            };
+                        })];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, r];
+            }
+        });
+    });
+};
+UserModel.login = function (data) {
+    return __awaiter(this, void 0, void 0, function () {
+        var r;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    r = {};
+                    return [4 /*yield*/, UserModel.findAll({
+                            where: {
+                                userName: data.email,
+                                passWord: data.password
+                            }
+                        }).then(function (result) {
+                            if (result.length > 0) {
+                                r = {
+                                    status: 1,
+                                    msg: "success",
+                                    data: {
+                                        message: "登录成功"
+                                    } // 正常
+                                };
+                            }
+                            else {
+                                r = {
+                                    status: -2,
+                                    msg: "success",
+                                    data: {
+                                        message: "用户名或密码错误"
+                                    } // 正常
+                                };
+                            }
+                        }).catch(function (err) {
+                            r = {
+                                status: -1000,
+                                msg: "error",
+                                data: {
+                                    message: "请稍后再试"
+                                } // 正常
+                            };
+                        })];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, r];
+            }
+        });
+    });
+};
 exports.default = UserModel;
 //# sourceMappingURL=Users.js.map

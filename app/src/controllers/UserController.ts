@@ -1,6 +1,6 @@
-import { Controller, Param, Body, Get, Post, Put, Delete } from "routing-controllers";
+import { JsonController, Param, Body, Get, Post, Put, Delete } from "routing-controllers";
 import Users from '../models/Users'
-@Controller()
+@JsonController()
 export class UserController {
 
    @Get("/users")
@@ -11,19 +11,19 @@ export class UserController {
       }
    }
 
-   @Get("/users/:id")
-   getOne(@Param("id") id: number) {
-      
+   @Post("/loginUser")
+   async login(@Body() user: any) {
+      const r = await Users.login(user)
       return {
-         user: id
-      };
+         data: r
+      }
    }
 
    @Post("/regUser")
-   post(@Param("email") email: any) {
-      console.log(email)
+   async reg(@Body() user: any) {
+      const r = await Users.reg(user)
       return {
-         data: email
+         data: r
       }
    }
 
