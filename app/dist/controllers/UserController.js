@@ -70,12 +70,25 @@ var UserController = /** @class */ (function () {
             });
         });
     };
-    UserController.prototype.login = function (user) {
+    UserController.prototype.login = function (user, res) {
         return __awaiter(this, void 0, void 0, function () {
             var r;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Users_1.default.login(user)];
+                    case 0:
+                        res.setHeader('Access-Control-Allow-Origin', '*');
+                        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+                        res.setHeader("Access-Control-Allow-Credentials", "true");
+                        res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, token");
+                        res.setHeader("Content-Type", "text/html; charset=utf-8");
+                        res.cookie('cookieParam', 1111, {
+                            expires: new Date(Date.now() + 10 * 60 * 1000),
+                            path: 'http://localhost:3001'
+                        });
+                        res.send({
+                            id: 1
+                        });
+                        return [4 /*yield*/, Users_1.default.login(user)];
                     case 1:
                         r = _a.sent();
                         return [2 /*return*/, {
@@ -114,9 +127,9 @@ var UserController = /** @class */ (function () {
     ], UserController.prototype, "getAll", null);
     __decorate([
         routing_controllers_1.Post("/loginUser"),
-        __param(0, routing_controllers_1.Body()),
+        __param(0, routing_controllers_1.Body()), __param(1, routing_controllers_1.Res()),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
+        __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", Promise)
     ], UserController.prototype, "login", null);
     __decorate([

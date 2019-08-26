@@ -1,5 +1,6 @@
-import { JsonController, Param, Body, Get, Post, Put, Delete } from "routing-controllers";
+import { JsonController, Param, Body, Get, Post, Put, Delete, Res } from "routing-controllers";
 import Users from '../models/Users'
+
 @JsonController()
 export class UserController {
 
@@ -12,7 +13,19 @@ export class UserController {
    }
 
    @Post("/loginUser")
-   async login(@Body() user: any) {
+   async login(@Body() user: any, @Res() res: any) {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+      res.setHeader("Access-Control-Allow-Credentials", "true")
+      res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, token")
+      res.setHeader("Content-Type", "text/html; charset=utf-8")
+      res.cookie('cookieParam', 1111, {
+         expires: new Date(Date.now() + 10 * 60 * 1000),
+         path: 'http://localhost:3001'
+     });
+     res.send({
+        id: 1
+     })
       const r = await Users.login(user)
       return {
          data: r

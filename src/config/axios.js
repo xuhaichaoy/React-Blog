@@ -30,7 +30,7 @@ Axios.interceptors.request.use(
     //   cookie.set("token", cookie.get("token"), 1 / 12)
     //   config.headers.token = cookie.get("token")
     // }
-    // config.withCredentials = true
+    config.withCredentials = true
 
     return config
   },

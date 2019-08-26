@@ -1,5 +1,7 @@
 import obj from '../config/mysql'
-import { async } from 'q';
+const jwt = require('jsonwebtoken');
+const secret = "haichao";
+
 const UserModel = obj.sequelize.define('user', {
     uid: {
         type: obj.Sequelize.INTEGER(11),
@@ -79,13 +81,17 @@ UserModel.login = async function (data: any) {
         }
     }).then(function (result: any) {
         if(result.length > 0) {
-            r = {
-                status: 1,
-                msg: "success",
-                data: {
-                    message: "登录成功"
-                }  // 正常
-            }
+            let token = jwt.sign(JSON.parse(JSON.stringify(result[0])), secret, (err: any, token: any) => {
+                r = {
+                    status: 1,
+                    msg: "success",
+                    data: {
+                        message: "登录成功",
+                        jwt: token
+                    }  // 正常
+                }
+            });
+           
         }else {
             r = {
                 status: -2,

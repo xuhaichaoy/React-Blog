@@ -3,6 +3,7 @@ import { createExpressServer } from "routing-controllers";
 import { UserController } from "./controllers/UserController";
 import { ArticalController } from "./controllers/ArticalController";
 
+
 const app = createExpressServer({
    defaults: {
 
@@ -19,7 +20,7 @@ const app = createExpressServer({
    },
    cors: true, // CORS 模块跨域
    controllers: [UserController, ArticalController]
-});
+})
 
 app.listen(3000);
 console.log("启动成功！！！")

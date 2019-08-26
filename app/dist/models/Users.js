@@ -39,6 +39,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mysql_1 = __importDefault(require("../config/mysql"));
+var jwt = require('jsonwebtoken');
+var secret = "haichao";
 var UserModel = mysql_1.default.sequelize.define('user', {
     uid: {
         type: mysql_1.default.Sequelize.INTEGER(11),
@@ -141,13 +143,16 @@ UserModel.login = function (data) {
                             }
                         }).then(function (result) {
                             if (result.length > 0) {
-                                r = {
-                                    status: 1,
-                                    msg: "success",
-                                    data: {
-                                        message: "登录成功"
-                                    } // 正常
-                                };
+                                var token = jwt.sign(JSON.parse(JSON.stringify(result[0])), secret, function (err, token) {
+                                    r = {
+                                        status: 1,
+                                        msg: "success",
+                                        data: {
+                                            message: "登录成功",
+                                            jwt: token
+                                        } // 正常
+                                    };
+                                });
                             }
                             else {
                                 r = {
