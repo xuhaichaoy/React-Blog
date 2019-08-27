@@ -54,6 +54,7 @@ var UserModel = mysql_1.default.sequelize.define('user', {
     passWord: mysql_1.default.Sequelize.STRING(100),
     Info: mysql_1.default.Sequelize.STRING(100),
     Github: mysql_1.default.Sequelize.STRING(100),
+    Chrome: mysql_1.default.Sequelize.STRING(100),
     image: mysql_1.default.Sequelize.STRING(100),
     Date: mysql_1.default.Sequelize.BIGINT,
     admin: mysql_1.default.Sequelize.BIGINT,

@@ -2,8 +2,10 @@ h1 {
     margin: 0!important;
 }
 .haichao {
+   font-weight: 400;
    height: 70px;
    line-height: 70px; 
+   font-size: 26px;
 }
 .input {
     height: 70px;

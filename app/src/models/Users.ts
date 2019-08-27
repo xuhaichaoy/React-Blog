@@ -15,6 +15,7 @@ const UserModel = obj.sequelize.define('user', {
     passWord: obj.Sequelize.STRING(100),
     Info: obj.Sequelize.STRING(100),
     Github: obj.Sequelize.STRING(100),
+    Chrome: obj.Sequelize.STRING(100),
     image: obj.Sequelize.STRING(100),
     Date: obj.Sequelize.BIGINT,
     admin: obj.Sequelize.BIGINT,

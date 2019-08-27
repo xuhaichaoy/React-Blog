@@ -5,7 +5,12 @@ import "./sidebar.css";
 
 class App extends React.Component {
   state = {
-    current: "home"
+    current: "home",
+    nickName: "海超",
+    Github: "https://github.com/xuhaichaoy",
+    Chrome: "http://haichao.mobi/index",
+    Info: "未来的事情无人知晓, 所以才有无限可能.",
+    image: ""
   };
 
   // 获取mine 的信息
@@ -37,8 +42,8 @@ class App extends React.Component {
       <div className="sidebar">
         <div className="header">
           <Avatar size={110} icon="user" />
-          <h2 className="name">asdad</h2>
-          <p className="tips">1231238723232342342121323341628736</p>
+          <h2 className="name">{this.state.nickName}</h2>
+          <p className="tips">{this.state.Info}</p>
           <div className="brand">
             <ul>
               <li className="marginRight">
@@ -47,7 +52,7 @@ class App extends React.Component {
                   type="github"
                   className="icons"
                 />
-                <span>Github</span>
+                <span><a href={this.state.Github} target="view_window" class = "aHref">Github</a></span>
               </li>
               <li className="marginRight">
                 <Icon
@@ -55,7 +60,7 @@ class App extends React.Component {
                   type="chrome"
                   className="icons"
                 />
-                <span>Chrome</span>
+                <span><a href={this.state.Chrome} target="view_window" class = "aHref">Chrome</a></span>
               </li>
               <li>
                 <Icon
