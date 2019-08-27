@@ -1,11 +1,22 @@
 import React from "react";
 import { Icon, Avatar, Divider, List, Tag } from "antd";
+import api from '../../config/http'
 import "./sidebar.css";
 
 class App extends React.Component {
   state = {
     current: "home"
   };
+
+  // 获取mine 的信息
+  componentDidMount () {
+    const _this = this
+    api.getmine('http://localhost:3000/allArticals', (r) => {
+      const {data} = r
+      const res = data.data
+      console.log(res)
+    })
+  }
 
   render() {
     const data = [

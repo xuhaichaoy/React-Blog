@@ -53,10 +53,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var routing_controllers_1 = require("routing-controllers");
 var bodyparser_1 = __importDefault(require("../config/bodyparser"));
 var Users_1 = __importDefault(require("../models/Users"));
+var localhost = "http://localhost:3001";
 var UserController = /** @class */ (function () {
     function UserController() {
     }
-    UserController.prototype.getAll = function () {
+    UserController.prototype.getmine = function () {
         return __awaiter(this, void 0, void 0, function () {
             var r;
             return __generator(this, function (_a) {
@@ -65,7 +66,7 @@ var UserController = /** @class */ (function () {
                     case 1:
                         r = _a.sent();
                         return [2 /*return*/, {
-                                code: r
+                                data: r
                             }];
                 }
             });
@@ -76,8 +77,10 @@ var UserController = /** @class */ (function () {
             var r;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        res.cookie('cookieParam', 22222, {
+                    case 0: return [4 /*yield*/, Users_1.default.login(user)];
+                    case 1:
+                        r = _a.sent();
+                        res.cookie('jwt', r.token, {
                             domain: 'localhost',
                             path: '/',
                             maxAge: 1000 * 60 * 60 * 1,
@@ -85,18 +88,8 @@ var UserController = /** @class */ (function () {
                             httpOnly: true,
                             overwrite: false
                         });
-                        return [4 /*yield*/, Users_1.default.login(user)
-                            // res.send({
-                            //    data: r
-                            // })
-                        ];
-                    case 1:
-                        r = _a.sent();
-                        // res.send({
-                        //    data: r
-                        // })
                         return [2 /*return*/, {
-                                data: r
+                                data: r.data
                             }];
                 }
             });
@@ -124,14 +117,19 @@ var UserController = /** @class */ (function () {
         return "Removing user...";
     };
     __decorate([
-        routing_controllers_1.Get("/users"),
+        routing_controllers_1.Get("/myself"),
+        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost),
+        routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
+        routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
+        routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
+        routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8"),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", Promise)
-    ], UserController.prototype, "getAll", null);
+    ], UserController.prototype, "getmine", null);
     __decorate([
         routing_controllers_1.Post("/loginUser"),
-        routing_controllers_1.Header("Access-Control-Allow-Origin", "http://localhost:3001"),
+        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost),
         routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
         routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
         routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
@@ -143,6 +141,11 @@ var UserController = /** @class */ (function () {
     ], UserController.prototype, "login", null);
     __decorate([
         routing_controllers_1.Post("/regUser"),
+        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost),
+        routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
+        routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
+        routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
+        routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8"),
         __param(0, routing_controllers_1.Body()),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),

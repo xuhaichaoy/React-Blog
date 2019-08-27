@@ -1,6 +1,5 @@
 import obj from '../config/mysql'
-const jwt = require('jsonwebtoken');
-const secret = "haichao";
+import jwt from '../config/jwt'
 
 const UserModel = obj.sequelize.define('user', {
     uid: {
@@ -27,15 +26,23 @@ UserModel.fetch = async function () {
     let r = {}
     await UserModel.findAll({
         where: {
-            nickName: 'chao',
-            userName: '111',
-            passWord: '1234'
+           admin: 1
         }
     }).then(function (result: any) {
-        r = {
-            status: 1,
-            msg: "success",
-            data: JSON.parse(JSON.stringify(result))  // 正常
+        if(result.length > 0) {
+            var data = JSON.parse(JSON.stringify(result[0]))
+            delete data.admin
+            delete data.uid
+            delete data.passWord
+            delete data.userName
+
+            r = data
+        }else {
+            r = {
+                status: -2,
+                msg: "success",
+                data: "请稍后再试"  // 正常
+            }
         }
     }).catch(function (err: any) {
         r = {
@@ -81,14 +88,16 @@ UserModel.login = async function (data: any) {
         }
     }).then(function (result: any) {
         if(result.length > 0) {
-            let token = jwt.sign(JSON.parse(JSON.stringify(result[0])), secret, (err: any, token: any) => {
+            jwt.token.sign(JSON.parse(JSON.stringify(result[0])), jwt.secret, (err: any, token: any) => {
                 r = {
-                    status: 1,
-                    msg: "success",
                     data: {
-                        message: "登录成功",
-                        jwt: token
-                    }  // 正常
+                        status: 1,
+                        msg: "success",
+                        data: {
+                            message: "登录成功",
+                        }
+                    },
+                    token
                 }
             });
            

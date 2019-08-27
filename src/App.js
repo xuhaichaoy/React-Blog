@@ -16,7 +16,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
+      <Router  >
         <div className="App">
           <Menu />
           <BackTop />

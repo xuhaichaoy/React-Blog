@@ -1,6 +1,8 @@
-import { JsonController, Param, Body, Get, Post, Put, Delete, Res, UseBefore, Header } from "routing-controllers";
+import { JsonController, Param, Body, Get, Post, Put, Delete, Res, UseBefore, Header, CookieParam } from "routing-controllers";
 import urlencodedParser from '../config/bodyparser'
 import Artical from '../models/Articals'
+import jsonwebtoken from '../config/jwt'
+
 @JsonController()
 @UseBefore(urlencodedParser)
 
@@ -12,15 +14,7 @@ export class ArticalController {
    @Header("Access-Control-Allow-Credentials", "true")
    @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
    @Header("Content-Type", "text/html; charset=utf-8")
-   async getAll(@Res() res: any) {
-      res.cookie('cookieParam', 1111, {
-         domain: 'localhost',
-         path: '/', //cookie写入的路径
-         maxAge: 1000 * 60 * 60 * 1,
-         // expires:new Date('2019-07-06'),
-         httpOnly: true,
-         overwrite: false
-     });
+   async getAll() {
       // 获取所有文章信息
       const r = await Artical.fetch() 
       return {

@@ -1,6 +1,7 @@
 import React from "react";
 import { List, Card, Divider, Icon, Tag } from "antd";
 import axios from '../../config/axios';
+import api from '../../config/http';
 import "./home.css";
 
 const { Meta } = Card;
@@ -11,20 +12,15 @@ class App extends React.Component {
   };
   componentDidMount() {
     const _this = this
-    axios.get('http://localhost:3000/allArticals')
-      .then(function (r) {
-        const { data } = r
-        const res = data.data
-        if (res.status === 1) {
-          _this.setState({
-            allData: res.list
-          });
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-
-      })
+    api.allArticals({}, (r) => {
+      const { data } = r
+      const res = data.data
+      if (res.status === 1) {
+        _this.setState({
+          allData: res.list
+        });
+      }
+    })
   }
 
   render() {
