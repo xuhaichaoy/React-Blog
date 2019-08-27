@@ -10,11 +10,11 @@ const apiURL = "http://localhost:3000"
 // axios默认配置
 Axios.defaults.timeout = 10000 // 超时时间
 Axios.defaults.baseURL = apiURL // 默认地址
-Axios.defaults.headers.post['Content-Type'] = 'application/json'
+Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 //整理数据
 Axios.defaults.transformRequest = function (data) {
-  // data = Qs.stringify(data)
-  data = JSON.stringify(data)
+  data = Qs.stringify(data)
+  // data = JSON.stringify(data)
   return data
 };
 

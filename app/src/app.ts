@@ -3,7 +3,6 @@ import { createExpressServer } from "routing-controllers";
 import { UserController } from "./controllers/UserController";
 import { ArticalController } from "./controllers/ArticalController";
 
-
 const app = createExpressServer({
    defaults: {
 

@@ -51,6 +51,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var routing_controllers_1 = require("routing-controllers");
+var bodyparser_1 = __importDefault(require("../config/bodyparser"));
 var Users_1 = __importDefault(require("../models/Users"));
 var UserController = /** @class */ (function () {
     function UserController() {
@@ -76,21 +77,24 @@ var UserController = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        res.setHeader('Access-Control-Allow-Origin', '*');
-                        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-                        res.setHeader("Access-Control-Allow-Credentials", "true");
-                        res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, token");
-                        res.setHeader("Content-Type", "text/html; charset=utf-8");
-                        res.cookie('cookieParam', 1111, {
-                            expires: new Date(Date.now() + 10 * 60 * 1000),
-                            path: 'http://localhost:3001'
+                        res.cookie('cookieParam', 22222, {
+                            domain: 'localhost',
+                            path: '/',
+                            maxAge: 1000 * 60 * 60 * 1,
+                            // expires:new Date('2019-07-06'),
+                            httpOnly: true,
+                            overwrite: false
                         });
-                        res.send({
-                            id: 1
-                        });
-                        return [4 /*yield*/, Users_1.default.login(user)];
+                        return [4 /*yield*/, Users_1.default.login(user)
+                            // res.send({
+                            //    data: r
+                            // })
+                        ];
                     case 1:
                         r = _a.sent();
+                        // res.send({
+                        //    data: r
+                        // })
                         return [2 /*return*/, {
                                 data: r
                             }];
@@ -127,6 +131,11 @@ var UserController = /** @class */ (function () {
     ], UserController.prototype, "getAll", null);
     __decorate([
         routing_controllers_1.Post("/loginUser"),
+        routing_controllers_1.Header("Access-Control-Allow-Origin", "http://localhost:3001"),
+        routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
+        routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
+        routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
+        routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8"),
         __param(0, routing_controllers_1.Body()), __param(1, routing_controllers_1.Res()),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
@@ -154,7 +163,8 @@ var UserController = /** @class */ (function () {
         __metadata("design:returntype", void 0)
     ], UserController.prototype, "remove", null);
     UserController = __decorate([
-        routing_controllers_1.JsonController()
+        routing_controllers_1.JsonController(),
+        routing_controllers_1.UseBefore(bodyparser_1.default)
     ], UserController);
     return UserController;
 }());

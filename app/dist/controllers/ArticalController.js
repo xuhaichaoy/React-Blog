@@ -51,16 +51,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var routing_controllers_1 = require("routing-controllers");
+var bodyparser_1 = __importDefault(require("../config/bodyparser"));
 var Articals_1 = __importDefault(require("../models/Articals"));
 var ArticalController = /** @class */ (function () {
     function ArticalController() {
     }
-    ArticalController.prototype.getAll = function () {
+    ArticalController.prototype.getAll = function (res) {
         return __awaiter(this, void 0, void 0, function () {
             var r;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Articals_1.default.fetch()];
+                    case 0:
+                        res.cookie('cookieParam', 1111, {
+                            domain: 'localhost',
+                            path: '/',
+                            maxAge: 1000 * 60 * 60 * 1,
+                            // expires:new Date('2019-07-06'),
+                            httpOnly: true,
+                            overwrite: false
+                        });
+                        return [4 /*yield*/, Articals_1.default.fetch()];
                     case 1:
                         r = _a.sent();
                         return [2 /*return*/, {
@@ -86,8 +96,14 @@ var ArticalController = /** @class */ (function () {
     };
     __decorate([
         routing_controllers_1.Get("/allArticals"),
+        routing_controllers_1.Header("Access-Control-Allow-Origin", "http://localhost:3001"),
+        routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
+        routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
+        routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
+        routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8"),
+        __param(0, routing_controllers_1.Res()),
         __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
+        __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", Promise)
     ], ArticalController.prototype, "getAll", null);
     __decorate([
@@ -119,7 +135,8 @@ var ArticalController = /** @class */ (function () {
         __metadata("design:returntype", void 0)
     ], ArticalController.prototype, "remove", null);
     ArticalController = __decorate([
-        routing_controllers_1.Controller()
+        routing_controllers_1.JsonController(),
+        routing_controllers_1.UseBefore(bodyparser_1.default)
     ], ArticalController);
     return ArticalController;
 }());
