@@ -79,7 +79,7 @@ class App extends React.Component {
                                     <a href="/admin">Home</a>
                                 </Breadcrumb.Item>
                             </Breadcrumb>
-                            <div className="cardList">
+                            <div className="admincardList">
                                 <Row gutter={16}>
                                     <Col span={3}>
                                         <Card hoverable className="cards">

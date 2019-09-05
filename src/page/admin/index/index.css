@@ -12,11 +12,11 @@
     overflow: auto;
     text-align: left;
 }
-.cardList {
+.admincardList {
     margin-top: 30px;
     /* border: 1px solid #E6E9ED; */
 }
-.cards {
+.admincardList .cards {
     border-radius: 6px;
     cursor: pointer;
     margin-bottom: 10px;
