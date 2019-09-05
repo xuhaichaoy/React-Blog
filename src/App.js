@@ -26,6 +26,7 @@ class App extends React.Component {
           <Route exact path="/category" component={Category} />
           <Route exact path="/intro" component={Info} />
           <Route exact path="/admin" component={Admin} />
+          <Redirect from="(/:name)" to="/index" />
         </div>
       </Router>
     );

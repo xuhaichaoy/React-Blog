@@ -51,3 +51,11 @@
 .tableStyle {
     margin-top: 20px;
 }
+.tableData {
+    margin-top: 20px;
+    box-sizing: border-box;
+    padding: 40px;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    padding-bottom: 26px;
+}
