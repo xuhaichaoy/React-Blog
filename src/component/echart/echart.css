@@ -1,0 +1,16 @@
+.echarts {
+    margin-top: 20px;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    padding-bottom: 50px;
+}
+.echarts > h3 {
+    padding: 26px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.echarts > p {
+    padding: 26px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}

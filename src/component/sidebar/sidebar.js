@@ -52,7 +52,7 @@ class App extends React.Component {
                   type="github"
                   className="icons"
                 />
-                <span><a href={this.state.Github} target="view_window" class = "aHref">Github</a></span>
+                <span><a href={this.state.Github} target="view_window" className = "aHref">Github</a></span>
               </li>
               <li className="marginRight">
                 <Icon
@@ -60,7 +60,7 @@ class App extends React.Component {
                   type="chrome"
                   className="icons"
                 />
-                <span><a href={this.state.Chrome} target="view_window" class = "aHref">Chrome</a></span>
+                <span><a href={this.state.Chrome} target="view_window" className = "aHref">Chrome</a></span>
               </li>
               <li>
                 <Icon
