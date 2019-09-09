@@ -65,6 +65,7 @@
     "react-dom": "^16.8.6",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
+    "react-sticky": "^6.0.3",
     "reflect-metadata": "^0.1.13",
     "resolve": "1.10.0",
     "routing-controllers": "^0.7.7",

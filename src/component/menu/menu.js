@@ -98,7 +98,7 @@ class App extends React.Component {
                     <Link to="/intro">介绍</Link>
                   </Menu.Item>
                   <Menu.Item key="admin">
-                  <Link to="/admin">admin</Link>
+                  <Link to="/admin">后台</Link>
                 </Menu.Item>
                 </Menu>
               </div>

@@ -1,0 +1,13 @@
+.tabLists {
+    margin-top: 10px;
+    overflow: auto;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.verCards {
+    margin-top: 10px;
+}
+.verCards .cards {
+    margin-bottom: 16px;
+}

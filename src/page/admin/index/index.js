@@ -1,5 +1,6 @@
 import React from "react";
 import LeftMenu from "../../../component/adminLeft/left";
+import Right from "../../../component/adminRight/right";
 // import BreadCrumb from "../../../component/breadcrumb/breadcrumb";
 import Echart from "../../../component/echart/echart";
 import Pie from "../../../component/pie/pie";
@@ -174,73 +175,83 @@ class App extends React.Component {
                 </Sider>
                 <Layout style={{ marginLeft: "200px" }}>
                     <Content style={{ margin: '24px 16px' }}>
-                        <div className="mainStyle" style={{ padding: 24, background: '#fff' }}>
-                            <h3>Dashboard</h3>
-                            <Breadcrumb>
-                                <Breadcrumb.Item>Admin</Breadcrumb.Item>
-                                <Breadcrumb.Item>
-                                    <a href="/admin">Home</a>
-                                </Breadcrumb.Item>
-                            </Breadcrumb>
-                            <div className="admincardList">
-                                <Row gutter={16}>
-                                    <Col span={3}>
-                                        <Card hoverable className="cards">
-                                            Card content
+                        <Row gutter={16}>
+                            <Col className="gutter-row" xl={24} xxl={20}>
+                                <div className="mainStyle" style={{ padding: 24, background: '#fff' }}>
+                                    <h3>Dashboard</h3>
+                                    <Breadcrumb>
+                                        <Breadcrumb.Item>Admin</Breadcrumb.Item>
+                                        <Breadcrumb.Item>
+                                            <a href="/admin">Home</a>
+                                        </Breadcrumb.Item>
+                                    </Breadcrumb>
+                                    <div className="admincardList">
+                                        <Row gutter={16}>
+                                            <Col span={3}>
+                                                <Card hoverable className="cards">
+                                                    Card content
+                                                </Card>
+                                            </Col>
+                                            <Col span={3}>
+                                                <Card hoverable className="cards">
+                                                    Card content
+                                                </Card>
+                                            </Col>
+                                            <Col span={3}>
+                                                <Card hoverable className="cards">
+                                                    Card content
+                                                </Card>
+                                            </Col>
+                                            <Col span={3}>
+                                                <Card hoverable className="cards">
+                                                    Card content
                                         </Card>
-                                    </Col>
-                                    <Col span={3}>
-                                        <Card hoverable className="cards">
-                                            Card content
-                                        </Card>
-                                    </Col>
-                                    <Col span={3}>
-                                        <Card hoverable className="cards">
-                                            Card content
-                                        </Card>
-                                    </Col>
-                                    <Col span={3}>
-                                        <Card hoverable className="cards">
-                                            Card content
-                                        </Card>
-                                    </Col>
-                                    <Col span={3}>
-                                        <Card hoverable className="cards">
-                                            Card content
-                                        </Card>
-                                    </Col>
-                                </Row>
-                            </div>
-                            <Echart />
+                                            </Col>
+                                            <Col span={3}>
+                                                <Card hoverable className="cards">
+                                                    Card content
+                                                </Card>
+                                            </Col>
+                                        </Row>
+                                    </div>
+                                    <Echart />
+                                    <div className="userMain">
+                                        <div className="userTable">
+                                            <h3>Statistics Report</h3>
+                                            <p>
+                                                Measure How Fast You’re Growing Monthly Recurring Revenue. &nbsp;
+                                        <a href="javascript:;">Learn More</a>
+                                            </p>
+                                            <Table columns={columns} scroll={{ y: 318 }} dataSource={data} pagination={false} className="tableStyle" />
+                                        </div>
+                                        <div className="userCharts">
+                                            <h3>Statistics Report</h3>
+                                            <p>
+                                                Measure How Fast You’re Growing Monthly Recurring Revenue. &nbsp;
+                                        <a href="javascript:;">Learn More</a>
+                                            </p>
+                                            <Pie />
+                                        </div>
+                                    </div>
+                                    <div className="tableData">
+                                        <h3>Statistics Report</h3>
+                                        <p>
+                                            Measure How Fast You’re Growing Monthly Recurring Revenue. &nbsp;
+                                        <a href="javascript:;">Learn More</a>
+                                        </p>
+                                        <Table columns={columnsData} dataSource={tableData} style={{ marginTop: "20px" }} />
+                                    </div>
+                                </div>
+                            </Col>
+                            <Col className="gutter-row" xl={0} xxl={4}>
+                                <div className="rightBar">
+                                    <Right />
+                                </div>
+                            </Col>
+                        </Row>
 
 
-                            <div className="userMain">
-                                <div className="userTable">
-                                    <h3>Statistics Report</h3>
-                                    <p>
-                                        Measure How Fast You’re Growing Monthly Recurring Revenue. &nbsp;
-                                        <a href="javascript:;">Learn More</a>
-                                    </p>
-                                    <Table columns={columns} scroll={{ y: 318 }} dataSource={data} pagination={false} className="tableStyle" />
-                                </div>
-                                <div className="userCharts">
-                                    <h3>Statistics Report</h3>
-                                    <p>
-                                        Measure How Fast You’re Growing Monthly Recurring Revenue. &nbsp;
-                                        <a href="javascript:;">Learn More</a>
-                                    </p>
-                                    <Pie />
-                                </div>
-                            </div>
-                            <div className="tableData">
-                                <h3>Statistics Report</h3>
-                                <p>
-                                    Measure How Fast You’re Growing Monthly Recurring Revenue. &nbsp;
-                                        <a href="javascript:;">Learn More</a>
-                                </p>
-                                <Table columns={columnsData} dataSource={tableData}  style = {{ marginTop: "20px" }}/>
-                            </div>
-                        </div>
+
 
                     </Content>
                 </Layout>

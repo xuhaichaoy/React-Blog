@@ -1,6 +1,6 @@
-.content {
+/* .content {
     min-height: calc(100vh - 184px);
-}
+} */
 .siderStyle {
     background: white!important;
 }
@@ -11,6 +11,16 @@
     height: calc(100vh - 170px);
     overflow: auto;
     text-align: left;
+    border-radius: 10px;
+}
+.rightBar {
+    height: calc(100vh - 170px);
+    overflow: auto;
+    text-align: left;
+    border-radius: 10px;
+    background: white;
+    box-sizing: border-box;
+    padding: 20px;
 }
 .admincardList {
     margin-top: 30px;
