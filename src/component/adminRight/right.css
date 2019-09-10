@@ -1,6 +1,5 @@
 .tabLists {
     margin-top: 10px;
-    overflow: auto;
     box-sizing: border-box;
     padding-left: 10px;
     padding-right: 10px;
@@ -10,4 +9,18 @@
 }
 .verCards .cards {
     margin-bottom: 16px;
+}
+.adminList {
+    height: calc(100vh - 510px);
+    overflow: auto;
+}
+.layOutRight {
+    display: flex;
+}
+.layOutRight  .rightIcons {
+    font-size: 36px;
+}
+.layOutRight .rightCardMain {
+    box-sizing: border-box;
+    margin-left: 20px;
 }

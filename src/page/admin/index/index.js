@@ -4,7 +4,7 @@ import Right from "../../../component/adminRight/right";
 // import BreadCrumb from "../../../component/breadcrumb/breadcrumb";
 import Echart from "../../../component/echart/echart";
 import Pie from "../../../component/pie/pie";
-import { Layout, Breadcrumb, Card, Col, Row, Table, Divider, Tag } from 'antd';
+import { Layout, Breadcrumb, Card, Col, Row, Table, Divider, Tag, Icon } from 'antd';
 
 import "./index.css";
 
@@ -189,27 +189,32 @@ class App extends React.Component {
                                         <Row gutter={16}>
                                             <Col span={3}>
                                                 <Card hoverable className="cards">
-                                                    Card content
+                                                    <Icon type="dashboard"  className="adminIcons" />
+                                                    <h4>Dashboard</h4>
                                                 </Card>
                                             </Col>
                                             <Col span={3}>
                                                 <Card hoverable className="cards">
-                                                    Card content
+                                                    <Icon type="dashboard"  className="adminIcons" />
+                                                    <h4>Dashboard</h4>
                                                 </Card>
                                             </Col>
                                             <Col span={3}>
                                                 <Card hoverable className="cards">
-                                                    Card content
+                                                    <Icon type="dashboard"  className="adminIcons" />
+                                                    <h4>Dashboard</h4>
                                                 </Card>
                                             </Col>
                                             <Col span={3}>
                                                 <Card hoverable className="cards">
-                                                    Card content
-                                        </Card>
+                                                    <Icon type="dashboard"  className="adminIcons" />
+                                                    <h4>Dashboard</h4>
+                                                </Card>
                                             </Col>
                                             <Col span={3}>
                                                 <Card hoverable className="cards">
-                                                    Card content
+                                                    <Icon type="dashboard"  className="adminIcons" />
+                                                    <h4>Dashboard</h4>
                                                 </Card>
                                             </Col>
                                         </Row>
@@ -220,7 +225,7 @@ class App extends React.Component {
                                             <h3>Statistics Report</h3>
                                             <p>
                                                 Measure How Fast You’re Growing Monthly Recurring Revenue. &nbsp;
-                                        <a href="javascript:;">Learn More</a>
+                                                <a href="javascript:;">Learn More</a>
                                             </p>
                                             <Table columns={columns} scroll={{ y: 318 }} dataSource={data} pagination={false} className="tableStyle" />
                                         </div>
@@ -228,7 +233,7 @@ class App extends React.Component {
                                             <h3>Statistics Report</h3>
                                             <p>
                                                 Measure How Fast You’re Growing Monthly Recurring Revenue. &nbsp;
-                                        <a href="javascript:;">Learn More</a>
+                                                <a href="javascript:;">Learn More</a>
                                             </p>
                                             <Pie />
                                         </div>
@@ -237,7 +242,7 @@ class App extends React.Component {
                                         <h3>Statistics Report</h3>
                                         <p>
                                             Measure How Fast You’re Growing Monthly Recurring Revenue. &nbsp;
-                                        <a href="javascript:;">Learn More</a>
+                                            <a href="javascript:;">Learn More</a>
                                         </p>
                                         <Table columns={columnsData} dataSource={tableData} style={{ marginTop: "20px" }} />
                                     </div>

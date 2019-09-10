@@ -29,7 +29,7 @@ class App extends React.Component {
                         <h4 style={{ marginBottom: "16px" }}>Total Revenue</h4>
                         <Row gutter={16}>
                             <Col span={12}>
-                                <Statistic value={1128} prefix={<Icon type="like" />} valueStyle={{ textAlign: "center", fontSize: "30px", lineHeight: "45px" }} />
+                                <Statistic value={1128} prefix={<Icon type="like" />} valueStyle={{ textAlign: "center", fontSize: "23px", lineHeight: "45px" }} />
 
                             </Col>
                             <Col span={12}>
@@ -46,7 +46,7 @@ class App extends React.Component {
                         <h4 style={{ marginTop: "20px", marginBottom: "16px" }}>Viewed</h4>
                         <Row gutter={16}>
                             <Col span={12}>
-                                <Statistic value={93} suffix="/ 100" valueStyle={{ textAlign: "center", fontSize: "30px" }} />
+                                <Statistic value={93} suffix="/ 100" valueStyle={{ textAlign: "center", fontSize: "23px" }} />
                             </Col>
                             <Col span={12}>
                                 <Statistic
@@ -59,53 +59,64 @@ class App extends React.Component {
                             </Col>
                         </Row>
                         <Divider />
-                        <Row gutter={16} className="verCards">
-                            <Col span={24}>
-                                <Card hoverable className="cards">
-                                    Card content
-                                </Card>
-                            </Col>
-                            <Col span={24}>
-                                <Card hoverable className="cards">
-                                    Card content
-                                </Card>
-                            </Col>
-                            <Col span={24}>
-                                <Card hoverable className="cards">
-                                    Card content
-                                </Card>
-                            </Col>
-                            <Col span={24}>
-                                <Card hoverable className="cards">
-                                    Card content
-                                </Card>
-                            </Col>
-                            <Col span={24}>
-                                <Card hoverable className="cards">
-                                    Card content
-                                </Card>
-                            </Col>
-                            <Col span={24}>
-                                <Card hoverable className="cards">
-                                    Card content
-                                </Card>
-                            </Col>
-                            <Col span={24}>
-                                <Card hoverable className="cards">
-                                    Card content
-                                </Card>
-                            </Col>
-                            <Col span={24}>
-                                <Card hoverable className="cards">
-                                    Card content
-                                </Card>
-                            </Col>
-                            <Col span={24}>
-                                <Card hoverable className="cards">
-                                    Card content
-                                </Card>
-                            </Col>
-                        </Row>
+                        <div className="adminList">
+                            <Row gutter={16} className="verCards">
+                                <Col span={24}>
+                                    <Card hoverable className="cards">
+                                        <div class ="layOutRight">
+                                            <div className="rightIcons">
+                                                <Icon type="border-outer" />
+                                            </div>
+                                            <div className="rightCardMain">
+                                                Card contentasdasdasdasd
+                                                asdasdasdasd
+                                            </div>
+                                        </div>
+
+                                    </Card>
+                                </Col>
+                                <Col span={24}>
+                                    <Card hoverable className="cards">
+                                        Card content
+                                    </Card>
+                                </Col>
+                                <Col span={24}>
+                                    <Card hoverable className="cards">
+                                        Card content
+                                    </Card>
+                                </Col>
+                                <Col span={24}>
+                                    <Card hoverable className="cards">
+                                        Card content
+                                    </Card>
+                                </Col>
+                                <Col span={24}>
+                                    <Card hoverable className="cards">
+                                        Card content
+                                    </Card>
+                                </Col>
+                                <Col span={24}>
+                                    <Card hoverable className="cards">
+                                        Card content
+                                    </Card>
+                                </Col>
+                                <Col span={24}>
+                                    <Card hoverable className="cards">
+                                        Card content
+                                    </Card>
+                                </Col>
+                                <Col span={24}>
+                                    <Card hoverable className="cards">
+                                        Card content
+                                    </Card>
+                                </Col>
+                                <Col span={24}>
+                                    <Card hoverable className="cards">
+                                        Card content
+                                    </Card>
+                                </Col>
+                            </Row>
+                        </div>
                     </TabPane>
                     <TabPane tab="Tab 2" key="2" className="tabLists">
                         Content of Tab Pane 2

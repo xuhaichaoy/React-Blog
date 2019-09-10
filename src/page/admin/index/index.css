@@ -8,13 +8,13 @@
     text-align: left!important;
 }
 .mainStyle {
-    height: calc(100vh - 170px);
+    height: calc(100vh - 156px);
     overflow: auto;
     text-align: left;
     border-radius: 10px;
 }
 .rightBar {
-    height: calc(100vh - 170px);
+    height: calc(100vh - 156px);
     overflow: auto;
     text-align: left;
     border-radius: 10px;
@@ -32,7 +32,7 @@
     margin-bottom: 10px;
     height: 120px;
     text-align: center;
-    line-height: 72px!important;
+    /* line-height: 72px!important; */
     color: #6c757d!important;
 }
 .userMain {
@@ -68,4 +68,15 @@
     border: 1px solid #e8e8e8;
     border-radius: 16px;
     padding-bottom: 26px;
+}
+.adminIcons {
+    font-weight: 300;
+    font-size: 34px;
+    margin-top: 6px;
+}
+.admincardList .cards:hover .adminIcons{
+    font-size: 40px;
+}
+.admincardList h4 {
+    margin-top: 6px;
 }
