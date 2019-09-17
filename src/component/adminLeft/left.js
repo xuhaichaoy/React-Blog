@@ -1,21 +1,35 @@
 import React from "react";
 import { Menu, Icon } from 'antd';
+import { withRouter } from "react-router-dom";
 import "./left.css";
 
 const { SubMenu } = Menu;
-
 class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            current: "home"
+        };
+    };
+
+    handleClick = e => {
+        this.setState({
+          current: e.key
+        });
+        // this.props.history.push("/admin/" + e.key);
+    };
 
     render() {
         return (
-            <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" className="menuStyle">
-                <Menu.Item key="1">
-                    <Icon type="pie-chart" />
-                    <span>Home</span>
+            <Menu onClick={this.handleClick} theme="light" selectedKeys={[this.state.current]} mode="inline" className="menuStyle">
+                <Menu.Item key="home">
+                        <Icon type="pie-chart" />
+                        <span>Home</span>
                 </Menu.Item>
-                <Menu.Item key="2">
-                    <Icon type="desktop" />
-                    <span>Option 2</span>
+                <Menu.Item key="publish">
+                        <Icon type="desktop" />
+                        <span>Publish</span>
                 </Menu.Item>
                 <SubMenu
                     key="sub1"
@@ -51,4 +65,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default withRouter(App);

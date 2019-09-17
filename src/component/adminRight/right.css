@@ -10,6 +10,9 @@
 .verCards .cards {
     margin-bottom: 16px;
 }
+.verCards .cards .ant-card-body{
+    padding: 8px;
+}
 .adminList {
     height: calc(100vh - 510px);
     overflow: auto;
@@ -18,9 +21,15 @@
     display: flex;
 }
 .layOutRight  .rightIcons {
-    font-size: 36px;
+    padding-left: 10px;
+    font-size: 46px;
 }
 .layOutRight .rightCardMain {
+    font-size: 16px;
     box-sizing: border-box;
     margin-left: 20px;
+    height: 69px;
+    line-height: 69px;
+    margin-right: 20px;
+    overflow: hidden;
 }

@@ -29,14 +29,14 @@ class App extends React.Component {
                         <h4 style={{ marginBottom: "16px" }}>Total Revenue</h4>
                         <Row gutter={16}>
                             <Col span={12}>
-                                <Statistic value={1128} prefix={<Icon type="like" />} valueStyle={{ textAlign: "center", fontSize: "23px", lineHeight: "45px" }} />
+                                <Statistic value={1128} prefix={<Icon type="like" />} valueStyle={{ textAlign: "left", fontSize: "23px", lineHeight: "45px" }} />
 
                             </Col>
                             <Col span={12}>
                                 <Statistic
                                     value={11.28}
                                     precision={2}
-                                    valueStyle={{ color: '#3f8600', fontSize: "20px", lineHeight: "45px", textAlign: "right" }}
+                                    valueStyle={{ color: '#3f8600', fontSize: "20px", lineHeight: "45px", textAlign: "left" }}
                                     prefix={<Icon type="arrow-up" />}
                                     suffix="%"
                                 />
@@ -46,13 +46,13 @@ class App extends React.Component {
                         <h4 style={{ marginTop: "20px", marginBottom: "16px" }}>Viewed</h4>
                         <Row gutter={16}>
                             <Col span={12}>
-                                <Statistic value={93} suffix="/ 100" valueStyle={{ textAlign: "center", fontSize: "23px" }} />
+                                <Statistic value={93} suffix="/ 100" valueStyle={{ textAlign: "left", fontSize: "23px" }} />
                             </Col>
                             <Col span={12}>
                                 <Statistic
                                     value={9.3}
                                     precision={2}
-                                    valueStyle={{ color: '#cf1322', fontSize: "20px", lineHeight: "45px", textAlign: "right" }}
+                                    valueStyle={{ color: '#cf1322', fontSize: "20px", lineHeight: "45px", textAlign: "left" }}
                                     prefix={<Icon type="arrow-down" />}
                                     suffix="%"
                                 />
@@ -63,13 +63,12 @@ class App extends React.Component {
                             <Row gutter={16} className="verCards">
                                 <Col span={24}>
                                     <Card hoverable className="cards">
-                                        <div class ="layOutRight">
+                                        <div className="layOutRight">
                                             <div className="rightIcons">
                                                 <Icon type="border-outer" />
                                             </div>
                                             <div className="rightCardMain">
-                                                Card contentasdasdasdasd
-                                                asdasdasdasd
+                                                Total Number
                                             </div>
                                         </div>
 
@@ -77,42 +76,98 @@ class App extends React.Component {
                                 </Col>
                                 <Col span={24}>
                                     <Card hoverable className="cards">
-                                        Card content
+                                        <div className="layOutRight">
+                                            <div className="rightIcons">
+                                                <Icon type="border-outer" />
+                                            </div>
+                                            <div className="rightCardMain">
+                                                Total Number
+                                            </div>
+                                        </div>
                                     </Card>
                                 </Col>
                                 <Col span={24}>
                                     <Card hoverable className="cards">
-                                        Card content
+                                        <div className="layOutRight">
+                                            <div className="rightIcons">
+                                                <Icon type="border-outer" />
+                                            </div>
+                                            <div className="rightCardMain">
+                                                Total Number
+                                            </div>
+                                        </div>
                                     </Card>
                                 </Col>
                                 <Col span={24}>
                                     <Card hoverable className="cards">
-                                        Card content
+                                        <div className="layOutRight">
+                                            <div className="rightIcons">
+                                                <Icon type="border-outer" />
+                                            </div>
+                                            <div className="rightCardMain">
+                                                Total Number
+                                            </div>
+                                        </div>
                                     </Card>
                                 </Col>
                                 <Col span={24}>
                                     <Card hoverable className="cards">
-                                        Card content
+                                        <div className="layOutRight">
+                                            <div className="rightIcons">
+                                                <Icon type="border-outer" />
+                                            </div>
+                                            <div className="rightCardMain">
+                                                Total Number
+                                            </div>
+                                        </div>
                                     </Card>
                                 </Col>
                                 <Col span={24}>
                                     <Card hoverable className="cards">
-                                        Card content
+                                        <div className="layOutRight">
+                                            <div className="rightIcons">
+                                                <Icon type="border-outer" />
+                                            </div>
+                                            <div className="rightCardMain">
+                                                Total Number
+                                            </div>
+                                        </div>
                                     </Card>
                                 </Col>
                                 <Col span={24}>
                                     <Card hoverable className="cards">
-                                        Card content
+                                        <div className="layOutRight">
+                                            <div className="rightIcons">
+                                                <Icon type="border-outer" />
+                                            </div>
+                                            <div className="rightCardMain">
+                                                Total Number
+                                            </div>
+                                        </div>
                                     </Card>
                                 </Col>
                                 <Col span={24}>
                                     <Card hoverable className="cards">
-                                        Card content
+                                        <div className="layOutRight">
+                                            <div className="rightIcons">
+                                                <Icon type="border-outer" />
+                                            </div>
+                                            <div className="rightCardMain">
+                                                Total Number
+                                            </div>
+                                        </div>
                                     </Card>
                                 </Col>
                                 <Col span={24}>
                                     <Card hoverable className="cards">
-                                        Card content
+                                        <div className="layOutRight">
+                                            <div className="rightIcons">
+                                                <Icon type="border-outer" />
+                                            </div>
+                                            <div className="rightCardMain">
+                                                Total Number
+                                            </div>
+                                        </div>
                                     </Card>
                                 </Col>
                             </Row>

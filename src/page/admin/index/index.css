@@ -70,11 +70,12 @@
     padding-bottom: 26px;
 }
 .adminIcons {
-    font-weight: 300;
     font-size: 34px;
     margin-top: 6px;
+    transition: .1s;
 }
 .admincardList .cards:hover .adminIcons{
+    transition: .1s;
     font-size: 40px;
 }
 .admincardList h4 {

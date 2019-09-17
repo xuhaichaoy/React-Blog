@@ -62,7 +62,7 @@ class App extends React.Component {
         <div className="fixed">
           <Row className="header">
             <Col xs={2} sm={4} md={6} lg={5} xl={5}>
-              <h1 className="haichao">Haichao.Xu's Blog</h1>
+              <h1 className="haichao">xxxxxxxxxxxx</h1>
             </Col>
             <Col xs={2} sm={4} md={6} lg={6} xl={6}>
               <div className="input">
@@ -98,7 +98,7 @@ class App extends React.Component {
                     <Link to="/intro">介绍</Link>
                   </Menu.Item>
                   <Menu.Item key="admin">
-                  <Link to="/admin">后台</Link>
+                  <Link to="/admin/home">后台</Link>
                 </Menu.Item>
                 </Menu>
               </div>
