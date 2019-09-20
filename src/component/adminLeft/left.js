@@ -1,6 +1,5 @@
 import React from "react";
 import { Menu, Icon } from 'antd';
-import { withRouter } from "react-router-dom";
 import "./left.css";
 
 const { SubMenu } = Menu;
@@ -15,7 +14,7 @@ class App extends React.Component {
 
     handleClick = e => {
         this.setState({
-          current: e.key
+            current: e.key 
         });
         // this.props.history.push("/admin/" + e.key);
     };
@@ -24,12 +23,12 @@ class App extends React.Component {
         return (
             <Menu onClick={this.handleClick} theme="light" selectedKeys={[this.state.current]} mode="inline" className="menuStyle">
                 <Menu.Item key="home">
-                        <Icon type="pie-chart" />
-                        <span>Home</span>
+                    <Icon type="pie-chart" />
+                    <span>Home</span>
                 </Menu.Item>
                 <Menu.Item key="publish">
-                        <Icon type="desktop" />
-                        <span>Publish</span>
+                    <Icon type="desktop" />
+                    <span>Publish</span>
                 </Menu.Item>
                 <SubMenu
                     key="sub1"
@@ -65,4 +64,4 @@ class App extends React.Component {
     }
 }
 
-export default withRouter(App);
+export default App;
