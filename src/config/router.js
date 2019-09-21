@@ -101,7 +101,7 @@ class App extends React.Component {
                     <Route exact path="/time" component={Time} />
                     <Route exact path="/category" component={Category} />
                     <Route exact path="/intro" component={Info} />
-                    <Route exact path="/admin" component={Topics} />
+                    <Route exact path="/admin" component={AdminHome} />
                     <Route exact path="/admin/home" component={AdminHome} />
                     <Route exact path="/admin/publish" component={AdminPublish} />
                     <Redirect from="(/:name)" to="/index" />
