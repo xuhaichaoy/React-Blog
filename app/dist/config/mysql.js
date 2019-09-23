@@ -25,4 +25,3 @@ var data = {
     sequelize: sequelize
 };
 exports.default = data;
-//# sourceMappingURL=mysql.js.map

@@ -36,7 +36,16 @@ const api = {
             .catch(err => {
                 return err
             })
-    }
+    },
+    allenter: (params, callback) => {
+        axios.get('/allenter', params)
+            .then(res => {
+                callback(res)
+            })
+            .catch(err => {
+                return err
+            })
+    },
 }
 
 export default api

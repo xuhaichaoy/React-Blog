@@ -1,7 +1,8 @@
 import React from "react";
 import LeftMenu from "../../../component/adminLeft/left";
 import Home from "../home/home";
-// import Publish from "../push/push";
+import { BrowserRouter as Router, Route, Redirect, Link, Switch } from "react-router-dom";
+import Publish from "../push/push";
 import { Layout } from 'antd';
 import "./index.css";
 
@@ -24,7 +25,11 @@ class App extends React.Component {
                 </Sider>
                 <Layout style={{ marginLeft: "200px" }}>
                     <Content style={{ margin: '24px 16px' }}>
-                        <Home />
+                        <Router>
+                            <Switch>
+                                <Route exact path="/admin" component={Home} />
+                            </Switch>
+                        </Router>
                     </Content>
                 </Layout>
             </Layout>

@@ -25,7 +25,7 @@ class App extends React.Component {
     current: "index",
     logined: false
   };
-  
+
 
   handleClick = e => {
     this.setState({
@@ -56,7 +56,7 @@ class App extends React.Component {
   }
 
   render() {
-    
+
     return (
       <div className="top">
         <div className="fixed">
@@ -98,8 +98,11 @@ class App extends React.Component {
                     <Link to="/intro">介绍</Link>
                   </Menu.Item>
                   <Menu.Item key="admin">
-                  <Link to="/admin">后台</Link>
-                </Menu.Item>
+                    <Link to="/admin">后台</Link>
+                  </Menu.Item>
+                  <Menu.Item key="enter">
+                    <Link to="/enter">娱乐</Link>
+                  </Menu.Item>
                 </Menu>
               </div>
             </Col>

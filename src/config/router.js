@@ -4,7 +4,7 @@ import Time from "../page/time/time";
 import Category from "../page/category/category";
 import Info from "../page/introduce/info";
 import AdminHome from "../page/admin/index/index";
-import AdminPublish from "../page/admin/push/push";
+import Enter from "../page/admin/push/push";
 import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
 import Menu from "../component/menu/menu";
 import { BackTop, Layout } from "antd";
@@ -98,12 +98,11 @@ class App extends React.Component {
                     <Menu />
                     <BackTop />
                     <Route exact path="/index" component={Index} />
-                    <Route exact path="/time" component={Time} />
-                    <Route exact path="/category" component={Category} />
-                    <Route exact path="/intro" component={Info} />
-                    <Route exact path="/admin" component={AdminHome} />
-                    <Route exact path="/admin/home" component={AdminHome} />
-                    <Route exact path="/admin/publish" component={AdminPublish} />
+                    <Route path="/time" component={Time} />
+                    <Route path="/category" component={Category} />
+                    <Route path="/intro" component={Info} />
+                    <Route path="/admin" component={AdminHome} />
+                    <Route path="/enter" component={Enter} />
                     <Redirect from="(/:name)" to="/index" />
                 </div>
             </Router>

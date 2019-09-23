@@ -50,10 +50,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var routing_controllers_1 = require("routing-controllers");
 var bodyparser_1 = __importDefault(require("../config/bodyparser"));
 var Articals_1 = __importDefault(require("../models/Articals"));
-var ArticalController = /** @class */ (function () {
-    function ArticalController() {
+var Enter = /** @class */ (function () {
+    function Enter() {
     }
-    ArticalController.prototype.getAll = function () {
+    Enter.prototype.getAll = function () {
         return __awaiter(this, void 0, void 0, function () {
             var r;
             return __generator(this, function (_a) {
@@ -68,18 +68,18 @@ var ArticalController = /** @class */ (function () {
             });
         });
     };
-    ArticalController.prototype.getOne = function (id) {
+    Enter.prototype.getOne = function (id) {
         return {
             user: id
         };
     };
-    ArticalController.prototype.post = function (user) {
+    Enter.prototype.post = function (user) {
         return "Saving user...";
     };
-    ArticalController.prototype.put = function (id, user) {
+    Enter.prototype.put = function (id, user) {
         return "Updating a user...";
     };
-    ArticalController.prototype.remove = function (id) {
+    Enter.prototype.remove = function (id) {
         return "Removing user...";
     };
     __decorate([
@@ -89,27 +89,27 @@ var ArticalController = /** @class */ (function () {
         routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
         routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
         routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8")
-    ], ArticalController.prototype, "getAll", null);
+    ], Enter.prototype, "getAll", null);
     __decorate([
         routing_controllers_1.Get("/users/:id"),
         __param(0, routing_controllers_1.Param("id"))
-    ], ArticalController.prototype, "getOne", null);
+    ], Enter.prototype, "getOne", null);
     __decorate([
         routing_controllers_1.Post("/users"),
         __param(0, routing_controllers_1.Body())
-    ], ArticalController.prototype, "post", null);
+    ], Enter.prototype, "post", null);
     __decorate([
         routing_controllers_1.Put("/users/:id"),
         __param(0, routing_controllers_1.Param("id")), __param(1, routing_controllers_1.Body())
-    ], ArticalController.prototype, "put", null);
+    ], Enter.prototype, "put", null);
     __decorate([
         routing_controllers_1.Delete("/users/:id"),
         __param(0, routing_controllers_1.Param("id"))
-    ], ArticalController.prototype, "remove", null);
-    ArticalController = __decorate([
+    ], Enter.prototype, "remove", null);
+    Enter = __decorate([
         routing_controllers_1.JsonController(),
         routing_controllers_1.UseBefore(bodyparser_1.default)
-    ], ArticalController);
-    return ArticalController;
+    ], Enter);
+    return Enter;
 }());
-exports.ArticalController = ArticalController;
+exports.Enter = Enter;

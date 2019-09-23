@@ -190,4 +190,3 @@ UserModel.login = function (data) {
     });
 };
 exports.default = UserModel;
-//# sourceMappingURL=Users.js.map

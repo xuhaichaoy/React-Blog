@@ -11,4 +11,3 @@ var bodyParser = __importStar(require("body-parser"));
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 exports.default = urlencodedParser;
-//# sourceMappingURL=bodyparser.js.map

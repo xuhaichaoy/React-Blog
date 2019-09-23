@@ -87,4 +87,3 @@ UserModel.fetch = function () {
     });
 };
 exports.default = UserModel;
-//# sourceMappingURL=Articals.js.map

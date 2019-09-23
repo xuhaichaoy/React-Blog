@@ -1,6 +1,5 @@
 import React from "react";
 import { List, Card, Divider, Icon, Tag } from "antd";
-import axios from '../../config/axios';
 import api from '../../config/http';
 import "./home.css";
 

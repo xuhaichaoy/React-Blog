@@ -21,4 +21,3 @@ exports.default = {
     secret: secret,
     check: verifyToken
 };
-//# sourceMappingURL=jwt.js.map

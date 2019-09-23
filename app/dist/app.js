@@ -4,6 +4,7 @@ require("reflect-metadata"); // this shim is required
 var routing_controllers_1 = require("routing-controllers");
 var UserController_1 = require("./controllers/UserController");
 var ArticalController_1 = require("./controllers/ArticalController");
+var EnterController_1 = require("./controllers/EnterController");
 var app = routing_controllers_1.createExpressServer({
     defaults: {
         //with this option, null will return 404 by default
@@ -16,8 +17,7 @@ var app = routing_controllers_1.createExpressServer({
         }
     },
     cors: true,
-    controllers: [UserController_1.UserController, ArticalController_1.ArticalController]
+    controllers: [UserController_1.UserController, ArticalController_1.ArticalController, EnterController_1.EnterController]
 });
 app.listen(3000);
 console.log("启动成功！！！");
-//# sourceMappingURL=app.js.map

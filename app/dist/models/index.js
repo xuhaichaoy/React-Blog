@@ -9,4 +9,3 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //   .catch(() => {
 //     console.log('init db error')
 //   })
-//# sourceMappingURL=index.js.map
