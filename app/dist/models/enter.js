@@ -48,7 +48,8 @@ var Pupperteer = {
                                 // 是否不显示浏览器， 为true则不显示
                                 'headless': true,
                                 args: [
-                                    '--proxy-server=socks5://127.0.0.1:1080'
+                                    '--proxy-server="direct://"',
+                                    '--proxy-bypass-list=*'
                                 ]
                             })];
                     case 1:
@@ -64,19 +65,28 @@ var Pupperteer = {
                             ])];
                     case 3:
                         _a.sent();
-                        chapter_list_url = "http://book.km.com/chapterlist/1358572.html";
+                        chapter_list_url = "https://www.bqg5200.com/all.html";
                         // 打开章节列表
                         return [4 /*yield*/, page.goto(chapter_list_url)];
                     case 4:
                         // 打开章节列表
                         _a.sent();
-                        return [4 /*yield*/, page.$eval('#xtopjsinfo > div.wrapper > div.container > div.catalog > div.catalog_bd', function (el) {
-                                return el.innerText;
+                        return [4 /*yield*/, page.$eval('#main .listlie', function (el) {
+                                var body = document.querySelectorAll('#main .listlie ul li');
+                                var arr = [];
+                                for (var i = 0; i < body.length; i++) {
+                                    var obj = {
+                                        title: body[i].childNodes[0].innerText,
+                                        href: body[i].childNodes[0].href,
+                                        achour: body[i].innerText
+                                    };
+                                    arr.push(obj);
+                                }
+                                return arr;
                             })];
                     case 5:
                         content = _a.sent();
-                        console.log(content, 1111111111111111111111111111);
-                        return [2 /*return*/, JSON.stringify(content)];
+                        return [2 /*return*/, JSON.parse(JSON.stringify(content))];
                     case 6:
                         err_1 = _a.sent();
                         console.log(err_1);

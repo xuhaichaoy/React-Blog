@@ -1,27 +1,30 @@
 import React from "react";
-import { Tabs, Icon } from 'antd';
+import { Tabs, Icon, List, Card } from 'antd';
 import api from '../../../config/http';
 import "./push.css";
 
 const { TabPane } = Tabs;
 class App extends React.Component {
+    state = {
+        allData: [],
+    };
 
     componentDidMount() {
         const _this = this
         api.allenter({}, (r) => {
-          const { data } = r
-          const res = data.data
-          if (res.status === 1) {
-            _this.setState({
-              allData: res.list
-            });
-          }
+            const { data } = r
+            const res = data.data
+            if (res.status === 1) {
+                _this.setState({
+                    allData: res.data
+                });
+            }
         })
-      }
+    }
 
     render() {
         return (
-            <div className = "enter">
+            <div className="enter">
                 <Tabs defaultActiveKey="1">
                     <TabPane
                         tab={
@@ -32,7 +35,19 @@ class App extends React.Component {
                         }
                         key="1"
                     >
-                        Tab 1111111111111111111
+                        <List
+                            grid={{ gutter: 16, column: 4 }}
+                            dataSource={this.state.allData}
+                            renderItem={item => (
+                                <a href={item.href} target="_blank">
+                                    <List.Item>
+                                        <Card title={item.title}>
+                                            作者： {item.achour}
+                                        </Card>
+                                    </List.Item> 
+                                </a>
+                            )}
+                        />
                     </TabPane>
                     <TabPane
                         tab={

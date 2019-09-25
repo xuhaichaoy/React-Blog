@@ -2,13 +2,14 @@ const puppeteer = require('puppeteer');
 
 const Pupperteer = {
     async fetch() {
-        try{
+        try {
             // 创建一个浏览器实例 Browser 对象
             let browser = await puppeteer.launch({
                 // 是否不显示浏览器， 为true则不显示
                 'headless': true,
                 args: [
-                    '--proxy-server=socks5://127.0.0.1:1080'
+                    '--proxy-server="direct://"',
+                    '--proxy-bypass-list=*'
                 ]
             });
             // 通过浏览器实例 Browser 对象创建页面 Page 对象
@@ -22,16 +23,24 @@ const Pupperteer = {
                 // 设置页面视口的大小
             ]);
             // 地址
-            let chapter_list_url = `http://book.km.com/chapterlist/1358572.html`
+            let chapter_list_url = `https://www.bqg5200.com/all.html`
             // 打开章节列表
             await page.goto(chapter_list_url);
-            // 使用css选择器的方式
-            let content= await page.$eval('#xtopjsinfo > div.wrapper > div.container > div.catalog > div.catalog_bd', (el: any) => {
-                return el.innerText
+            let content = await page.$eval('#main .listlie', (el: any) => {
+                const body = document.querySelectorAll('#main .listlie ul li')
+                let arr = []
+                for (var i = 0; i < body.length; i++) {
+                    let obj = {
+                        title: body[i].childNodes[0].innerText,
+                        href: body[i].childNodes[0].href,
+                        achour: body[i].innerText
+                    }
+                    arr.push(obj)
+                }
+                return arr
             });
-            console.log(content, 1111111111111111111111111111)
-            return JSON.stringify(content)
-        }catch(err){
+            return JSON.parse(JSON.stringify(content))
+        } catch (err) {
             console.log(err)
             return err
         }

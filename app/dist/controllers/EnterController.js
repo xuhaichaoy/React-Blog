@@ -62,7 +62,10 @@ var EnterController = /** @class */ (function () {
                     case 1:
                         r = _a.sent();
                         return [2 /*return*/, {
-                                data: r
+                                data: {
+                                    status: 1,
+                                    data: r
+                                }
                             }];
                 }
             });

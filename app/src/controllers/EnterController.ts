@@ -17,7 +17,10 @@ export class EnterController {
       // 获取所有文章信息
       const r = await Pupperteer.fetch() 
       return {
-         data: r
+         data: {
+            status: 1,
+            data: r
+         }
       }
    }
 
