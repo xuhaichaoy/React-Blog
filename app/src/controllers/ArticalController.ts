@@ -2,6 +2,7 @@ import { JsonController, Param, Body, Get, Post, Put, Delete, Res, UseBefore, He
 import urlencodedParser from '../config/bodyparser'
 import Artical from '../models/Articals'
 import jsonwebtoken from '../config/jwt'
+import { callbackify } from "util";
 
 @JsonController()
 @UseBefore(urlencodedParser)

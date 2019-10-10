@@ -1,7 +1,14 @@
+import obj from '../config/mysql'
+import { async } from 'q';
+import { array } from 'prop-types';
 const puppeteer = require('puppeteer');
+
+
+
 
 const Pupperteer = {
     async fetch() {
+        // 爬取接口 存储数据
         try {
             // 创建一个浏览器实例 Browser 对象
             let browser = await puppeteer.launch({
@@ -29,22 +36,55 @@ const Pupperteer = {
             let content = await page.$eval('#main .listlie', (el: any) => {
                 const body = document.querySelectorAll('#main .listlie ul li')
                 let arr = []
-                for (var i = 0; i < body.length; i++) {
+                for (let i = 0; i < body.length; i++) {
                     let obj = {
                         title: body[i].childNodes[0].innerText,
                         href: body[i].childNodes[0].href,
                         achour: body[i].innerText
                     }
+
                     arr.push(obj)
                 }
                 return arr
             });
+
+            // 存储数据
+            const EnterArtical = obj.sequelize.define('enterartical', {
+                aid: {
+                    type: obj.Sequelize.INTEGER(11),
+                    primaryKey: true,            // 主键
+                    autoIncrement: true,         // 自动递增
+                    // 文章ID
+                },
+                artical_name: obj.Sequelize.STRING(100),
+                artical_achour: obj.Sequelize.STRING(100),
+                artical_href: obj.Sequelize.STRING(100),
+            }, {
+                timestamps: false
+            })
+            EnterArtical.sync();
+
+            EnterArtical.create({
+                artical_name: 1,
+                artical_achour: 1,
+                artical_href: 1,
+            }).then(function (result: any) {
+                console.log('inserted XiaoMing ok');
+            }).catch(function (err: any) {
+                console.log('inserted XiaoMing error');
+                console.log(err.message);
+            });
+
             return JSON.parse(JSON.stringify(content))
+            
         } catch (err) {
             console.log(err)
             return err
         }
-    }
+    },
+    async insert() {
+
+    },
 };
 
 

@@ -11,15 +11,26 @@ class App extends React.Component {
 
     componentDidMount() {
         const _this = this
-        api.allenter({}, (r) => {
-            const { data } = r
-            const res = data.data
-            if (res.status === 1) {
-                _this.setState({
-                    allData: res.data
-                });
-            }
-        })
+        let value = localStorage.getItem("enterArtical")
+        if(!value) {
+            console.log(JSON.parse(value))
+            // _this.setState({
+            //     allData: JSON.parse(value)
+            // });
+        }else {                           
+            api.allenter({}, (r) => {
+                const { data } = r
+                const res = data.data
+                if (res.status === 1) {
+                    _this.setState({
+                        allData: res.data
+                    });
+                    localStorage.setItem("enterArtical", JSON.stringify(res.data))
+                }
+            })
+        }
+        
+
     }
 
     render() {
@@ -39,7 +50,7 @@ class App extends React.Component {
                             grid={{ gutter: 16, column: 4 }}
                             dataSource={this.state.allData}
                             renderItem={item => (
-                                <a href={item.href} target="_blank">
+                                <a href={item.href} target="_blank" style={{display: "block"}}>
                                     <List.Item>
                                         <Card title={item.title}>
                                             作者： {item.achour}

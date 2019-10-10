@@ -34,12 +34,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+var mysql_1 = __importDefault(require("../config/mysql"));
 var puppeteer = require('puppeteer');
 var Pupperteer = {
     fetch: function () {
         return __awaiter(this, void 0, void 0, function () {
-            var browser, page, UA, chapter_list_url, content, err_1;
+            var browser, page, UA, chapter_list_url, content, EnterArtical, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -75,17 +79,40 @@ var Pupperteer = {
                                 var body = document.querySelectorAll('#main .listlie ul li');
                                 var arr = [];
                                 for (var i = 0; i < body.length; i++) {
-                                    var obj = {
+                                    var obj_1 = {
                                         title: body[i].childNodes[0].innerText,
                                         href: body[i].childNodes[0].href,
                                         achour: body[i].innerText
                                     };
-                                    arr.push(obj);
+                                    arr.push(obj_1);
                                 }
                                 return arr;
                             })];
                     case 5:
                         content = _a.sent();
+                        EnterArtical = mysql_1.default.sequelize.define('enterartical', {
+                            aid: {
+                                type: mysql_1.default.Sequelize.INTEGER(11),
+                                primaryKey: true,
+                                autoIncrement: true,
+                            },
+                            artical_name: mysql_1.default.Sequelize.STRING(100),
+                            artical_achour: mysql_1.default.Sequelize.STRING(100),
+                            artical_href: mysql_1.default.Sequelize.STRING(100),
+                        }, {
+                            timestamps: false
+                        });
+                        EnterArtical.sync();
+                        EnterArtical.create({
+                            artical_name: 1,
+                            artical_achour: 1,
+                            artical_href: 1,
+                        }).then(function (result) {
+                            console.log('inserted XiaoMing ok');
+                        }).catch(function (err) {
+                            console.log('inserted XiaoMing error');
+                            console.log(err.message);
+                        });
                         return [2 /*return*/, JSON.parse(JSON.stringify(content))];
                     case 6:
                         err_1 = _a.sent();
@@ -95,6 +122,13 @@ var Pupperteer = {
                 }
             });
         });
-    }
+    },
+    insert: function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/];
+            });
+        });
+    },
 };
 exports.default = Pupperteer;
