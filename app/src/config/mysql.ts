@@ -16,7 +16,7 @@ sequelize
     .then(() => {
         console.log('Connection has been established successfully.')
     })
-    .catch(() => {
+    .catch(() => { 
         console.log('Unable to connect to the database')
     })
 const data = {

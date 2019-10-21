@@ -2,7 +2,8 @@ import "reflect-metadata"; // this shim is required
 import { createExpressServer } from "routing-controllers";
 import { UserController } from "./controllers/UserController";
 import { ArticalController } from "./controllers/ArticalController";
-import {EnterController} from "./controllers/EnterController";
+import { EnterController } from "./controllers/EnterController";
+import Schedule from "./config/schedule"
 
 const app = createExpressServer({
    defaults: {
@@ -21,6 +22,8 @@ const app = createExpressServer({
    cors: true, // CORS 模块跨域
    controllers: [UserController, ArticalController, EnterController]
 })
+
+Schedule.startSchedule()
 
 
 app.listen(3000);

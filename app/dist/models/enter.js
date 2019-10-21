@@ -39,96 +39,46 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mysql_1 = __importDefault(require("../config/mysql"));
-var puppeteer = require('puppeteer');
-var Pupperteer = {
-    fetch: function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var browser, page, UA, chapter_list_url, content, EnterArtical, err_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 6, , 7]);
-                        return [4 /*yield*/, puppeteer.launch({
-                                // 是否不显示浏览器， 为true则不显示
-                                'headless': true,
-                                args: [
-                                    '--proxy-server="direct://"',
-                                    '--proxy-bypass-list=*'
-                                ]
-                            })];
-                    case 1:
-                        browser = _a.sent();
-                        return [4 /*yield*/, browser.newPage()];
-                    case 2:
-                        page = _a.sent();
-                        UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/63.0.3239.84 Chrome/63.0.3239.84 Safari/537.36";
-                        return [4 /*yield*/, Promise.all([
-                                page.setUserAgent(UA),
-                                // 允许运行js
-                                page.setJavaScriptEnabled(true),
-                            ])];
-                    case 3:
-                        _a.sent();
-                        chapter_list_url = "https://www.bqg5200.com/all.html";
-                        // 打开章节列表
-                        return [4 /*yield*/, page.goto(chapter_list_url)];
-                    case 4:
-                        // 打开章节列表
-                        _a.sent();
-                        return [4 /*yield*/, page.$eval('#main .listlie', function (el) {
-                                var body = document.querySelectorAll('#main .listlie ul li');
-                                var arr = [];
-                                for (var i = 0; i < body.length; i++) {
-                                    var obj_1 = {
-                                        title: body[i].childNodes[0].innerText,
-                                        href: body[i].childNodes[0].href,
-                                        achour: body[i].innerText
-                                    };
-                                    arr.push(obj_1);
-                                }
-                                return arr;
-                            })];
-                    case 5:
-                        content = _a.sent();
-                        EnterArtical = mysql_1.default.sequelize.define('enterartical', {
-                            aid: {
-                                type: mysql_1.default.Sequelize.INTEGER(11),
-                                primaryKey: true,
-                                autoIncrement: true,
-                            },
-                            artical_name: mysql_1.default.Sequelize.STRING(100),
-                            artical_achour: mysql_1.default.Sequelize.STRING(100),
-                            artical_href: mysql_1.default.Sequelize.STRING(100),
-                        }, {
-                            timestamps: false
-                        });
-                        EnterArtical.sync();
-                        EnterArtical.create({
-                            artical_name: 1,
-                            artical_achour: 1,
-                            artical_href: 1,
+var EnterArtical = mysql_1.default.sequelize.define('enterartical', {
+    aid: {
+        type: mysql_1.default.Sequelize.INTEGER(11),
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    artical_name: mysql_1.default.Sequelize.STRING(100),
+    artical_achour: mysql_1.default.Sequelize.STRING(100),
+    artical_href: mysql_1.default.Sequelize.STRING(100),
+}, {
+    timestamps: false
+});
+EnterArtical.fetch = function () {
+    return __awaiter(this, void 0, void 0, function () {
+        var r;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    r = {};
+                    return [4 /*yield*/, EnterArtical.findAll({
+                            // 获取所有信息
+                            limit: 10,
                         }).then(function (result) {
-                            console.log('inserted XiaoMing ok');
+                            r = {
+                                status: 1,
+                                msg: "success",
+                                list: JSON.parse(JSON.stringify(result))
+                            };
                         }).catch(function (err) {
-                            console.log('inserted XiaoMing error');
-                            console.log(err.message);
-                        });
-                        return [2 /*return*/, JSON.parse(JSON.stringify(content))];
-                    case 6:
-                        err_1 = _a.sent();
-                        console.log(err_1);
-                        return [2 /*return*/, err_1];
-                    case 7: return [2 /*return*/];
-                }
-            });
+                            r = {
+                                status: -1000,
+                                msg: "error",
+                                data: err
+                            };
+                        })];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, r];
+            }
         });
-    },
-    insert: function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/];
-            });
-        });
-    },
+    });
 };
-exports.default = Pupperteer;
+exports.default = EnterArtical;

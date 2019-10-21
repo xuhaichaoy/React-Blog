@@ -1,6 +1,6 @@
 import { JsonController, Param, Body, Get, Post, Put, Delete, Res, UseBefore, Header, CookieParam } from "routing-controllers";
 import urlencodedParser from '../config/bodyparser'
-import Pupperteer from '../models/Enter'
+import Novel from '../models/Enter'
 
 @JsonController()
 @UseBefore(urlencodedParser)
@@ -15,7 +15,7 @@ export class EnterController {
    @Header("Content-Type", "text/html; charset=utf-8")
    async getAll() {
       // 获取所有文章信息
-      const r = await Pupperteer.fetch() 
+      const r = await Novel.fetch() 
       return {
          data: {
             status: 1,
