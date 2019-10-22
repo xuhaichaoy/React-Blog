@@ -1,14 +1,19 @@
 import React from "react";
 import { List, Card, Divider, Icon, Tag } from "antd";
+import {withRouter} from "react-router-dom";
 import api from '../../config/http';
 import "./home.css";
 
 const { Meta } = Card;
 
 class App extends React.Component {
-  state = {
-    allData: []
+  constructor(props) {
+    super(props);
+    this.state = {
+      allData: []
+    }
   };
+
   componentDidMount() {
     const _this = this
     api.allArticals({}, (r) => {
@@ -21,6 +26,10 @@ class App extends React.Component {
       }
     })
   }
+
+  watchDetail(e) {
+    this.props.history.push('/detail/' + e)
+  };
 
   render() {
     return (
@@ -40,7 +49,7 @@ class App extends React.Component {
         }
         renderItem={item => (
           <List.Item>
-            <Card hoverable={true} className="cards">
+            <Card hoverable={true} className="cards" onClick={this.watchDetail.bind(this, item.aid)}>
               <Divider orientation="left">
                 <span className="title">{item.artical_name}</span>
               </Divider>
@@ -74,4 +83,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

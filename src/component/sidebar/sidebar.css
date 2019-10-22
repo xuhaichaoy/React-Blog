@@ -51,6 +51,7 @@
 .currentArtical {
     margin-top: -28px;
     border-right: 1px solid rgb(232, 232, 232); 
+    background: white;
 }
 .lists {
     text-align: left;
@@ -72,6 +73,7 @@
 .sidebar > .tips {
     margin-top: -28px!important;
     border-right: 1px solid rgb(232, 232, 232); 
+    background: white;
     margin-bottom: 110px;
 }
 .tipsBlock {

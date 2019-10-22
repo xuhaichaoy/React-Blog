@@ -18,8 +18,8 @@ EnterArtical.fetch = async function () {
     let r = {}
     await EnterArtical.findAll({
         // 获取所有信息
-        limit: 10,
-        
+        limit: 24,
+
     }).then(function (result: any) {
         r = {
             status: 1,

@@ -62,7 +62,7 @@ class App extends React.Component {
         <div className="fixed">
           <Row className="header">
             <Col xs={2} sm={4} md={6} lg={5} xl={5}>
-              <h1 className="haichao">xxxxxxxxxxxx</h1>
+              <h1 className="haichao">HaiChao</h1>
             </Col>
             <Col xs={2} sm={4} md={6} lg={6} xl={6}>
               <div className="input">

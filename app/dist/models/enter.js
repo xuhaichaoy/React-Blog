@@ -60,7 +60,7 @@ EnterArtical.fetch = function () {
                     r = {};
                     return [4 /*yield*/, EnterArtical.findAll({
                             // 获取所有信息
-                            limit: 10,
+                            limit: 24,
                         }).then(function (result) {
                             r = {
                                 status: 1,
