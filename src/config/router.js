@@ -5,6 +5,7 @@ import Detail from "../page/detail/detail";
 import Category from "../page/category/category";
 import Info from "../page/introduce/info";
 import AdminHome from "../page/admin/index/index";
+import AdminPublish from "../page/admin/publish/publish";
 import Enter from "../page/admin/push/push";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Menu from "../component/menu/menu";
@@ -28,7 +29,8 @@ class App extends React.Component {
                     <Route path="/category" component={Category} />
                     <Route path="/intro" component={Info} />
                     <Route path="/detail/:id" component={Detail} />
-                    <Route path="/admin" component={AdminHome} />
+                    <Route path="/admin/home" component={AdminHome} />
+                    <Route path="/admin/publish" component={AdminPublish} />
                     <Route path="/enter" component={Enter} />
                     <Redirect from="(/:name)" to="/index" />
                 </div>

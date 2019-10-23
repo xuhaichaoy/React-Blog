@@ -1,5 +1,6 @@
 import React from "react";
 import { Menu, Icon } from 'antd';
+import { withRouter } from "react-router-dom";
 import "./left.css";
 
 const { SubMenu } = Menu;
@@ -13,11 +14,16 @@ class App extends React.Component {
     };
 
     handleClick = e => {
-        this.setState({
-            current: e.key 
-        });
-        // this.props.history.push("/admin/" + e.key);
+        this.props.history.push("/admin/" + e.key);
     };
+
+    componentDidMount() {
+        const url = window.location.href
+        const params = url.slice(url.lastIndexOf('/') + 1)
+        this.setState({
+            current: params
+        })
+    }
 
     render() {
         return (
@@ -64,4 +70,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default withRouter(App);

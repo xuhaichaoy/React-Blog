@@ -1,0 +1,23 @@
+.editPublish {
+  background: white;
+  padding: 24px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-align: right;
+}
+.CodeMirror {
+  height: calc(100vh - 250px);
+}
+.code-mirror {
+  font-size: 13px;
+  line-height: 150%;
+}
+.publishButton {
+  display: inline-block;
+  margin-top: 30px;
+  height: 32px;
+  margin-right: 100px;
+}
+.ReactCodeMirror {
+  text-align: left;
+}
