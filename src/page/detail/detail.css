@@ -1,0 +1,32 @@
+.detailPage {
+  padding-right: 40px;
+  text-align: left;
+  box-shadow: border-box;
+  height: 100vh;
+}
+.detailPage > .title {
+  padding-left: 80px;
+  padding-right: 80px;
+  box-sizing: border-box;
+  width: 100%;
+  /* background: beige; */
+  height: 50px;
+  line-height: 50px;
+  margin-top: 20px;
+}
+.detailPage > .title > h2 {
+  font-size: 22px;
+  margin: 0;
+  display: inline-block;
+}
+.detailPage > .title > span {
+  font-size: 14px;
+  margin-left: 40px;
+  display: inline-block;
+}
+.detailPage .detailContent {
+  font-size: 16px;
+}
+.detailPage .detailContent > p {
+  word-wrap: break-word;
+}

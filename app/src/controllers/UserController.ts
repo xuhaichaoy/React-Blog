@@ -16,7 +16,6 @@ export class UserController {
    @Header("Content-Type", "text/html; charset=utf-8")
    async getmine() {
       const r = await Users.fetch() 
-
       return {
          data: r
       }

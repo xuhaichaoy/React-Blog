@@ -4,13 +4,14 @@ import Artical from '../models/Articals'
 import jsonwebtoken from '../config/jwt'
 import { callbackify } from "util";
 
+const localhost = "http://localhost:3001"
 @JsonController()
 @UseBefore(urlencodedParser)
 
 export class ArticalController {
 
    @Get("/allArticals")
-   @Header("Access-Control-Allow-Origin", "http://localhost:3001")
+   @Header("Access-Control-Allow-Origin", localhost)
    @Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
    @Header("Access-Control-Allow-Credentials", "true")
    @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
@@ -23,11 +24,16 @@ export class ArticalController {
       }
    }
 
-   @Get("/users/:id")
-   getOne(@Param("id") id: number) {
-      
+   @Get("/detailArtical/:id")
+   @Header("Access-Control-Allow-Origin", localhost)
+   @Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+   @Header("Access-Control-Allow-Credentials", "true")
+   @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
+   @Header("Content-Type", "text/html; charset=utf-8")
+   async getOne(@Param("id") id: number) {
+      const r = await Artical.detail(id)
       return {
-         user: id
+         data: r
       };
    }
 

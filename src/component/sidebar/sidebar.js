@@ -16,10 +16,10 @@ class App extends React.Component {
   // 获取mine 的信息
   componentDidMount () {
     const _this = this
-    api.getmine('http://localhost:3000/allArticals', (r) => {
+    api.getmine({}, (r) => {
       const {data} = r
       const res = data.data
-      console.log(res)
+      // console.log(res)
     })
   }
 

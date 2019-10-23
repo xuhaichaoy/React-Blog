@@ -20,7 +20,9 @@ const api = {
             })
     },
     getmine: (params, callback) => {
-        axios.get('/myself', params)
+        axios.get('/myself', {
+            params
+        })
             .then(res => {
                 callback(res)
             })
@@ -29,7 +31,9 @@ const api = {
             })
     },
     allArticals: (params, callback) => {
-        axios.get('/allArticals', params)
+        axios.get('/allArticals', {
+            params
+        })
             .then(res => {
                 callback(res)
             })
@@ -38,7 +42,9 @@ const api = {
             })
     },
     allenter: (params, callback) => {
-        axios.get('/allenter', params)
+        axios.get('/allenter', {
+            params
+        })
             .then(res => {
                 callback(res)
             })
@@ -46,6 +52,15 @@ const api = {
                 return err
             })
     },
+    detailArtical: (params, callback) => {
+        axios.get('/detailArtical/' + params, {})
+            .then(res => {
+                callback(res)
+            })
+            .catch(err => {
+                return err
+            })
+    }
 }
 
 export default api

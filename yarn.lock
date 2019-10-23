@@ -887,6 +887,13 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
+"@babel/runtime@^7.5.5":
+  version "7.6.3"
+  resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.6.3.tgz?cache=0&sync_timestamp=1570564351618&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.6.3.tgz#935122c74c73d2240cafd32ddb5fc2a6cd35cf1f"
+  integrity sha1-k1Eix0xz0iQMr9Mt21/Cps01zx8=
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@babel/template@^7.1.0", "@babel/template@^7.4.0", "@babel/template@^7.4.4":
   version "7.4.4"
   resolved "https://registry.npm.taobao.org/@babel/template/download/@babel/template-7.4.4.tgz#f4b88d1225689a08f5bc3a17483545be9e4ed237"
@@ -2374,6 +2381,39 @@ braces@^2.3.1, braces@^2.3.2:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
+braft-convert@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npm.taobao.org/braft-convert/download/braft-convert-2.3.0.tgz#27d5905136c334903d083b7a2352a72045627888"
+  integrity sha1-J9WQUTbDNJA9CDt6I1KnIEVieIg=
+  dependencies:
+    draft-convert "^2.0.0"
+    draft-js "^0.10.3"
+
+braft-editor@^2.3.8:
+  version "2.3.8"
+  resolved "https://registry.npm.taobao.org/braft-editor/download/braft-editor-2.3.8.tgz#3adee489c371f87ee2771e6c5aa681ac04dce4c9"
+  integrity sha1-Ot7kicNx+H7idx5sWqaBrATc5Mk=
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    braft-convert "^2.3.0"
+    braft-finder "^0.0.19"
+    braft-utils "^3.0.8"
+    draft-convert "^2.0.0"
+    draft-js "^0.10.3"
+    draft-js-multidecorators "^1.0.0"
+    draftjs-utils "^0.9.4"
+    immutable "~3.7.4"
+
+braft-finder@^0.0.19:
+  version "0.0.19"
+  resolved "https://registry.npm.taobao.org/braft-finder/download/braft-finder-0.0.19.tgz#c324d82526ed3476a93de86cc9b407f4e188bc8d"
+  integrity sha1-wyTYJSbtNHapPehsybQH9OGIvI0=
+
+braft-utils@^3.0.8:
+  version "3.0.12"
+  resolved "https://registry.npm.taobao.org/braft-utils/download/braft-utils-3.0.12.tgz#2b755ce1d8397d96b627b6767f74d07f25729d85"
+  integrity sha1-K3Vc4dg5fZa2J7Z2f3TQfyVynYU=
+
 brorand@^1.0.1:
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/brorand/download/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
@@ -3547,7 +3587,7 @@ debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
   dependencies:
     ms "^2.1.1"
 
-decamelize@^1.2.0:
+decamelize@^1.1.1, decamelize@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/decamelize/download/decamelize-1.2.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdecamelize%2Fdownload%2Fdecamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
   integrity sha1-9lNNFRSCabIDUue+4m9QH5oZEpA=
@@ -3860,7 +3900,23 @@ dottie@^2.0.0:
   resolved "https://registry.yarnpkg.com/dottie/-/dottie-2.0.1.tgz#697ad9d72004db7574d21f892466a3c285893659"
   integrity sha512-ch5OQgvGDK2u8pSZeSYAQaV/lczImd7pMJ7BcEPXmnFVjy4yJIzP6CsODJUTH8mg1tyH1Z2abOiuJO3DjZ/GBw==
 
-draft-js@^0.10.0, draft-js@~0.10.0:
+draft-convert@^2.0.0:
+  version "2.1.8"
+  resolved "https://registry.npm.taobao.org/draft-convert/download/draft-convert-2.1.8.tgz#0508efafeea79e11e5793ba771948128ba151291"
+  integrity sha1-BQjvr+6nnhHleTuncZSBKLoVEpE=
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    immutable "~3.7.4"
+    invariant "^2.2.1"
+
+draft-js-multidecorators@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/draft-js-multidecorators/download/draft-js-multidecorators-1.0.0.tgz#6c4be8d7b78dd2b966ee51ee6cc179b9b535e612"
+  integrity sha1-bEvo17eN0rlm7lHubMF5ubU15hI=
+  dependencies:
+    immutable "*"
+
+draft-js@^0.10.0, draft-js@^0.10.3, draft-js@~0.10.0:
   version "0.10.5"
   resolved "https://registry.npm.taobao.org/draft-js/download/draft-js-0.10.5.tgz#bfa9beb018fe0533dbb08d6675c371a6b08fa742"
   integrity sha1-v6m+sBj+BTPbsI1mdcNxprCPp0I=
@@ -3868,6 +3924,11 @@ draft-js@^0.10.0, draft-js@~0.10.0:
     fbjs "^0.8.15"
     immutable "~3.7.4"
     object-assign "^4.1.0"
+
+draftjs-utils@^0.9.4:
+  version "0.9.4"
+  resolved "https://registry.npm.taobao.org/draftjs-utils/download/draftjs-utils-0.9.4.tgz#976c61aa133dbbbfedd65ae1dd6627d7b98c6f08"
+  integrity sha1-l2xhqhM9u7/t1lrh3WYn17mMbwg=
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -5389,7 +5450,7 @@ immer@1.10.0:
   resolved "https://registry.npm.taobao.org/immer/download/immer-1.10.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fimmer%2Fdownload%2Fimmer-1.10.0.tgz#bad67605ba9c810275d91e1c2a47d4582e98286d"
   integrity sha1-utZ2BbqcgQJ12R4cKkfUWC6YKG0=
 
-immutable@^3.7.4:
+immutable@*, immutable@^3.7.4:
   version "3.8.2"
   resolved "https://registry.npm.taobao.org/immutable/download/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
   integrity sha1-wkOZUUVbs5kT2vKBN28VMOEErfM=
@@ -5536,12 +5597,17 @@ internal-ip@^4.2.0:
     default-gateway "^4.2.0"
     ipaddr.js "^1.9.0"
 
-invariant@^2.2.2, invariant@^2.2.4:
+invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.npm.taobao.org/invariant/download/invariant-2.2.4.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Finvariant%2Fdownload%2Finvariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha1-YQ88ksk1nOHbYW5TgAjSP/NRWOY=
   dependencies:
     loose-envify "^1.0.0"
+
+invert-kv@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/invert-kv/download/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
+  integrity sha1-EEqOSqym09jNFXqO+L+rLXo//bY=
 
 invert-kv@^2.0.0:
   version "2.0.0"
@@ -6728,6 +6794,13 @@ lazy-cache@^1.0.3:
   resolved "https://registry.npm.taobao.org/lazy-cache/download/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
   integrity sha1-odePw6UEdMuAhF07O24dpJpEbo4=
 
+lcid@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/lcid/download/lcid-1.0.0.tgz#308accafa0bc483a3867b4b6f2b9506251d1b835"
+  integrity sha1-MIrMr6C8SDo4Z7S28rlQYlHRuDU=
+  dependencies:
+    invert-kv "^1.0.0"
+
 lcid@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/lcid/download/lcid-2.0.0.tgz#6ef5d2df60e52f82eb228a4c373e8d1f397253cf"
@@ -7076,6 +7149,13 @@ media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.npm.taobao.org/media-typer/download/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
+
+mem@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/mem/download/mem-1.1.0.tgz#5edd52b485ca1d900fe64895505399a0dfa45f76"
+  integrity sha1-Xt1StIXKHZAP5kiVUFOZoN+kX3Y=
+  dependencies:
+    mimic-fn "^1.0.0"
 
 mem@^4.0.0:
   version "4.3.0"
@@ -7862,6 +7942,15 @@ os-homedir@^1.0.0:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/os-homedir/download/os-homedir-1.0.2.tgz#ffbc4988336e0e833de0c168c7ef152121aa7fb3"
   integrity sha1-/7xJiDNuDoM94MFox+8VISGqf7M=
+
+os-locale@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.npm.taobao.org/os-locale/download/os-locale-2.1.0.tgz#42bc2900a6b5b8bd17376c8e882b65afccf24bf2"
+  integrity sha1-QrwpAKa1uL0XN2yOiCtlr8zyS/I=
+  dependencies:
+    execa "^0.7.0"
+    lcid "^1.0.0"
+    mem "^1.1.0"
 
 os-locale@^3.0.0:
   version "3.1.0"
@@ -10513,6 +10602,13 @@ shimmer@^1.1.0:
   resolved "https://registry.yarnpkg.com/shimmer/-/shimmer-1.2.1.tgz#610859f7de327b587efebf501fb43117f9aff337"
   integrity sha512-sQTKC1Re/rM6XyFM6fIAGHRPVGvyXfgzIDvzoq608vM+jeyVD0Tu1E6Np0Kc2zAIFWIj963V2800iF/9LPieQw==
 
+showdown@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.npm.taobao.org/showdown/download/showdown-1.9.0.tgz#d49d2a0b6db21b7c2e96ef855f7b3b2a28ef46f4"
+  integrity sha1-1J0qC22yG3wulu+FX3s7KijvRvQ=
+  dependencies:
+    yargs "^10.0.3"
+
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.npm.taobao.org/signal-exit/download/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
@@ -12136,6 +12232,11 @@ xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
   resolved "https://registry.npm.taobao.org/xtend/download/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
   integrity sha1-pcbVMr5lbiPbgg77lDofBJmNY68=
 
+y18n@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.npm.taobao.org/y18n/download/y18n-3.2.1.tgz#6d15fba884c08679c0d77e88e7759e811e07fa41"
+  integrity sha1-bRX7qITAhnnA136I53WegR4H+kE=
+
 "y18n@^3.2.1 || ^4.0.0", y18n@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/y18n/download/y18n-4.0.0.tgz#95ef94f85ecc81d007c264e190a120f0a3c8566b"
@@ -12166,6 +12267,13 @@ yargs-parser@^11.1.1:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
+yargs-parser@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.npm.taobao.org/yargs-parser/download/yargs-parser-8.1.0.tgz#f1376a33b6629a5d063782944da732631e966950"
+  integrity sha1-8TdqM7Ziml0GN4KUTacyYx6WaVA=
+  dependencies:
+    camelcase "^4.1.0"
+
 yargs@12.0.2:
   version "12.0.2"
   resolved "https://registry.npm.taobao.org/yargs/download/yargs-12.0.2.tgz#fe58234369392af33ecbef53819171eff0f5aadc"
@@ -12183,6 +12291,24 @@ yargs@12.0.2:
     which-module "^2.0.0"
     y18n "^3.2.1 || ^4.0.0"
     yargs-parser "^10.1.0"
+
+yargs@^10.0.3:
+  version "10.1.2"
+  resolved "https://registry.npm.taobao.org/yargs/download/yargs-10.1.2.tgz?cache=0&sync_timestamp=1570412076919&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fyargs%2Fdownload%2Fyargs-10.1.2.tgz#454d074c2b16a51a43e2fb7807e4f9de69ccb5c5"
+  integrity sha1-RU0HTCsWpRpD4vt4B+T53mnMtcU=
+  dependencies:
+    cliui "^4.0.0"
+    decamelize "^1.1.1"
+    find-up "^2.1.0"
+    get-caller-file "^1.0.1"
+    os-locale "^2.0.0"
+    require-directory "^2.1.1"
+    require-main-filename "^1.0.1"
+    set-blocking "^2.0.0"
+    string-width "^2.0.0"
+    which-module "^2.0.0"
+    y18n "^3.2.1"
+    yargs-parser "^8.1.0"
 
 yargs@^12.0.2:
   version "12.0.5"

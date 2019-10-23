@@ -1,4 +1,5 @@
 import obj from '../config/mysql'
+import { async } from 'q';
 const UserModel = obj.sequelize.define('artical', {
     aid: {
         type: obj.Sequelize.INTEGER(11),
@@ -12,32 +13,55 @@ const UserModel = obj.sequelize.define('artical', {
     tag_id: obj.Sequelize.STRING(100), // 标签ID
     category_id: obj.Sequelize.STRING(100), // 分类ID
     viewCount: obj.Sequelize.STRING(100), // 阅读数量
-    content:obj.Sequelize.TEXT, // 文章内容
+    content: obj.Sequelize.TEXT, // 文章内容
     Date: obj.Sequelize.BIGINT, // 日期
 }, {
-        timestamps: false
+    timestamps: false
 })
 UserModel.sync();
 UserModel.fetch = async function () {
     let r = {}
     await UserModel.findAll({
         // 获取所有信息
-    
+
     }).then(function (result: any) {
         r = {
             status: 1,
             msg: "success",
-            list: JSON.parse(JSON.stringify(result))  
+            list: JSON.parse(JSON.stringify(result))
         }
     }).catch(function (err: any) {
         r = {
             status: -1000,
             msg: "error",
-            data: err  
+            data: err
         }
     })
     return r
 };
+UserModel.detail = async function (id: number) {
+    console.log(id)
+    let r = {}
+    await UserModel.findAll({
+        // 获取所有信息
+        where: {
+            aid: id
+        }
+    }).then(function (result: any) {
+        r = {
+            status: 1,
+            msg: "success",
+            list: JSON.parse(JSON.stringify(result))
+        }
+    }).catch(function (err: any) {
+        r = {
+            status: -1000,
+            msg: "error",
+            data: err
+        }
+    })
+    return r
+}
 
 
 export default UserModel
