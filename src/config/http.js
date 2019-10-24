@@ -60,6 +60,15 @@ const api = {
             .catch(err => {
                 return err
             })
+    },
+    publishArtical: (params, callback) => {
+        axios.post('/publishArtical', params)
+            .then(res => {
+                callback(res)
+            })
+            .catch(err => {
+                return err
+            })
     }
 }
 

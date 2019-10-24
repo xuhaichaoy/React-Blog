@@ -119,4 +119,41 @@ UserModel.detail = function (id) {
         });
     });
 };
+UserModel.publish = function (value) {
+    return __awaiter(this, void 0, void 0, function () {
+        var myDate, r;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    myDate = new Date();
+                    r = {};
+                    return [4 /*yield*/, UserModel.create({
+                            // 获取所有信息
+                            cid: 1,
+                            artical_status: 1,
+                            artical_name: value.artical_name,
+                            content: value.content,
+                            Date: myDate
+                        }).then(function (result) {
+                            r = {
+                                status: 1,
+                                msg: "success",
+                                data: {
+                                    message: "发布成功"
+                                } // 正常
+                            };
+                        }).catch(function (err) {
+                            r = {
+                                status: -1000,
+                                msg: "error",
+                                data: err
+                            };
+                        })];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, r];
+            }
+        });
+    });
+};
 exports.default = UserModel;

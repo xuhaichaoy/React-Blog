@@ -1,5 +1,4 @@
 import obj from '../config/mysql'
-import { async } from 'q';
 const UserModel = obj.sequelize.define('artical', {
     aid: {
         type: obj.Sequelize.INTEGER(11),
@@ -62,6 +61,35 @@ UserModel.detail = async function (id: number) {
     })
     return r
 }
+UserModel.publish = async function (value: any) {
+    const myDate = new Date()
+    let r = {}
+    await UserModel.create({
+        // 获取所有信息
+        cid: 1,
+        artical_status: 1,
+        artical_name: value.artical_name,
+        content: value.content,
+        Date: myDate
+    }).then(function (result: any) {
+        r = {
+            status: 1,
+            msg: "success",
+            data: {
+                message: "发布成功"
+            }  // 正常
+        }
+        
+    }).catch(function (err: any) {
+        r = {
+            status: -1000,
+            msg: "error",
+            data: err
+        }
+    })
+    return r
+};
+
 
 
 export default UserModel

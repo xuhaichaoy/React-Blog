@@ -37,9 +37,17 @@ export class ArticalController {
       };
    }
 
-   @Post("/users")
-   post(@Body() user: any) {
-      return "Saving user...";
+   @Post("/publishArtical")
+   @Header("Access-Control-Allow-Origin", localhost)
+   @Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+   @Header("Access-Control-Allow-Credentials", "true")
+   @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
+   @Header("Content-Type", "text/html; charset=utf-8")
+   async publishone(@Body() res: any) {
+      const r = await Artical.publish(res)
+      return {
+         data: r
+      }
    }
 
    @Put("/users/:id")
