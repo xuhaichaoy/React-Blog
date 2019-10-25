@@ -30,6 +30,17 @@ const api = {
                 return err
             })
     },
+    getList: (params, callback) => {
+        axios.get('/articalList', {
+            params
+        })
+            .then(res => {
+                callback(res)
+            })
+            .catch(err => {
+                return err
+            })
+    },
     allArticals: (params, callback) => {
         axios.get('/allArticals', {
             params

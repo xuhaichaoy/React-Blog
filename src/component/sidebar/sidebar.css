@@ -53,9 +53,14 @@
     border-right: 1px solid rgb(232, 232, 232); 
     background: white;
 }
+.listBox {
+    height: 268px;
+    overflow: hidden;
+    margin-bottom: 46px;
+}
 .lists {
     text-align: left;
-    padding-bottom: 46px!important;
+    /* padding-bottom: 46px!important; */
 }
 .lis {
     box-sizing: border-box;

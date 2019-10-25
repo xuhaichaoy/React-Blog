@@ -99,6 +99,21 @@ var ArticalController = /** @class */ (function () {
             });
         });
     };
+    ArticalController.prototype.getList = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var r;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Articals_1.default.list()];
+                    case 1:
+                        r = _a.sent();
+                        return [2 /*return*/, {
+                                data: r
+                            }];
+                }
+            });
+        });
+    };
     ArticalController.prototype.put = function (id, user) {
         return "Updating a user...";
     };
@@ -131,6 +146,14 @@ var ArticalController = /** @class */ (function () {
         routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8"),
         __param(0, routing_controllers_1.Body())
     ], ArticalController.prototype, "publishone", null);
+    __decorate([
+        routing_controllers_1.Get("/articalList"),
+        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost),
+        routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
+        routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
+        routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
+        routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8")
+    ], ArticalController.prototype, "getList", null);
     __decorate([
         routing_controllers_1.Put("/users/:id"),
         __param(0, routing_controllers_1.Param("id")), __param(1, routing_controllers_1.Body())

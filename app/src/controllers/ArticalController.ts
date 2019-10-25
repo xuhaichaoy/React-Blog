@@ -50,6 +50,20 @@ export class ArticalController {
       }
    }
 
+   @Get("/articalList")
+   @Header("Access-Control-Allow-Origin", localhost)
+   @Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+   @Header("Access-Control-Allow-Credentials", "true")
+   @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
+   @Header("Content-Type", "text/html; charset=utf-8")
+   async getList() {
+      // 获取所有文章信息
+      const r = await Artical.list() 
+      return {
+         data: r
+      }
+   }
+
    @Put("/users/:id")
    put(@Param("id") id: number, @Body() user: any) {
       return "Updating a user...";

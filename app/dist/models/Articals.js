@@ -159,4 +159,38 @@ UserModel.publish = function (value) {
         });
     });
 };
+UserModel.list = function () {
+    return __awaiter(this, void 0, void 0, function () {
+        var r;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    r = {};
+                    return [4 /*yield*/, UserModel.findAll({
+                            attributes: ['aid', 'artical_name'],
+                            // 获取所有信息
+                            limit: 7,
+                            order: [
+                                ['aid', 'DESC'],
+                            ],
+                        }).then(function (result) {
+                            r = {
+                                status: 1,
+                                msg: "success",
+                                list: JSON.parse(JSON.stringify(result))
+                            };
+                        }).catch(function (err) {
+                            r = {
+                                status: -1000,
+                                msg: "error",
+                                data: err
+                            };
+                        })];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, r];
+            }
+        });
+    });
+};
 exports.default = UserModel;

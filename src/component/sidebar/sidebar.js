@@ -1,7 +1,8 @@
-import React from "react";
-import { Icon, Avatar, Divider, List, Tag } from "antd";
+import React from "react"
+import { Icon, Avatar, Divider, List, Tag } from "antd"
+import { withRouter } from "react-router-dom";
 import api from '../../config/http'
-import "./sidebar.css";
+import "./sidebar.css"
 
 class App extends React.Component {
   state = {
@@ -10,34 +11,51 @@ class App extends React.Component {
     Github: "https://github.com/xuhaichaoy",
     Chrome: "http://haichao.mobi/index",
     Info: "未来的事情无人知晓, 所以才有无限可能.",
-    image: ""
+    image: "",
+    allData: [
+      // "Racing car sprays burning fuel  into crowdinto crowdinto crowdinto crowd.",
+      // "Japanese princess to wed commoner.",
+      // "Australian walks 100km after outback crash.",
+      // "Man charged over missing wedding girl.",
+      // "Los Angeles battles huge wildfires.",
+      // "Man charged over missing wedding girl.",
+      // "Los Angeles battles huge wildfires.",
+      // "Los Angeles battles huge wildfires.",
+      // "Man charged over missing wedding girl.",
+      // "Los Angeles battles huge wildfires.",
+      // "Man charged over missing wedding girl."
+    ]
   };
 
-  // 获取mine 的信息
-  componentDidMount () {
+
+  componentDidMount() {
+    // 获取mine 的信息
     const _this = this
     api.getmine({}, (r) => {
-      const {data} = r
+      const { data } = r
       const res = data.data
       // console.log(res)
     })
+
+    api.getList({}, (r) => {
+      const { data } = r
+      const res = data.data
+      if (res.status === 1) {
+        const list = res.list
+        this.setState({
+          allData: list
+        })
+      }
+      console.log(res)
+    })
+  }
+
+  handleClick = (e) => {
+    this.props.history.push('/detail/' + e)
   }
 
   render() {
-    const data = [
-      "Racing car sprays burning fuel  into crowdinto crowdinto crowdinto crowd.",
-      "Japanese princess to wed commoner.",
-      "Australian walks 100km after outback crash.",
-      "Man charged over missing wedding girl.",
-      "Los Angeles battles huge wildfires.",
-      "Man charged over missing wedding girl.",
-      "Los Angeles battles huge wildfires.",
-      "Los Angeles battles huge wildfires.",
-      "Man charged over missing wedding girl.",
-      "Los Angeles battles huge wildfires.",
-      "Man charged over missing wedding girl."
-    ];
-
+    const data = this.state.allData
     return (
       <div className="sidebar">
         <div className="header">
@@ -52,7 +70,7 @@ class App extends React.Component {
                   type="github"
                   className="icons"
                 />
-                <span><a href={this.state.Github} target="view_window" className = "aHref">Github</a></span>
+                <span><a href={this.state.Github} target="view_window" className="aHref">Github</a></span>
               </li>
               <li className="marginRight">
                 <Icon
@@ -60,7 +78,7 @@ class App extends React.Component {
                   type="chrome"
                   className="icons"
                 />
-                <span><a href={this.state.Chrome} target="view_window" className = "aHref">Chrome</a></span>
+                <span><a href={this.state.Chrome} target="view_window" className="aHref">Chrome</a></span>
               </li>
               <li>
                 <Icon
@@ -75,15 +93,17 @@ class App extends React.Component {
         </div>
         <div className="currentArtical">
           <Divider orientation="left">最热文章</Divider>
-          <List
-            className="lists"
-            size="small"
-            dataSource={data}
-            split={false}
-            renderItem={(item, index) => (
-              <List.Item className="lis">{" " + item}</List.Item>
-            )}
-          />
+          <div className="listBox">
+            <List
+              className="lists"
+              size="small"
+              dataSource={data}
+              split={false}
+              renderItem={(item, index) => (
+                <List.Item className="lis" onClick={this.handleClick.bind(this, item.aid)}>{" " + item.artical_name}</List.Item>
+              )}
+            />
+          </div>
         </div>
         <div className="tips">
           <Divider orientation="left">标签墙</Divider>
@@ -125,4 +145,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

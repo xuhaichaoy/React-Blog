@@ -1,6 +1,7 @@
 import React from "react";
 import SideBar from "../../component/sidebar/sidebar";
 import { Row, Col, Divider } from "antd";
+import { withRouter } from "react-router-dom";
 import api from '../../config/http'
 import "./detail.css";
 
@@ -14,8 +15,12 @@ class App extends React.Component {
         }
     }
 
+    componentWillReceiveProps(prevProps, prevState) {
+        this.componentDidMount()
+    }
+
     componentDidMount() {
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
         const _this = this
         const url = window.location.href
         const params = url.slice(url.lastIndexOf('/') + 1)
@@ -30,7 +35,7 @@ class App extends React.Component {
             const { data } = r
             const res = data.data
             console.log(res)
-            if(res.status === 1) {
+            if (res.status === 1) {
                 _this.setState({
                     detailData: res.list[0]
                 })
@@ -69,4 +74,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default withRouter(App);

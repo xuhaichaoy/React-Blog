@@ -91,6 +91,30 @@ UserModel.publish = async function (value: any) {
     })
     return r
 };
+UserModel.list = async function () {
+    let r = {}
+    await UserModel.findAll({
+        attributes: ['aid', 'artical_name'],
+        // 获取所有信息
+        limit: 7,
+        order: [
+            ['aid', 'DESC'],
+        ],
+    }).then(function (result: any) {
+        r = {
+            status: 1,
+            msg: "success",
+            list: JSON.parse(JSON.stringify(result))
+        }
+    }).catch(function (err: any) {
+        r = {
+            status: -1000,
+            msg: "error",
+            data: err
+        }
+    })
+    return r
+};
 
 
 

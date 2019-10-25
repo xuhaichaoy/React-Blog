@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu, Icon, Input, Row, Col, Divider, Avatar, Dropdown } from "antd";
 import Login from "../login/login";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
 import "./menu.css";
 // const { Search } = Input;
 const { SubMenu } = Menu;
@@ -25,6 +25,18 @@ class App extends React.Component {
     current: "index",
     logined: false
   };
+
+  componentWillUpdate(prevProps, prevState) {
+    // 监听路由变化。。。。。。。
+    // todo
+    const historyUrl = prevProps.history.location.pathname.slice(1)
+    const currentUrl = prevState.current
+    if (historyUrl === "index" && historyUrl !== currentUrl) {
+      this.setState({
+        current: historyUrl
+      })
+    }
+  }
 
 
   handleClick = e => {
@@ -119,4 +131,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);
