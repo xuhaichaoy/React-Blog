@@ -1,12 +1,18 @@
 import React from "react"
 import LeftMenu from "../../../component/adminLeft/left"
-import { Layout, Button, Modal, Form, Input, Radio } from 'antd'
+import { Layout, Button, Modal, Form, Input, Radio, message } from 'antd'
 import api from '../../../config/http'
+import {withRouter} from "react-router-dom"
 import CodeMirror from 'react-codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/shadowfox.css'
 import 'codemirror/mode/markdown/markdown'
 import 'codemirror/mode/javascript/javascript'
+import 'codemirror/mode/css/css'
+import 'codemirror/mode/xml/xml'
+import 'codemirror/mode/sass/sass'
+import 'codemirror/mode/htmlmixed/htmlmixed'
+import 'codemirror/mode/sql/sql'
 import 'codemirror/mode/vue/vue'
 import 'codemirror/keymap/sublime.js'
 import 'codemirror/addon/hint/css-hint'
@@ -74,9 +80,6 @@ class App extends React.Component {
         }
     }
 
-    handleClick = () => {
-       
-    }
 
     handleChange = (value) => {
         this.setState({
@@ -93,20 +96,25 @@ class App extends React.Component {
     };
 
     handleCreate = () => {
-        const _this = this
         const { form } = this.formRef.props;
         form.validateFields((err, values) => {
             if (err) {
                 return;
             }
+            const hide = message.loading('Action in progress..', 0);
             const md = converter.makeHtml(this.state.value)
             values["content"] = md
             api.publishArtical(values, (r) => {
                 const { data } = r
                 const res = data.data
-                console.log(res)
                 if (res.status === 1) {
-    
+                    setTimeout(hide, 0);
+                    message.success('Released successfully');
+                    setTimeout(() => {
+                        this.props.history.push('/index')
+                    }, 1600)
+                } else {
+                    message.warning('Publishing failed try again later ');
                 }
             })
 
@@ -166,4 +174,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default withRouter(App);

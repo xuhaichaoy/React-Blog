@@ -22,7 +22,9 @@ UserModel.fetch = async function () {
     let r = {}
     await UserModel.findAll({
         // 获取所有信息
-
+        order: [
+            ['aid', 'DESC'],
+        ],
     }).then(function (result: any) {
         r = {
             status: 1,
@@ -79,7 +81,7 @@ UserModel.publish = async function (value: any) {
                 message: "发布成功"
             }  // 正常
         }
-        
+
     }).catch(function (err: any) {
         r = {
             status: -1000,
@@ -93,8 +95,3 @@ UserModel.publish = async function (value: any) {
 
 
 export default UserModel
-
-
-
-
-

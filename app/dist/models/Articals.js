@@ -65,7 +65,10 @@ UserModel.fetch = function () {
                 case 0:
                     r = {};
                     return [4 /*yield*/, UserModel.findAll({
-                        // 获取所有信息
+                            // 获取所有信息
+                            order: [
+                                ['aid', 'DESC'],
+                            ],
                         }).then(function (result) {
                             r = {
                                 status: 1,

@@ -54,10 +54,7 @@ class App extends React.Component {
                 <span className="title">{item.artical_name}</span>
               </Divider>
               <Meta description={item.Date} />
-              <p className="articalContent">
-               {item.content}
-              </p>
-             
+              <p className="articalContent" dangerouslySetInnerHTML={{__html: item.content}}></p>
               <Divider className="shuline" />
               <div className="cardsMessage">
                 <ul>
