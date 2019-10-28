@@ -90,9 +90,6 @@ UserModel.login = async function (data: any) {
     }).then(function (result: any) {
         if (result.length > 0) {
             jwt.token.sign(JSON.parse(JSON.stringify(result[0])), jwt.secret, (err: any, token: any) => {
-
-                console.log(token, 222222222222222)
-
                 r = {
                     data: {
                         status: 1,

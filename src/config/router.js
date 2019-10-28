@@ -1,16 +1,6 @@
 import React from "react";
 import Index from "../page/index/index";
-import Time from "../page/time/time";
-import Detail from "../page/detail/detail";
-import Category from "../page/category/category";
-import Info from "../page/introduce/info";
-import AdminHome from "../page/admin/index/index";
-import AdminPublish from "../page/admin/publish/publish";
-import Enter from "../page/admin/push/push";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import Menu from "../component/menu/menu";
-import { BackTop } from "antd";
-
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class App extends React.Component {
     constructor(props) {
@@ -22,17 +12,7 @@ class App extends React.Component {
         return (
             <Router>
                 <div className="App">
-                    <Menu />
-                    <BackTop />
-                    <Route exact path="/index" component={Index} />
-                    <Route path="/time" component={Time} />
-                    <Route path="/category" component={Category} />
-                    <Route path="/intro" component={Info} />
-                    <Route path="/detail/:id" component={Detail} />
-                    <Route path="/admin/home" component={AdminHome} />
-                    <Route path="/admin/publish" component={AdminPublish} />
-                    <Route path="/enter" component={Enter} />
-                    <Redirect from="(/:name)" to="/index" />
+                    <Route path="/" component={Index} />
                 </div>
             </Router>
         )

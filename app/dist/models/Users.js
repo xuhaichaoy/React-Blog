@@ -152,7 +152,6 @@ UserModel.login = function (data) {
                         }).then(function (result) {
                             if (result.length > 0) {
                                 jwt_1.default.token.sign(JSON.parse(JSON.stringify(result[0])), jwt_1.default.secret, function (err, token) {
-                                    console.log(token, 222222222222222);
                                     r = {
                                         data: {
                                             status: 1,
