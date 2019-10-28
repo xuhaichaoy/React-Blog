@@ -21,6 +21,7 @@ class NormalLoginForm extends React.Component {
           const {data} = res.data
           if(data.status === 1) {
             message.success('登录成功')
+            that.props.loginState(true)
             that.props.hideModal()
           }else {
             message.warning('用户名或密码错误')
@@ -33,7 +34,6 @@ class NormalLoginForm extends React.Component {
   showReg = () => {
     this.props.showRegModal()
   }
-
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -273,13 +273,6 @@ class App extends React.Component {
     });
   };
 
-  handleloginOk = e => {
-    console.log(e);
-    this.setState({
-      loginvisible: false
-    });
-  };
-
   handleloginCancel = e => {
     console.log(e);
     this.setState({
@@ -287,12 +280,6 @@ class App extends React.Component {
     });
   };
 
-  handleregOk = e => {
-    console.log(e);
-    this.setState({
-      regvisible: false
-    });
-  };
 
   handleregCancel = e => {
     console.log(e);
@@ -300,6 +287,10 @@ class App extends React.Component {
       regvisible: false
     });
   };
+
+  loginState = (flag) => {
+    this.props.callback(flag)
+  }
 
   render() {
     return (
@@ -313,16 +304,14 @@ class App extends React.Component {
         <Modal
           title="登录"
           visible={this.state.loginvisible}
-          onOk={this.handleloginOk}
           onCancel={this.handleloginCancel}
           footer={null}
         >
-          <WrappedNormalLoginForm showRegModal={this.showRegModal} hideModal={this.hideModal}/>
+          <WrappedNormalLoginForm showRegModal={this.showRegModal} hideModal={this.hideModal} loginState={this.loginState}/>
         </Modal>
         <Modal
           title="注册"
           visible={this.state.regvisible}
-          onOk={this.handleregOk}
           onCancel={this.handleregCancel}
           footer={null}
         >

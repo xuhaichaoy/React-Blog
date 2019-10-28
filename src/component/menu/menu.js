@@ -1,10 +1,11 @@
-import React from "react";
-import { Menu, Icon, Input, Row, Col, Divider, Avatar, Dropdown } from "antd";
-import Login from "../login/login";
-import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
-import "./menu.css";
-// const { Search } = Input;
-const { SubMenu } = Menu;
+import React from "react"
+import { Menu, Icon, Input, Row, Col, Divider, Avatar, Dropdown } from "antd"
+import Login from "../login/login"
+import api from '../../config/http'
+import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom"
+import "./menu.css"
+// const { Search } = Input
+const { SubMenu } = Menu
 
 const menu = (
   <Menu>
@@ -38,6 +39,31 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.getLogined()
+  }
+
+  getLogined = () => {
+    // 判断当前登录状态
+    api.getCurrentUser({}, (r) => {
+      const { data } = r
+      const res = data.data
+      if(res.status === -1 ) {
+        return
+      }else {
+        this.setState({
+          logined: true
+        })
+      }
+    })
+  }
+
+  callback = (flag) => {
+    this.setState({
+      logined: flag
+    })
+  }
+
 
   handleClick = e => {
     this.setState({
@@ -61,14 +87,13 @@ class App extends React.Component {
     } else {
       return (
         <div className="user">
-          <Login />
+          <Login callback={this.callback} />
         </div>
       );
     }
   }
 
   render() {
-
     return (
       <div className="top">
         <div className="fixed">

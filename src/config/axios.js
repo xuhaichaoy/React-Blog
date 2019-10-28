@@ -30,6 +30,8 @@ Axios.interceptors.request.use(
     //   cookie.set("token", cookie.get("token"), 1 / 12)
     //   config.headers.token = cookie.get("token")
     // }
+
+    // axios请求默认是不携带cookie的，让了让其带上cookie
     config.withCredentials = true
 
     return config

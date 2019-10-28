@@ -152,6 +152,7 @@ UserModel.login = function (data) {
                         }).then(function (result) {
                             if (result.length > 0) {
                                 jwt_1.default.token.sign(JSON.parse(JSON.stringify(result[0])), jwt_1.default.secret, function (err, token) {
+                                    console.log(token, 222222222222222);
                                     r = {
                                         data: {
                                             status: 1,
@@ -186,6 +187,30 @@ UserModel.login = function (data) {
                     _a.sent();
                     return [2 /*return*/, r];
             }
+        });
+    });
+};
+UserModel.getCurrentUser = function (token) {
+    return __awaiter(this, void 0, void 0, function () {
+        var logined, r;
+        return __generator(this, function (_a) {
+            logined = jwt_1.default.check(token.jwt);
+            r = {};
+            if (!logined) {
+                r = {
+                    status: -1,
+                    msg: "当前未登录！"
+                };
+            }
+            else {
+                // 登录状态 返回登录人的信息
+                r = {
+                    status: 1,
+                    msg: "当前已登录！",
+                    data: logined
+                };
+            }
+            return [2 /*return*/, r];
         });
     });
 };

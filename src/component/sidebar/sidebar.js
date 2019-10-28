@@ -34,7 +34,7 @@ class App extends React.Component {
     api.getmine({}, (r) => {
       const { data } = r
       const res = data.data
-      // console.log(res)
+      console.log(res)
     })
 
     api.getList({}, (r) => {
@@ -46,7 +46,6 @@ class App extends React.Component {
           allData: list
         })
       }
-      console.log(res)
     })
   }
 

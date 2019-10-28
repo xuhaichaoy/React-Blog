@@ -5,6 +5,7 @@ import jsonwebtoken from '../config/jwt'
 import { callbackify } from "util";
 
 const localhost = "http://localhost:3001"
+
 @JsonController()
 @UseBefore(urlencodedParser)
 

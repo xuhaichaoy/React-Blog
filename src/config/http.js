@@ -80,6 +80,17 @@ const api = {
             .catch(err => {
                 return err
             })
+    },
+    getCurrentUser: (params, callback) => {
+        axios.get('/getCurrentUser', {
+            params
+        })
+            .then(res => {
+                callback(res)
+            })
+            .catch(err => {
+                return err
+            })
     }
 }
 

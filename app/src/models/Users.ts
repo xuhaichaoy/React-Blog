@@ -20,17 +20,17 @@ const UserModel = obj.sequelize.define('user', {
     Date: obj.Sequelize.BIGINT,
     admin: obj.Sequelize.BIGINT,
 }, {
-        timestamps: false
-}) 
+    timestamps: false
+})
 UserModel.sync();
 UserModel.fetch = async function () {
     let r = {}
     await UserModel.findAll({
         where: {
-           admin: 1
+            admin: 1
         }
     }).then(function (result: any) {
-        if(result.length > 0) {
+        if (result.length > 0) {
             var data = JSON.parse(JSON.stringify(result[0]))
             delete data.admin
             delete data.uid
@@ -38,7 +38,7 @@ UserModel.fetch = async function () {
             delete data.userName
 
             r = data
-        }else {
+        } else {
             r = {
                 status: -2,
                 msg: "success",
@@ -67,7 +67,7 @@ UserModel.reg = async function (data: any) {
                 message: "注册成功"
             }  // 正常
         }
-       
+
     }).catch(function (err: any) {
         r = {
             status: -1000,
@@ -88,8 +88,11 @@ UserModel.login = async function (data: any) {
             passWord: data.password
         }
     }).then(function (result: any) {
-        if(result.length > 0) {
+        if (result.length > 0) {
             jwt.token.sign(JSON.parse(JSON.stringify(result[0])), jwt.secret, (err: any, token: any) => {
+
+                console.log(token, 222222222222222)
+
                 r = {
                     data: {
                         status: 1,
@@ -101,8 +104,8 @@ UserModel.login = async function (data: any) {
                     token
                 }
             });
-           
-        }else {
+
+        } else {
             r = {
                 status: -2,
                 msg: "success",
@@ -111,7 +114,7 @@ UserModel.login = async function (data: any) {
                 }  // 正常
             }
         }
-      
+
     }).catch(function (err: any) {
         r = {
             status: -1000,
@@ -123,6 +126,26 @@ UserModel.login = async function (data: any) {
     })
     return r
 };
+
+UserModel.getCurrentUser = async function (token: any) {
+    const logined = jwt.check(token.jwt)
+    let r = {}
+    if (!logined) {
+        r = {
+            status: -1,
+            msg: "当前未登录！"
+        }
+    } else {
+        // 登录状态 返回登录人的信息
+        r = {
+            status: 1,
+            msg: "当前已登录！",
+            data: logined
+        }
+    }
+    return r
+};
+
 
 
 export default UserModel
