@@ -10,7 +10,10 @@ class App extends React.Component {
         this.state = {
             articalId: 0,
             value: '',
-            detailData: {}
+            detailData: {
+                artical_name: '',
+                Date: ''
+            }
         }
     }
 
@@ -33,7 +36,6 @@ class App extends React.Component {
         api.detailArtical(parseInt(params), (r) => {
             const { data } = r
             const res = data.data
-            console.log(res)
             if (res.status === 1) {
                 _this.setState({
                     detailData: res.list[0]
