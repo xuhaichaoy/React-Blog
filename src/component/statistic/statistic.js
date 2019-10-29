@@ -1,5 +1,5 @@
 import React from "react";
-import { Statistic, Row, Col, Button } from "antd";
+import { Statistic, Row, Col } from "antd";
 
 import "./statistic.css";
 

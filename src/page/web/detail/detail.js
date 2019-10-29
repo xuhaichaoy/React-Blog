@@ -1,7 +1,7 @@
 import React from "react";
 import { Divider } from "antd";
 import { withRouter } from "react-router-dom";
-import api from '../../config/http'
+import api from '../../../config/http'
 import "./detail.css";
 
 class App extends React.Component {
@@ -47,7 +47,7 @@ class App extends React.Component {
     render() {
         const detail = this.state.detailData
         return (
-            <div className="gutter-box" className="pageContent detailPage">
+            <div className="gutter-box pageContent detailPage">
                 <div className="title">
                     <h2>{detail.artical_name}</h2>
                     <span>{detail.Date}</span>

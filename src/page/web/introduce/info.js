@@ -1,11 +1,11 @@
 import React from "react";
-import Info from "../../component/info/info"
+import Info from "../../../component/info/info"
 import "./info.css";
 
 class App extends React.Component {
   render() {
     return (
-      <div className="gutter-box" className="pageContent">
+      <div className="gutter-box pageContent">
         <Info></Info>
       </div>
     );

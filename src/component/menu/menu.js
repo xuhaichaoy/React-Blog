@@ -2,7 +2,7 @@ import React from "react"
 import { Menu, Icon, Input, Row, Col, Divider, Avatar, Dropdown } from "antd"
 import Login from "../login/login"
 import api from '../../config/http'
-import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom"
+import { BrowserRouter as Router, Link, withRouter } from "react-router-dom"
 import "./menu.css"
 // const { Search } = Input
 const { SubMenu } = Menu
@@ -40,6 +40,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    const url = window.location.href
+    const num = url.lastIndexOf('/')
+    this.setState({
+      current: url.slice(num + 1)
+    })
     this.getLogined()
   }
 
@@ -99,7 +104,7 @@ class App extends React.Component {
         <div className="fixed">
           <Row className="header">
             <Col xs={2} sm={4} md={6} lg={5} xl={5}>
-              <h1 className="haichao">HaiChao</h1>
+              <h1 className="haichao"><Link to="/index">HaiChao</Link></h1>
             </Col>
             <Col xs={2} sm={4} md={6} lg={6} xl={6}>
               <div className="input">
@@ -133,9 +138,6 @@ class App extends React.Component {
                   </Menu.Item>
                   <Menu.Item key="intro">
                     <Link to="/intro">介绍</Link>
-                  </Menu.Item>
-                  <Menu.Item key="enter">
-                    <Link to="/enter">娱乐</Link>
                   </Menu.Item>
                 </Menu>
               </div>

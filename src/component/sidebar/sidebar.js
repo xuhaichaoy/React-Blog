@@ -19,7 +19,6 @@ class App extends React.Component {
 
   componentDidMount() {
     // 获取mine 的信息
-    const _this = this
     api.getmine({}, (r) => {
       const { data } = r
       const res = data.data

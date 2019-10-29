@@ -7,6 +7,9 @@ h1 {
    line-height: 70px; 
    font-size: 26px;
 }
+.haichao > a {
+    color: rgba(0, 0, 0, 0.85);
+}
 .input {
     height: 70px;
     line-height: 70px;

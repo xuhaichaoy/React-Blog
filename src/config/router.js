@@ -1,5 +1,5 @@
 import React from "react";
-import Index from "../page/index/index";
+import Index from "../page/web/index/index";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class App extends React.Component {
@@ -13,6 +13,7 @@ class App extends React.Component {
             <Router>
                 <div className="App">
                     <Route path="/" component={Index} />
+                    <Route path="/admin" component={Index} />
                 </div>
             </Router>
         )
