@@ -1,6 +1,7 @@
-import React from "react";
-import Index from "../page/web/index/index";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React from "react"
+import Index from "../page/web/index/index"
+import Admin from "../page/admin/index/index"
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 
 class App extends React.Component {
     constructor(props) {
@@ -12,8 +13,9 @@ class App extends React.Component {
         return (
             <Router>
                 <div className="App">
-                    <Route path="/" component={Index} />
-                    <Route path="/admin" component={Index} />
+                    <Route exact path='/' render={()=>(<Redirect to='/index' />)}></Route>
+                    <Route exact path="/index" component={Index} />
+                    <Route exact path="/admin" component={Admin} />
                 </div>
             </Router>
         )

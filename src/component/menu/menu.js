@@ -4,7 +4,6 @@ import Login from "../login/login"
 import api from '../../config/http'
 import { BrowserRouter as Router, Link, withRouter } from "react-router-dom"
 import "./menu.css"
-// const { Search } = Input
 const { SubMenu } = Menu
 
 const menu = (

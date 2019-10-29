@@ -15,10 +15,6 @@ const renderTabBar = (props, DefaultTabBar) => (
     </Sticky>
 );
 
-function callback(key) {
-    console.log(key);
-}
-
 class App extends React.Component {
 
     render() {

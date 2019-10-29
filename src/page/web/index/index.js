@@ -1,16 +1,18 @@
 import React from "react";
-import SideBar from "../../../component/sidebar/sidebar";
-import Home from "../../../component/home/home";
-import Anchor from "../../../component/anchor/anchor";
-import Menu from "../../../component/menu/menu";
-import Time from "../time/time";
-import Category from "../category/category";
-import Info from "../introduce/info";
-import Detail from "../detail/detail";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import lazy from '../../../component/lazy'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Row, Col, BackTop } from "antd";
-
 import "./index.css";
+
+const SideBar = lazy(() => import('../../../component/sidebar/sidebar'))
+const Home = lazy(() => import('../../../component/home/home'))
+const Anchor = lazy(() => import('../../../component/anchor/anchor'))
+const Menu = lazy(() => import('../../../component/menu/menu'))
+const Time = lazy(() => import('../time/time'))
+const Category = lazy(() => import('../category/category'))
+const Info = lazy(() => import('../introduce/info'))
+const Detail = lazy(() => import('../detail/detail'))
+
 
 class App extends React.Component {
   render() {
@@ -31,12 +33,11 @@ class App extends React.Component {
                   <div className="App">
                     <BackTop />
                     <Switch>
-                      <Route path="/index" component={Home} />
-                      <Route path="/time" component={Time} />
-                      <Route path="/category" component={Category} />
-                      <Route path="/intro" component={Info} />
-                      <Route path="/detail/:id" component={Detail} />
-                      <Redirect to="/index" />
+                      <Route exact path="/index" component={Home} />
+                      <Route exact path="/time" component={Time} />
+                      <Route exact path="/category" component={Category} />
+                      <Route exact path="/intro" component={Info} />
+                      <Route exact path="/detail/:id" component={Detail} />
                     </Switch>
                   </div>
                 </div>
