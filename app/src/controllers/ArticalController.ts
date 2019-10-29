@@ -11,15 +11,15 @@ const localhost = "http://localhost:3001"
 
 export class ArticalController {
 
-   @Get("/allArticals")
+   @Get("/allArticals/:page")
    @Header("Access-Control-Allow-Origin", localhost)
    @Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
    @Header("Access-Control-Allow-Credentials", "true")
    @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
    @Header("Content-Type", "text/html; charset=utf-8")
-   async getAll() {
+   async getAll(@Param("page") page: number) {
       // 获取所有文章信息
-      const r = await Artical.fetch() 
+      const r = await Artical.fetch(page) 
       return {
          data: r
       }

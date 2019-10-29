@@ -12,13 +12,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allData: []
+      allData: [],
+      currentPage: 1
     }
   };
 
   componentDidMount() {
     const _this = this
-    api.allArticals({}, (r) => {
+    api.allArticals(this.state.currentPage, (r) => {
       const { data } = r
       const res = data.data
       if (res.status === 1) {
@@ -46,6 +47,7 @@ class App extends React.Component {
                 window.scrollTo(0, 0)
               },
               pageSize: 6,
+              total: 100
             }}
             footer={
               <div className="listFoot">

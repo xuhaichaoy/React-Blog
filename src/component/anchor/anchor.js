@@ -14,6 +14,7 @@ class App extends React.Component {
   
   render() {
     const data = this.props.data
+    
     return (
       <Anchor offsetTop={120} className="anchor">
         {data.map((item, index) => 

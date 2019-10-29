@@ -18,10 +18,12 @@ const UserModel = obj.sequelize.define('artical', {
     timestamps: false
 })
 UserModel.sync();
-UserModel.fetch = async function () {
+UserModel.fetch = async function (page: number) {
     let r = {}
     await UserModel.findAll({
         // 获取所有信息
+        limit: 6,
+        offset: (page - 1) * 6,
         order: [
             ['aid', 'DESC'],
         ],

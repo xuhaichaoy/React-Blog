@@ -57,7 +57,7 @@ var UserModel = mysql_1.default.sequelize.define('artical', {
     timestamps: false
 });
 UserModel.sync();
-UserModel.fetch = function () {
+UserModel.fetch = function (page) {
     return __awaiter(this, void 0, void 0, function () {
         var r;
         return __generator(this, function (_a) {
@@ -66,6 +66,8 @@ UserModel.fetch = function () {
                     r = {};
                     return [4 /*yield*/, UserModel.findAll({
                             // 获取所有信息
+                            limit: 6,
+                            offset: (page - 1) * 6,
                             order: [
                                 ['aid', 'DESC'],
                             ],

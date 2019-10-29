@@ -42,9 +42,7 @@ const api = {
             })
     },
     allArticals: (params, callback) => {
-        axios.get('/allArticals', {
-            params
-        })
+        axios.get('/allArticals/' + params, {})
             .then(res => {
                 callback(res)
             })
