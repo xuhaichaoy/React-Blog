@@ -1,6 +1,15 @@
 .homeList {
     text-align: left;
 }
+.mainContent {
+    padding-right: 300px;
+}
+.anchorStyle {
+    position: fixed;
+    top: 120px;
+    width: 220px;
+    right: 80px;
+}
 .cards {
     width: 100%;
     text-align: left;

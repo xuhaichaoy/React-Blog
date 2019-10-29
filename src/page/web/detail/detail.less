@@ -1,10 +1,10 @@
 .detailPage {
-    padding-right: 40px;
     text-align: left;
     // background: beige;
     box-shadow: border-box;
     height: 100vh;
-    > .title {
+
+    >.title {
         // background: bisque;
         padding-left: 80px;
         padding-right: 80px;
@@ -14,21 +14,36 @@
         height: 50px;
         line-height: 50px;
         margin-top: 20px;
-        > h2 {
+
+        >h2 {
             font-size: 22px;
             margin: 0;
             display: inline-block;
         }
-        > span {
+
+        >span {
             font-size: 14px;
             margin-left: 40px;
             display: inline-block;
         }
     }
+
     .detailContent {
         font-size: 16px;
-        > p {
-            word-wrap: break-word;        
+
+        >p {
+            word-wrap: break-word;
         }
     }
+}
+
+.mainContent {
+    padding-right: 300px;
+}
+
+.anchorStyle {
+    position: fixed;
+    top: 120px;
+    width: 220px;
+    right: 80px;
 }

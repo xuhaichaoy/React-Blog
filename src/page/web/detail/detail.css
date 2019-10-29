@@ -1,5 +1,4 @@
 .detailPage {
-  padding-right: 40px;
   text-align: left;
   box-shadow: border-box;
   height: 100vh;
@@ -29,4 +28,13 @@
 }
 .detailPage .detailContent > p {
   word-wrap: break-word;
+}
+.mainContent {
+  padding-right: 300px;
+}
+.anchorStyle {
+  position: fixed;
+  top: 120px;
+  width: 220px;
+  right: 80px;
 }
