@@ -42,6 +42,10 @@ class App extends React.Component {
                 _this.setState({
                     detailData: res.list[0]
                 })
+                const main = res.list[0].content
+
+                // console.log(main)
+
             }
         })
     }
@@ -64,7 +68,7 @@ class App extends React.Component {
                 </div>
                 <div className="anchorStyle">
                     <div className="gutter-box" style={{ paddingLeft: "40px" }}>
-                        <Anchor></Anchor>
+                        <Anchor data={detail.content} flag = {true}></Anchor>
                     </div>
                 </div>
             </div>
