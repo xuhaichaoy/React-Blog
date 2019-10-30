@@ -1,23 +1,27 @@
 import React from "react"
-import { Menu, Icon, Input, Row, Col, Divider, Avatar, Dropdown } from "antd"
+import { Menu, Icon, Input , Row, Col, Divider, Avatar, Dropdown } from "antd"
 import Login from "../login/login"
 import api from '../../config/http'
 import { BrowserRouter as Router, Link, withRouter } from "react-router-dom"
 import "./menu.css"
+import Img from "../../static/1.jpeg"
+
 const { SubMenu } = Menu
+const { Search } = Input
 
 const menu = (
-  <Menu>
-    <Menu.Item>1st menu item</Menu.Item>
-    <Menu.Item>2nd menu item</Menu.Item>
-    <SubMenu title="sub menu">
+  <Menu className="userMenuStyle">
+    <Menu.Item>写文章</Menu.Item>
+    <Menu.Item>草稿</Menu.Item>
+    <Menu.Item>写文章</Menu.Item>
+    <Menu.Item>草稿
+    <Divider className="menuDividerStyle" />
+    </Menu.Item>
+    <SubMenu title="关于">
       <Menu.Item>3rd menu item</Menu.Item>
       <Menu.Item>4th menu item</Menu.Item>
     </SubMenu>
-    <SubMenu title="disabled sub menu" disabled>
-      <Menu.Item>5d menu item</Menu.Item>
-      <Menu.Item>6th menu item</Menu.Item>
-    </SubMenu>
+    <Menu.Item>退出</Menu.Item>
   </Menu>
 );
 class App extends React.Component {
@@ -28,7 +32,6 @@ class App extends React.Component {
 
   componentWillUpdate(prevProps, prevState) {
     // 监听路由变化。。。。。。。
-    // todo
     const historyUrl = prevProps.history.location.pathname.slice(1)
     const currentUrl = prevState.current
     if (historyUrl === "index" && historyUrl !== currentUrl) {
@@ -52,9 +55,9 @@ class App extends React.Component {
     api.getCurrentUser({}, (r) => {
       const { data } = r
       const res = data.data
-      if(res.status === -1 ) {
+      if (res.status === -1) {
         return
-      }else {
+      } else {
         this.setState({
           logined: true
         })
@@ -73,17 +76,17 @@ class App extends React.Component {
     this.setState({
       current: e.key
     });
-  };
+  }
 
   userInfo() {
     if (this.state.logined) {
       return (
         <div className="user">
           <Icon type="bell" className="bell" />
-          <Dropdown overlay={menu} trigger={["click"]}>
+          <Dropdown overlay={menu} trigger={["click"]} className="userImg">
             <Avatar
               className="avatar ant-dropdown-link"
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              src={Img}
             />
           </Dropdown>
         </div>
@@ -97,6 +100,11 @@ class App extends React.Component {
     }
   }
 
+  keyDown = (value) => {
+    // ajax
+    console.log(value)
+  }
+
   render() {
     return (
       <div className="top">
@@ -108,10 +116,11 @@ class App extends React.Component {
             <Col xs={2} sm={4} md={6} lg={6} xl={6}>
               <div className="input">
                 <Divider type="vertical" className="verLine" />
-                <Input
+                <Search
                   className="inputValue"
                   style={{ width: 280 }}
-                  placeholder="Enter your username"
+                  onSearch={this.keyDown}
+                  placeholder="Enter your keyword"
                   prefix={
                     <Icon type="search" style={{ color: "rgba(0,0,0,.25)" }} />
                   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 /**
- * 使用 webpack 的 import 方法实现动态加载组件！dynamic import
+ * 使用 webpack 的 import 方法实现动态加载组件
  * @param {Function} importComponent - example const xx = asyncComponent(() => import('./xxx'))
  */
 export const asyncComponent = importComponent =>

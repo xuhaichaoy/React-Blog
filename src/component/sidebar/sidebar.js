@@ -3,7 +3,7 @@ import { Icon, Avatar, Divider, List, Tag } from "antd"
 import { withRouter } from "react-router-dom";
 import api from '../../config/http'
 import "./sidebar.css"
-
+import Img from '../../static/1.jpeg'
 
 class App extends React.Component {
   state = {
@@ -12,7 +12,7 @@ class App extends React.Component {
     Github: "https://github.com/xuhaichaoy",
     Chrome: "http://haichao.mobi/index",
     Info: "未来的事情无人知晓, 所以才有无限可能.",
-    image: "",
+    image: "https://c-ssl.duitang.com/uploads/item/201707/19/20170719211350_4PnBt.thumb.700_0.jpeg",
     allData: []
   };
 
@@ -50,7 +50,7 @@ class App extends React.Component {
     return (
       <div className="sidebar">
         <div className="header">
-          <Avatar size={110} icon="user" />
+          <Avatar size={110} src={Img} />
           <h2 className="name">{this.state.nickName}</h2>
           <p className="tips">{this.state.Info}</p>
           <div className="brand">

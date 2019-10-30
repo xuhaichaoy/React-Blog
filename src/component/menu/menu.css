@@ -1,86 +1,110 @@
 h1 {
-    margin: 0!important;
+    margin: 0 !important;
 }
+
 .haichao {
-   font-weight: 400;
-   height: 70px;
-   line-height: 70px; 
-   font-size: 26px;
+    font-weight: 400;
+    height: 70px;
+    line-height: 70px;
+    font-size: 26px;
 }
-.haichao > a {
+
+.haichao>a {
     color: rgba(0, 0, 0, 0.85);
 }
+
 .input {
     height: 70px;
     line-height: 70px;
     text-align: left;
 }
-.inputValue > input, .inputValue > input:focus{
+
+.inputValue>input,
+.inputValue>input:focus {
     border: none;
     border-bottom: 1px solid white !important;
     box-shadow: none;
 }
-.input > .verLine {
+
+.input>.verLine {
     display: inline-block;
-    margin: 0!important;
-    margin-right: 8px!important;
-    margin-left: -2px!important;
+    margin: 0 !important;
+    margin-right: 8px !important;
+    margin-left: -2px !important;
 }
+
 .menu {
     text-align: right;
 }
-.menu > .ant-menu-horizontal{
+
+.menu>.ant-menu-horizontal {
     border-bottom: none;
 }
+
 .menu .ant-menu-item {
-    border-top: 2px solid transparent!important;
-    border-bottom: 2px solid transparent!important;
+    border-top: 2px solid transparent !important;
+    border-bottom: 2px solid transparent !important;
 }
+
 .menu .ant-menu-item-active {
-    border-top: 2px solid #1890ff!important;
-    border-bottom: 2px solid transparent!important;
+    border-top: 2px solid #1890ff !important;
+    border-bottom: 2px solid transparent !important;
 }
+
 .menu .ant-menu-item-selected {
-    border-top: 2px solid #1890ff!important;
-    border-bottom: 2px solid transparent!important;
+    border-top: 2px solid #1890ff !important;
+    border-bottom: 2px solid transparent !important;
 }
+
 .user {
     height: 70px;
     line-height: 70px;
     text-align: right;
-    padding-right: 62px;
+    padding-right: 100px;
 }
+
+.userImg {
+    cursor: pointer;
+}
+
 .login {
     margin-right: 20px;
 }
 
 .fixed {
     width: 100%;
-    position: fixed!important;
+    position: fixed !important;
     top: 0;
     left: 0;
     box-shadow: 0 2px 8px #f0f1f2;
     z-index: 99;
 }
+
 .header {
     background: white;
 }
+
 .topHeader {
     height: 90px;
 }
+
 .bell {
     font-size: 20px;
-    vertical-align: middle!important;
+    vertical-align: middle !important;
     display: inline-block;
+    cursor: pointer;
 }
+
 .avatar {
-    margin-left: 20px!important;
+    margin-left: 25px !important;
     vertical-align: middle;
     display: inline-block;
 }
+
 .input .ant-input-affix-wrapper .ant-input:not(:first-child) {
     padding-left: 38px;
 }
+
 .fixedBac {
     height: 90px;
     background: white;
@@ -89,4 +113,13 @@ h1 {
     left: 0;
     width: 100%;
     z-index: 98;
+}
+.menuDividerStyle {
+    margin: 8px 0;
+}
+.userMenuStyle {
+    width: 140px;
+}
+.inputValue > .ant-input-suffix {
+    display: none;
 }
