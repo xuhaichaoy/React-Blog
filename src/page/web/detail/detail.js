@@ -6,6 +6,7 @@ import api from '../../../config/http'
 import "./detail.css"
 
 const Anchor = lazy(() => import('../../../component/anchor/anchor'))
+const Comment = lazy(() => import('../../../component/comment/comment'))
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -42,10 +43,6 @@ class App extends React.Component {
                 _this.setState({
                     detailData: res.list[0]
                 })
-                const main = res.list[0].content
-
-                // console.log(main)
-
             }
         })
     }
@@ -64,11 +61,13 @@ class App extends React.Component {
                         <div className="detailContent">
                             <p dangerouslySetInnerHTML={{ __html: detail.content }}></p>
                         </div>
+                        <Comment />
+
                     </div>
                 </div>
                 <div className="anchorStyle">
                     <div className="gutter-box" style={{ paddingLeft: "40px" }}>
-                        <Anchor data={detail.content} flag = {true}></Anchor>
+                        <Anchor data={detail.content} flag={true}></Anchor>
                     </div>
                 </div>
             </div>

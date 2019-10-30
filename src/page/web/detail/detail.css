@@ -1,7 +1,6 @@
 .detailPage {
   text-align: left;
   box-shadow: border-box;
-  height: 100vh;
 }
 .detailPage > .title {
   padding-left: 80px;
@@ -30,6 +29,7 @@
   word-wrap: break-word;
 }
 .mainContent {
+  height: 100%;
   padding-right: 300px;
 }
 .anchorStyle {
