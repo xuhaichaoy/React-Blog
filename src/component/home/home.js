@@ -13,18 +13,23 @@ class App extends React.Component {
     super(props);
     this.state = {
       allData: [],
-      currentPage: 1
+      currentPage: 1,
+      allCount: 0
     }
   };
 
   componentDidMount() {
-    const _this = this
-    api.allArticals(this.state.currentPage, (r) => {
+    this.getData(this.state.currentPage)
+  }
+
+  getData = (current) => {
+    api.allArticals(current, (r) => {
       const { data } = r
       const res = data.data
       if (res.status === 1) {
-        _this.setState({
-          allData: res.list
+        this.setState({
+          allData: res.list.rows,
+          allCount: res.list.count
         });
       }
     })
@@ -43,11 +48,14 @@ class App extends React.Component {
             dataSource={this.state.allData}
             pagination={{
               onChange: page => {
-                console.log(page)
                 window.scrollTo(0, 0)
+                this.getData(page)
+                this.setState({
+                  currentPage: page
+                })
               },
               pageSize: 6,
-              total: 100
+              total: this.state.allCount
             }}
             footer={
               <div className="listFoot">

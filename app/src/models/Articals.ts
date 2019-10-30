@@ -20,7 +20,7 @@ const UserModel = obj.sequelize.define('artical', {
 UserModel.sync();
 UserModel.fetch = async function (page: number) {
     let r = {}
-    await UserModel.findAll({
+    await UserModel.findAndCountAll({
         // 获取所有信息
         limit: 6,
         offset: (page - 1) * 6,

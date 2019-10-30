@@ -64,7 +64,7 @@ UserModel.fetch = function (page) {
             switch (_a.label) {
                 case 0:
                     r = {};
-                    return [4 /*yield*/, UserModel.findAll({
+                    return [4 /*yield*/, UserModel.findAndCountAll({
                             // 获取所有信息
                             limit: 6,
                             offset: (page - 1) * 6,
