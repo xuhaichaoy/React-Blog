@@ -19,7 +19,7 @@
     font-family: Avenir,Helvetica,Arial,sans-serif;
     -webkit-font-smoothing: antialiased;
     display: inline-block;
-    width: 66%;
+    /* width: 66%; */
     text-align: center;
     word-wrap: break-word; 
     word-break: normal; 

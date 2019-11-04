@@ -30,11 +30,11 @@
 }
 .mainContent {
   height: 100%;
-  padding-right: 300px;
+  padding-right: 260px;
 }
 .anchorStyle {
   position: fixed;
   top: 120px;
   width: 220px;
-  right: 80px;
+  right: 40px;
 }
