@@ -19,14 +19,35 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.getData(this.state.currentPage)
+    this.getUrl()
+  }
+  componentWillReceiveProps(prevProps, prevState) {
+    this.setState({
+      currentPage: 1
+    })
+    this.getUrl(1)
   }
 
-  getData = (current) => {
-    api.allArticals(current, (r) => {
+  getUrl = (page) => {
+    const search = window.location.href.split('=')[1]
+    const current = page ? page : this.state.currentPage
+    if (search) {
+      this.getData(current, search)
+    } else {
+      this.getData(current)
+    }
+  }
+
+  getData = (current, value) => {
+    const params = {
+      page: current,
+      search: value ? value : ' '
+    }
+    api.allArticals(params, (r) => {
       const { data } = r
       const res = data.data
       if (res.status === 1) {
+        window.scrollTo(0, 0)
         this.setState({
           allData: res.list.rows,
           allCount: res.list.count
@@ -48,12 +69,12 @@ class App extends React.Component {
             dataSource={this.state.allData}
             pagination={{
               onChange: page => {
-                window.scrollTo(0, 0)
-                this.getData(page)
+                this.getUrl(page)
                 this.setState({
                   currentPage: page
                 })
               },
+              current: this.state.currentPage,
               pageSize: 6,
               total: this.state.allCount
             }}

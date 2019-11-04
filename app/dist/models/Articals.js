@@ -57,15 +57,26 @@ var UserModel = mysql_1.default.sequelize.define('artical', {
     timestamps: false
 });
 UserModel.sync();
-UserModel.fetch = function (page) {
+UserModel.fetch = function (page, search) {
     return __awaiter(this, void 0, void 0, function () {
-        var r;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var _a, confition, Op, r;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
+                    search = search.trim();
+                    confition = {};
+                    Op = mysql_1.default.Sequelize.Op;
+                    if (search) {
+                        confition = {
+                            artical_name: (_a = {},
+                                _a[Op.like] = '%' + search + '%',
+                                _a)
+                        };
+                    }
                     r = {};
                     return [4 /*yield*/, UserModel.findAndCountAll({
                             // 获取所有信息
+                            where: confition,
                             limit: 6,
                             offset: (page - 1) * 6,
                             order: [
@@ -85,7 +96,7 @@ UserModel.fetch = function (page) {
                             };
                         })];
                 case 1:
-                    _a.sent();
+                    _b.sent();
                     return [2 /*return*/, r];
             }
         });

@@ -18,10 +18,22 @@ const UserModel = obj.sequelize.define('artical', {
     timestamps: false
 })
 UserModel.sync();
-UserModel.fetch = async function (page: number) {
+UserModel.fetch = async function (page: number, search: string) {
+    search = search.trim()
+    let confition = {}
+    const Op = obj.Sequelize.Op
+    if(search) {
+        confition = {
+            artical_name:  {
+                [Op.like]: '%'+search+'%',
+            }
+        }
+    }
+    
     let r = {}
     await UserModel.findAndCountAll({
         // 获取所有信息
+        where: confition,
         limit: 6,
         offset: (page - 1) * 6,
         order: [

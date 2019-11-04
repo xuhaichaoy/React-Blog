@@ -54,12 +54,15 @@ var localhost = "http://localhost:3001";
 var ArticalController = /** @class */ (function () {
     function ArticalController() {
     }
-    ArticalController.prototype.getAll = function (page) {
+    ArticalController.prototype.getAll = function (page, search) {
         return __awaiter(this, void 0, void 0, function () {
             var r;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Articals_1.default.fetch(page)];
+                    case 0:
+                        // 获取所有文章信息
+                        console.log(search);
+                        return [4 /*yield*/, Articals_1.default.fetch(page, search)];
                     case 1:
                         r = _a.sent();
                         return [2 /*return*/, {
@@ -121,13 +124,13 @@ var ArticalController = /** @class */ (function () {
         return "Removing user...";
     };
     __decorate([
-        routing_controllers_1.Get("/allArticals/:page"),
+        routing_controllers_1.Get("/allArticals"),
         routing_controllers_1.Header("Access-Control-Allow-Origin", localhost),
         routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
         routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
         routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
         routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8"),
-        __param(0, routing_controllers_1.Param("page"))
+        __param(0, routing_controllers_1.QueryParam("page")), __param(1, routing_controllers_1.QueryParam("search"))
     ], ArticalController.prototype, "getAll", null);
     __decorate([
         routing_controllers_1.Get("/detailArtical/:id"),

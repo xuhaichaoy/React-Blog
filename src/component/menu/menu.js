@@ -71,7 +71,6 @@ class App extends React.Component {
     })
   }
 
-
   handleClick = e => {
     this.setState({
       current: e.key
@@ -101,8 +100,12 @@ class App extends React.Component {
   }
 
   keyDown = (value) => {
-    // ajax
-    console.log(value)
+    value = value.trim()
+    if(value) {
+      this.props.history.push("/index?search=" + value);
+    }else {
+      this.props.history.push("/index");
+    }
   }
 
   render() {

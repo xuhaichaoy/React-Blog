@@ -1,4 +1,4 @@
-import { JsonController, Param, Body, Get, Post, Put, Delete, Res, UseBefore, Header, CookieParam } from "routing-controllers";
+import { JsonController, Param, Body, Get, Post, Put, Delete, Req, Res, UseBefore, Header, CookieParam, QueryParam } from "routing-controllers";
 import urlencodedParser from '../config/bodyparser'
 import Artical from '../models/Articals'
 import jsonwebtoken from '../config/jwt'
@@ -11,15 +11,16 @@ const localhost = "http://localhost:3001"
 
 export class ArticalController {
 
-   @Get("/allArticals/:page")
+   @Get("/allArticals")
    @Header("Access-Control-Allow-Origin", localhost)
    @Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
    @Header("Access-Control-Allow-Credentials", "true")
    @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
    @Header("Content-Type", "text/html; charset=utf-8")
-   async getAll(@Param("page") page: number) {
+   async getAll(@QueryParam("page") page: number, @QueryParam("search") search: any) {
       // 获取所有文章信息
-      const r = await Artical.fetch(page) 
+      console.log(search)
+      const r = await Artical.fetch(page, search) 
       return {
          data: r
       }

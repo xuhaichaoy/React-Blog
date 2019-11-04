@@ -33,6 +33,7 @@ class App extends React.Component {
                     <BackTop />
                     <Switch>
                       <Route path="/index" component={Home} />
+                      <Route path="/index/:value" component={Home} />
                       <Route path="/time" component={Time} />
                       <Route path="/category" component={Category} />
                       <Route path="/intro" component={Info} />
