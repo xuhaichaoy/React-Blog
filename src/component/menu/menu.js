@@ -27,11 +27,11 @@ const menu = (
 class App extends React.Component {
   state = {
     current: "index",
-    logined: false
+    logined: false,
+    inputValue: ''
   };
 
   componentWillUpdate(prevProps, prevState) {
-    // 监听路由变化。。。。。。。
     const historyUrl = prevProps.history.location.pathname.slice(1)
     const currentUrl = prevState.current
     if (historyUrl === "index" && historyUrl !== currentUrl) {
@@ -40,8 +40,15 @@ class App extends React.Component {
       })
     }
   }
+  componentWillMount() {
+    const value = window.location.href.split('=')[1]
+    this.setState({
+      inputValue: value
+    })
+  }
 
   componentDidMount() {
+    
     const url = window.location.href
     const num = url.lastIndexOf('/')
     this.setState({
@@ -100,8 +107,8 @@ class App extends React.Component {
   }
 
   keyDown = (value) => {
-    value = value.trim()
     if(value) {
+      value = value.trim()
       this.props.history.push("/index?search=" + value);
     }else {
       this.props.history.push("/index");
@@ -120,6 +127,7 @@ class App extends React.Component {
               <div className="input">
                 <Divider type="vertical" className="verLine" />
                 <Search
+                  defaultValue = {this.state.inputValue}
                   className="inputValue"
                   style={{ width: 280 }}
                   onSearch={this.keyDown}
