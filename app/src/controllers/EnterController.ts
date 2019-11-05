@@ -1,6 +1,7 @@
 import { JsonController, Param, Body, Get, Post, Put, Delete, Res, UseBefore, Header, CookieParam } from "routing-controllers";
 import urlencodedParser from '../config/bodyparser'
 import Novel from '../models/Enter'
+import localhost from '../config/localhost'
 
 @JsonController()
 @UseBefore(urlencodedParser)
@@ -8,7 +9,7 @@ import Novel from '../models/Enter'
 export class EnterController {
 
    @Get("/allenter")
-   @Header("Access-Control-Allow-Origin", "http://localhost:3001")
+   @Header("Access-Control-Allow-Origin", localhost)
    @Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
    @Header("Access-Control-Allow-Credentials", "true")
    @Header("Access-Control-Allow-Headers", "X-Requested-With, token")

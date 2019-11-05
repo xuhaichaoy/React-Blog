@@ -82,7 +82,7 @@ var Pupperteer = {
                             ])];
                     case 3:
                         _a.sent();
-                        chapter_list_url = "https://www.bqg5200.com/all.html";
+                        chapter_list_url = "";
                         // 打开章节列表
                         return [4 /*yield*/, page.goto(chapter_list_url)];
                     case 4:
@@ -103,8 +103,6 @@ var Pupperteer = {
                             })];
                     case 5:
                         content = _a.sent();
-                        console.log("111111111111111111111");
-                        console.log(content);
                         EnterArtical.bulkCreate(content);
                         return [3 /*break*/, 7];
                     case 6:

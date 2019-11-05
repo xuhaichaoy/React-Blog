@@ -50,7 +50,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var routing_controllers_1 = require("routing-controllers");
 var bodyparser_1 = __importDefault(require("../config/bodyparser"));
 var Users_1 = __importDefault(require("../models/Users"));
-var localhost = "http://localhost:3001";
+var localhost_1 = __importDefault(require("../config/localhost"));
 var UserController = /** @class */ (function () {
     function UserController() {
     }
@@ -130,7 +130,7 @@ var UserController = /** @class */ (function () {
     };
     __decorate([
         routing_controllers_1.Get("/myself"),
-        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost),
+        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost_1.default),
         routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
         routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
         routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
@@ -138,7 +138,7 @@ var UserController = /** @class */ (function () {
     ], UserController.prototype, "getmine", null);
     __decorate([
         routing_controllers_1.Post("/loginUser"),
-        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost),
+        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost_1.default),
         routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
         routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
         routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
@@ -147,7 +147,7 @@ var UserController = /** @class */ (function () {
     ], UserController.prototype, "login", null);
     __decorate([
         routing_controllers_1.Post("/regUser"),
-        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost),
+        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost_1.default),
         routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
         routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
         routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
@@ -156,7 +156,7 @@ var UserController = /** @class */ (function () {
     ], UserController.prototype, "reg", null);
     __decorate([
         routing_controllers_1.Get("/getCurrentUser"),
-        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost),
+        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost_1.default),
         routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
         routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
         routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),

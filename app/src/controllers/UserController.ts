@@ -1,8 +1,7 @@
 import { JsonController, Param, Body, Get, Post, Put, Delete, Res, UseBefore, Header, CookieParams } from "routing-controllers";
 import urlencodedParser from '../config/bodyparser'
 import Users from '../models/Users'
-
-const localhost = "http://localhost:3001"
+import localhost from '../config/localhost'
 @JsonController()
 @UseBefore(urlencodedParser)
 
@@ -15,7 +14,7 @@ export class UserController {
    @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
    @Header("Content-Type", "text/html; charset=utf-8")
    async getmine() {
-      const r = await Users.fetch() 
+      const r = await Users.fetch()
       return {
          data: r
       }
@@ -31,11 +30,11 @@ export class UserController {
       const r = await Users.login(user)
       res.cookie('jwt', r.token, {
          domain: 'localhost',
-          path: '/', //cookie写入的路径
-          maxAge: 1000 * 60 * 60 * 1,
-          // expires:new Date('2019-07-06'),
-          httpOnly: true,
-          overwrite: false
+         path: '/', //cookie写入的路径
+         maxAge: 1000 * 60 * 60 * 1,
+         // expires:new Date('2019-07-06'),
+         httpOnly: true,
+         overwrite: false
       });
 
       return {
@@ -63,7 +62,7 @@ export class UserController {
    @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
    @Header("Content-Type", "text/html; charset=utf-8")
    async getCurrentUser(@CookieParams() params: any) {
-      const r = await Users.getCurrentUser(params) 
+      const r = await Users.getCurrentUser(params)
       return {
          data: r
       }

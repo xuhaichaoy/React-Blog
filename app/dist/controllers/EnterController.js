@@ -50,6 +50,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var routing_controllers_1 = require("routing-controllers");
 var bodyparser_1 = __importDefault(require("../config/bodyparser"));
 var Enter_1 = __importDefault(require("../models/Enter"));
+var localhost_1 = __importDefault(require("../config/localhost"));
 var EnterController = /** @class */ (function () {
     function EnterController() {
     }
@@ -87,7 +88,7 @@ var EnterController = /** @class */ (function () {
     };
     __decorate([
         routing_controllers_1.Get("/allenter"),
-        routing_controllers_1.Header("Access-Control-Allow-Origin", "http://localhost:3001"),
+        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost_1.default),
         routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
         routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
         routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),

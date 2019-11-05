@@ -7,6 +7,7 @@ import Qs from 'qs'
 // import cookie from 'js-cookie'
 
 const apiURL = "http://localhost:3000"
+// const apiURL = "http://haichao.mobi:3000"
 // axios默认配置
 Axios.defaults.timeout = 10000 // 超时时间
 Axios.defaults.baseURL = apiURL // 默认地址

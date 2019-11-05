@@ -40,7 +40,8 @@ const Pupperteer = {
                 // 设置页面视口的大小
             ]);
             // 地址 
-            let chapter_list_url = `https://www.bqg5200.com/all.html`
+            // let chapter_list_url = `https://www.bqg5200.com/all.html`
+            let chapter_list_url = ``
             // 打开章节列表
             await page.goto(chapter_list_url);
             let content = await page.$eval('#main .listlie', (el: any) => {
@@ -57,8 +58,6 @@ const Pupperteer = {
                 }
                 return arr
             });
-            console.log("111111111111111111111")
-            console.log(content)
             EnterArtical.bulkCreate(content)
 
         } catch (err) {
