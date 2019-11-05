@@ -14,6 +14,7 @@ const EnterArtical = obj.sequelize.define('enterartical', {
     timestamps: false
 })
 
+
 EnterArtical.fetch = async function () {
     let r = {}
     await EnterArtical.findAll({
