@@ -1,5 +1,5 @@
 import React from "react"
-import { Menu, Icon, Input , Row, Col, Divider, Avatar, Dropdown } from "antd"
+import { Menu, Icon, Input, Row, Col, Divider, Avatar, Dropdown } from "antd"
 import Login from "../login/login"
 import api from '../../config/http'
 import { BrowserRouter as Router, Link, withRouter } from "react-router-dom"
@@ -31,15 +31,7 @@ class App extends React.Component {
     inputValue: ''
   };
 
-  componentWillUpdate(prevProps, prevState) {
-    const historyUrl = prevProps.history.location.pathname.slice(1)
-    const currentUrl = prevState.current
-    if (historyUrl === "index" && historyUrl !== currentUrl) {
-      this.setState({
-        current: historyUrl
-      })
-    }
-  }
+
   componentWillMount() {
     const value = window.location.href.split('=')[1]
     this.setState({
@@ -48,13 +40,22 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    
     const url = window.location.href
     const num = url.lastIndexOf('/')
     this.setState({
       current: url.slice(num + 1)
     })
     this.getLogined()
+  }
+
+  componentWillUpdate(prevProps, prevState) {
+    const historyUrl = prevProps.history.location.pathname.slice(1)
+    const currentUrl = prevState.current
+    if (historyUrl === "index" && historyUrl !== currentUrl) {
+      this.setState({
+        current: historyUrl
+      })
+    }
   }
 
   getLogined = () => {
@@ -107,10 +108,10 @@ class App extends React.Component {
   }
 
   keyDown = (value) => {
-    if(value) {
+    if (value) {
       value = value.trim()
       this.props.history.push("/index?search=" + value);
-    }else {
+    } else {
       this.props.history.push("/index");
     }
   }
@@ -127,7 +128,7 @@ class App extends React.Component {
               <div className="input">
                 <Divider type="vertical" className="verLine" />
                 <Search
-                  defaultValue = {this.state.inputValue}
+                  defaultValue={this.state.inputValue}
                   className="inputValue"
                   style={{ width: 280 }}
                   onSearch={this.keyDown}
