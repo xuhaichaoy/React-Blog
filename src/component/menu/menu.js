@@ -28,14 +28,16 @@ class App extends React.Component {
   state = {
     current: "index",
     logined: false,
-    inputValue: ''
+    inputValue: '',
+    search: '',
+    point: ''
   };
 
 
   componentWillMount() {
-    const value = window.location.href.split('=')[1]
+    const obj = this.solveUrl()
     this.setState({
-      inputValue: value
+      inputValue: obj.search
     })
   }
 
@@ -56,6 +58,37 @@ class App extends React.Component {
         current: historyUrl
       })
     }
+  }
+
+  solveUrl = () => {
+    // 有没有锚点 有没有search 都有 ？
+    // 锚点    #aid  
+    // 搜索    ?search 
+    const url = window.location.href
+    let point = ''
+    let search = ''
+
+    if (url.includes('#aid')) {
+      const num = url.indexOf('#aid')
+      point = url.slice(num, url.length)
+    }
+    if (url.includes('?search=')) {
+      const num = url.indexOf('?search=')
+      search = url.slice(num + 8, url.length)
+      if (point) {
+        const n = search.indexOf('#aid')
+        search = search.slice(0, n)
+      }
+    }
+    this.setState({
+      search: search,
+      point: point
+    })
+    const obj = {
+      point: point,
+      search: search
+    }
+    return obj
   }
 
   getLogined = () => {

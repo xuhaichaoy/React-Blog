@@ -14,27 +14,85 @@ class App extends React.Component {
     this.state = {
       allData: [],
       currentPage: 1,
-      allCount: 0
+      allCount: 0,
+      search: '',
+      point: ''
     }
   };
 
   componentDidMount() {
-    this.getUrl()
+    // 刷新
+    this.getUrl(true)
   }
   componentWillReceiveProps(prevProps, prevState) {
-    this.setState({
-      currentPage: 1
-    })
-    this.getUrl(1)
+    // 锚点变化 搜索变化
+    this.getUrl()
   }
 
-  getUrl = (page) => {
-    const search = window.location.href.split('=')[1]
-    const current = page ? page : this.state.currentPage
-    if (search) {
-      this.getData(current, search)
-    } else {
-      this.getData(current)
+  solveUrl = () => {
+    // 有没有锚点 有没有search 都有 ？
+    // 锚点    #aid  
+    // 搜索    ?search 
+    const url = window.location.href
+    let point = ''
+    let search = ''
+
+    if (url.includes('#aid')) {
+      const num = url.indexOf('#aid')
+      point = url.slice(num, url.length)
+    }
+    if (url.includes('?search=')) {
+      const num = url.indexOf('?search=')
+      search = url.slice(num + 8, url.length)
+      if (point) {
+        const n = search.indexOf('#aid')
+        search = search.slice(0, n)
+      }
+    }
+    this.setState({
+      search: search,
+      point: point
+    })
+    const obj = {
+      point: point,
+      search: search
+    }
+    return obj
+  }
+
+  getUrl = (flag, page) => {
+    const obj = this.solveUrl()
+    if(page) {
+      this.getData(page, obj.search)
+      return
+    }
+    if(obj.point && obj.search) {
+      if(flag) {
+        // true 为刷新 需要重新拉取数据
+        this.getData(1, obj.search)
+        this.setState({
+          currentPage: 1
+        })
+        return
+      }
+    }else {
+      if(obj.point) {
+        // 只有锚点 说明锚点一直在切换
+        if(flag) {
+          this.getData(1, obj.search)
+          this.setState({
+            currentPage: 1
+          })
+          return
+        }
+      }else {
+        // 只有 search
+        this.getData(1, obj.search)
+        this.setState({
+          currentPage: 1
+        })
+        return
+      }
     }
   }
 
@@ -69,7 +127,7 @@ class App extends React.Component {
             dataSource={this.state.allData}
             pagination={{
               onChange: page => {
-                this.getUrl(page)
+                this.getUrl(null, page)
                 this.setState({
                   currentPage: page
                 })
