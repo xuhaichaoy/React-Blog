@@ -91,6 +91,15 @@ const api = {
             .catch(err => {
                 return err
             })
+    },
+    changData: (params, callback) => {
+        axios.post('/changeData', params)
+            .then(res => {
+                callback(res)
+            })
+            .catch(err => {
+                return err
+            })
     }
 }
 

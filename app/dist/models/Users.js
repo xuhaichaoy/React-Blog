@@ -55,7 +55,7 @@ var UserModel = mysql_1.default.sequelize.define('user', {
     Info: mysql_1.default.Sequelize.STRING(100),
     Github: mysql_1.default.Sequelize.STRING(100),
     Chrome: mysql_1.default.Sequelize.STRING(100),
-    image: mysql_1.default.Sequelize.STRING(100),
+    image: mysql_1.default.Sequelize.TEXT,
     Date: mysql_1.default.Sequelize.BIGINT,
     admin: mysql_1.default.Sequelize.BIGINT,
 }, {
@@ -158,7 +158,7 @@ UserModel.login = function (data) {
                                             msg: "success",
                                             data: {
                                                 message: "登录成功",
-                                            }
+                                            },
                                         },
                                         token: token
                                     };
@@ -194,6 +194,11 @@ UserModel.getCurrentUser = function (token) {
         var logined, r;
         return __generator(this, function (_a) {
             logined = jwt_1.default.check(token.jwt);
+            delete logined["uid"];
+            delete logined["passWord"];
+            delete logined["admin"];
+            delete logined["iat"];
+            delete logined["userName"];
             r = {};
             if (!logined) {
                 r = {
@@ -210,6 +215,49 @@ UserModel.getCurrentUser = function (token) {
                 };
             }
             return [2 /*return*/, r];
+        });
+    });
+};
+UserModel.changeData = function (data, token) {
+    return __awaiter(this, void 0, void 0, function () {
+        var currentUser, uid, r;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    currentUser = jwt_1.default.check(token.jwt);
+                    uid = currentUser.uid;
+                    r = {};
+                    return [4 /*yield*/, UserModel.update({
+                            nickName: data.nickName,
+                            Info: data.Info,
+                            Github: data.Github,
+                            Chrome: data.Chrome,
+                            image: data.image,
+                        }, {
+                            where: {
+                                uid: uid
+                            }
+                        }).then(function (result) {
+                            r = {
+                                status: 1,
+                                msg: "success",
+                                data: {
+                                    message: "修改成功"
+                                } // 正常
+                            };
+                        }).catch(function (err) {
+                            r = {
+                                status: -1000,
+                                msg: "error",
+                                data: {
+                                    message: "修改失败"
+                                } // 正常
+                            };
+                        })];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, r];
+            }
         });
     });
 };

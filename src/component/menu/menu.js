@@ -1,6 +1,7 @@
 import React from "react"
 import { Menu, Icon, Input, Row, Col, Divider, Avatar, Dropdown } from "antd"
 import Login from "../login/login"
+import Drawer from "../drawer/drawer"
 import api from '../../config/http'
 import { BrowserRouter as Router, Link, withRouter } from "react-router-dom"
 import "./menu.css"
@@ -9,30 +10,16 @@ import Img from "../../static/1.jpeg"
 const { SubMenu } = Menu
 const { Search } = Input
 
-const menu = (
-  <Menu className="userMenuStyle">
-    <Menu.Item>写文章</Menu.Item>
-    <Menu.Item>草稿</Menu.Item>
-    <Menu.Item>写文章</Menu.Item>
-    <Menu.Item>草稿
-    <Divider className="menuDividerStyle" />
-    </Menu.Item>
-    <SubMenu title="关于">
-      <Menu.Item>3rd menu item</Menu.Item>
-      <Menu.Item>4th menu item</Menu.Item>
-    </SubMenu>
-    <Menu.Item>退出</Menu.Item>
-  </Menu>
-);
+
 class App extends React.Component {
   state = {
     current: "index",
     logined: false,
     inputValue: '',
     search: '',
-    point: ''
+    point: '',
+    user: {}
   };
-
 
   componentWillMount() {
     const obj = this.solveUrl()
@@ -58,6 +45,13 @@ class App extends React.Component {
         current: historyUrl
       })
     }
+  }
+
+  userClick = e => {
+    if(e.key === 'setting') {
+      this.drawerChild.showDrawer()
+    }
+    console.log(e.key)
   }
 
   solveUrl = () => {
@@ -100,6 +94,7 @@ class App extends React.Component {
         return
       } else {
         this.setState({
+          user: res.data,
           logined: true
         })
       }
@@ -120,6 +115,23 @@ class App extends React.Component {
 
   userInfo() {
     if (this.state.logined) {
+
+      const menu = () => (
+        <Menu className="userMenuStyle" onClick={this.userClick}>
+          <Menu.Item key='1'>写文章</Menu.Item>
+          <Menu.Item key='2'>草稿</Menu.Item>
+          <Menu.Item key='setting'>设置</Menu.Item>
+          <Menu.Item key='4'>草稿
+          <Divider className="menuDividerStyle" />
+          </Menu.Item>
+          <SubMenu title="关于">
+            <Menu.Item key='5'>3rd menu item</Menu.Item>
+            <Menu.Item key='6'>4th menu item</Menu.Item>
+          </SubMenu>
+          <Menu.Item>退出</Menu.Item>
+        </Menu>
+      );
+
       return (
         <div className="user">
           <Icon type="bell" className="bell" />
@@ -139,6 +151,11 @@ class App extends React.Component {
       );
     }
   }
+
+  onRef = (ref) => {
+    this.drawerChild = ref
+  }
+
 
   keyDown = (value) => {
     if (value) {
@@ -199,6 +216,7 @@ class App extends React.Component {
               {this.userInfo()}
             </Col>
           </Row>
+          <Drawer onRef={this.onRef} user={this.state.user}/>
         </div>
         <div className="fixedBac" />
 

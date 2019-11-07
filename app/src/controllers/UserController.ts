@@ -55,6 +55,19 @@ export class UserController {
       }
    }
 
+   @Post("/changeData")
+   @Header("Access-Control-Allow-Origin", localhost)
+   @Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+   @Header("Access-Control-Allow-Credentials", "true")
+   @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
+   @Header("Content-Type", "text/html; charset=utf-8")
+   async changeData(@Body() user: any, @CookieParams() params: any) {
+      const r = await Users.changeData(user, params)
+      return {
+         data: r
+      }
+   }
+
    @Get("/getCurrentUser")
    @Header("Access-Control-Allow-Origin", localhost)
    @Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")

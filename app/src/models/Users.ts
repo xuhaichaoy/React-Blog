@@ -16,7 +16,7 @@ const UserModel = obj.sequelize.define('user', {
     Info: obj.Sequelize.STRING(100),
     Github: obj.Sequelize.STRING(100),
     Chrome: obj.Sequelize.STRING(100),
-    image: obj.Sequelize.STRING(100),
+    image: obj.Sequelize.TEXT,
     Date: obj.Sequelize.BIGINT,
     admin: obj.Sequelize.BIGINT,
 }, {
@@ -96,7 +96,7 @@ UserModel.login = async function (data: any) {
                         msg: "success",
                         data: {
                             message: "登录成功",
-                        }
+                        },
                     },
                     token
                 }
@@ -125,7 +125,13 @@ UserModel.login = async function (data: any) {
 };
 
 UserModel.getCurrentUser = async function (token: any) {
-    const logined = jwt.check(token.jwt)
+    let logined = jwt.check(token.jwt)
+    delete logined["uid"]
+    delete logined["passWord"]
+    delete logined["admin"]
+    delete logined["iat"]
+    delete logined["userName"]
+
     let r = {}
     if (!logined) {
         r = {
@@ -140,6 +146,42 @@ UserModel.getCurrentUser = async function (token: any) {
             data: logined
         }
     }
+    return r
+};
+
+UserModel.changeData = async function (data: any, token: any) {
+    const currentUser = jwt.check(token.jwt)
+    const uid = currentUser.uid
+    let r = {}
+    await UserModel.update({
+        nickName: data.nickName,
+        Info: data.Info,
+        Github: data.Github,
+        Chrome: data.Chrome,
+        image: data.image,
+    }, {
+        where: {
+            uid: uid
+        }
+    }
+    ).then(function (result: any) {
+        r = {
+            status: 1,
+            msg: "success",
+            data: {
+                message: "修改成功"
+            }  // 正常
+        }
+
+    }).catch(function (err: any) {
+        r = {
+            status: -1000,
+            msg: "error",
+            data: {
+                message: "修改失败"
+            }  // 正常
+        }
+    })
     return r
 };
 
