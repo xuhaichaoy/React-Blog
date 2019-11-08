@@ -1,5 +1,6 @@
 import obj from '../config/mysql'
 import jwt from '../config/jwt'
+import fs from "fs"
 
 const UserModel = obj.sequelize.define('user', {
     uid: {
@@ -149,16 +150,36 @@ UserModel.getCurrentUser = async function (token: any) {
     return r
 };
 
+UserModel.writePic = async function (imgfile: any) {
+    var base64Data = imgfile.replace(/^data:image\/\w+;base64,/, "");
+    var dataBuffer = Buffer.from(base64Data, 'base64');
+    let name = new Date().getTime().toString();
+    let url = './upload/' + name + '.png'
+    await fs.writeFile(url, dataBuffer, function (err: any) {
+        if (err) {
+            url = ''
+        }
+    });
+    return url
+    
+}
+
 UserModel.changeData = async function (data: any, token: any) {
     const currentUser = jwt.check(token.jwt)
     const uid = currentUser.uid
     let r = {}
+    let imgfile = data.image
+
+
+    if (imgfile) {
+        imgfile = await UserModel.writePic(imgfile)
+    }
     await UserModel.update({
         nickName: data.nickName,
         Info: data.Info,
         Github: data.Github,
         Chrome: data.Chrome,
-        image: data.image,
+        image: imgfile,
     }, {
         where: {
             uid: uid
@@ -178,7 +199,7 @@ UserModel.changeData = async function (data: any, token: any) {
             status: -1000,
             msg: "error",
             data: {
-                message: "修改失败"
+                message: err
             }  // 正常
         }
     })

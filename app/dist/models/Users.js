@@ -40,6 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var mysql_1 = __importDefault(require("../config/mysql"));
 var jwt_1 = __importDefault(require("../config/jwt"));
+var fs_1 = __importDefault(require("fs"));
 var UserModel = mysql_1.default.sequelize.define('user', {
     uid: {
         type: mysql_1.default.Sequelize.INTEGER(11),
@@ -218,43 +219,71 @@ UserModel.getCurrentUser = function (token) {
         });
     });
 };
+UserModel.writePic = function (imgfile) {
+    return __awaiter(this, void 0, void 0, function () {
+        var base64Data, dataBuffer, name, url;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    base64Data = imgfile.replace(/^data:image\/\w+;base64,/, "");
+                    dataBuffer = Buffer.from(base64Data, 'base64');
+                    name = new Date().getTime().toString();
+                    url = './upload/' + name + '.png';
+                    return [4 /*yield*/, fs_1.default.writeFile(url, dataBuffer, function (err) {
+                            if (err) {
+                                url = '';
+                            }
+                        })];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, url];
+            }
+        });
+    });
+};
 UserModel.changeData = function (data, token) {
     return __awaiter(this, void 0, void 0, function () {
-        var currentUser, uid, r;
+        var currentUser, uid, r, imgfile;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     currentUser = jwt_1.default.check(token.jwt);
                     uid = currentUser.uid;
                     r = {};
-                    return [4 /*yield*/, UserModel.update({
-                            nickName: data.nickName,
-                            Info: data.Info,
-                            Github: data.Github,
-                            Chrome: data.Chrome,
-                            image: data.image,
-                        }, {
-                            where: {
-                                uid: uid
-                            }
-                        }).then(function (result) {
-                            r = {
-                                status: 1,
-                                msg: "success",
-                                data: {
-                                    message: "修改成功"
-                                } // 正常
-                            };
-                        }).catch(function (err) {
-                            r = {
-                                status: -1000,
-                                msg: "error",
-                                data: {
-                                    message: "修改失败"
-                                } // 正常
-                            };
-                        })];
+                    imgfile = data.image;
+                    if (!imgfile) return [3 /*break*/, 2];
+                    return [4 /*yield*/, UserModel.writePic(imgfile)];
                 case 1:
+                    imgfile = _a.sent();
+                    _a.label = 2;
+                case 2: return [4 /*yield*/, UserModel.update({
+                        nickName: data.nickName,
+                        Info: data.Info,
+                        Github: data.Github,
+                        Chrome: data.Chrome,
+                        image: imgfile,
+                    }, {
+                        where: {
+                            uid: uid
+                        }
+                    }).then(function (result) {
+                        r = {
+                            status: 1,
+                            msg: "success",
+                            data: {
+                                message: "修改成功"
+                            } // 正常
+                        };
+                    }).catch(function (err) {
+                        r = {
+                            status: -1000,
+                            msg: "error",
+                            data: {
+                                message: err
+                            } // 正常
+                        };
+                    })];
+                case 3:
                     _a.sent();
                     return [2 /*return*/, r];
             }
