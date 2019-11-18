@@ -9,6 +9,7 @@ var UserController_1 = require("./controllers/UserController");
 var ArticalController_1 = require("./controllers/ArticalController");
 var EnterController_1 = require("./controllers/EnterController");
 var schedule_1 = __importDefault(require("./config/schedule"));
+var serve_static_1 = __importDefault(require("serve-static"));
 var app = routing_controllers_1.createExpressServer({
     defaults: {
         //with this option, null will return 404 by default
@@ -24,5 +25,6 @@ var app = routing_controllers_1.createExpressServer({
     controllers: [UserController_1.UserController, ArticalController_1.ArticalController, EnterController_1.EnterController]
 });
 schedule_1.default.startSchedule();
+app.use(serve_static_1.default(__dirname));
 app.listen(3000);
 console.log("启动成功！！！");

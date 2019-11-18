@@ -4,6 +4,7 @@ import { UserController } from "./controllers/UserController";
 import { ArticalController } from "./controllers/ArticalController";
 import { EnterController } from "./controllers/EnterController";
 import Schedule from "./config/schedule"
+import serveStatic from "serve-static"
 
 const app = createExpressServer({
    defaults: {
@@ -24,7 +25,7 @@ const app = createExpressServer({
 })
 
 Schedule.startSchedule()
-
+app.use(serveStatic(__dirname))
 
 app.listen(3000);
 console.log("启动成功！！！")

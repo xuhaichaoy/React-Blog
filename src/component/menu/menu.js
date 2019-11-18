@@ -48,7 +48,7 @@ class App extends React.Component {
   }
 
   userClick = e => {
-    if(e.key === 'setting') {
+    if (e.key === 'setting') {
       this.drawerChild.showDrawer()
     }
     console.log(e.key)
@@ -216,7 +216,7 @@ class App extends React.Component {
               {this.userInfo()}
             </Col>
           </Row>
-          <Drawer onRef={this.onRef} user={this.state.user}/>
+          <Drawer onRef={this.onRef} user={this.state.user} />
         </div>
         <div className="fixedBac" />
 

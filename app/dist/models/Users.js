@@ -261,7 +261,7 @@ UserModel.changeData = function (data, token) {
                         Info: data.Info,
                         Github: data.Github,
                         Chrome: data.Chrome,
-                        image: imgfile,
+                        image: 'http://localhost:3000' + imgfile.slice(1),
                     }, {
                         where: {
                             uid: uid
