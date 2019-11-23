@@ -124,6 +124,31 @@ UserModel.login = async function (data: any) {
     })
     return r
 };
+UserModel.logout = async function (token: any) {
+    return token
+    let logined = jwt.check(token.jwt)
+    // delete logined["uid"]
+    // delete logined["passWord"]
+    // delete logined["admin"]
+    // delete logined["iat"]
+    // delete logined["userName"]
+
+    // let r = {}
+    // if (!logined) {
+    //     r = {
+    //         status: -1,
+    //         msg: "当前未登录！"
+    //     }
+    // } else {
+    //     // 登录状态 返回登录人的信息
+    //     r = {
+    //         status: 1,
+    //         msg: "当前已登录！",
+    //         data: logined
+    //     }
+    // }
+    // return r
+};
 
 UserModel.getCurrentUser = async function (token: any) {
     let logined = jwt.check(token.jwt)

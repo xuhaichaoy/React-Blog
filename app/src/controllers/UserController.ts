@@ -81,9 +81,21 @@ export class UserController {
       }
    }
 
-   @Put("/users/:id")
-   put(@Param("id") id: number, @Body() user: any) {
-      return "Updating a user...";
+   @Get("/logout")
+   @Header("Access-Control-Allow-Origin", localhost)
+   @Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+   @Header("Access-Control-Allow-Credentials", "true")
+   @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
+   @Header("Content-Type", "text/html; charset=utf-8")
+   async logout(@CookieParams() params: any, @Res() res: any) {
+      const r = await Users.logout(params)
+      res.clearCookie('jwt')
+      return {
+         data: {
+            status: 1,
+            msg: "退出成功"
+         }
+      }
    }
 
    @Delete("/users/:id")

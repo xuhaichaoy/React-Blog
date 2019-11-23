@@ -137,8 +137,24 @@ var UserController = /** @class */ (function () {
             });
         });
     };
-    UserController.prototype.put = function (id, user) {
-        return "Updating a user...";
+    UserController.prototype.logout = function (params, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var r;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Users_1.default.logout(params)];
+                    case 1:
+                        r = _a.sent();
+                        res.clearCookie('jwt');
+                        return [2 /*return*/, {
+                                data: {
+                                    status: 1,
+                                    msg: "退出成功"
+                                }
+                            }];
+                }
+            });
+        });
     };
     UserController.prototype.remove = function (id) {
         return "Removing user...";
@@ -188,9 +204,14 @@ var UserController = /** @class */ (function () {
         __param(0, routing_controllers_1.CookieParams())
     ], UserController.prototype, "getCurrentUser", null);
     __decorate([
-        routing_controllers_1.Put("/users/:id"),
-        __param(0, routing_controllers_1.Param("id")), __param(1, routing_controllers_1.Body())
-    ], UserController.prototype, "put", null);
+        routing_controllers_1.Get("/logout"),
+        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost_1.default),
+        routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
+        routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
+        routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
+        routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8"),
+        __param(0, routing_controllers_1.CookieParams()), __param(1, routing_controllers_1.Res())
+    ], UserController.prototype, "logout", null);
     __decorate([
         routing_controllers_1.Delete("/users/:id"),
         __param(0, routing_controllers_1.Param("id"))

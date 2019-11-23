@@ -100,6 +100,18 @@ const api = {
             .catch(err => {
                 return err
             })
+    },
+    logout: (params, callback) => {
+        axios.get('/logout', {
+            params
+        })
+            .then(res => {
+                callback(res)
+            })
+            .catch(err => {
+                return err
+            })
+        console.log('11111')
     }
 }
 

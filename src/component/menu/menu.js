@@ -50,8 +50,9 @@ class App extends React.Component {
   userClick = e => {
     if (e.key === 'setting') {
       this.drawerChild.showDrawer()
+    }else if(e.key === 'logout') {
+      this.getLogout()
     }
-    console.log(e.key)
   }
 
   solveUrl = () => {
@@ -101,7 +102,25 @@ class App extends React.Component {
     })
   }
 
+  getLogout = () => {
+    // 判断当前登录状态
+    api.logout({}, (r) => {
+      console.log(r)
+      const { data } = r
+      const res = data.data
+      if (res.status === 1) {
+        this.setState({
+          user: {},
+          logined: false
+        })
+      }
+    })
+  }
+
   callback = (flag) => {
+    if(flag) {
+      this.getLogined()
+    }
     this.setState({
       logined: flag
     })
@@ -128,7 +147,7 @@ class App extends React.Component {
             <Menu.Item key='5'>3rd menu item</Menu.Item>
             <Menu.Item key='6'>4th menu item</Menu.Item>
           </SubMenu>
-          <Menu.Item>退出</Menu.Item>
+          <Menu.Item key='logout'>退出</Menu.Item>
         </Menu>
       );
 

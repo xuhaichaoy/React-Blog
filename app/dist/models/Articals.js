@@ -59,7 +59,8 @@ var UserModel = mysql_1.default.sequelize.define('artical', {
 UserModel.sync();
 UserModel.fetch = function (page, search) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, confition, Op, r;
+        var confition, Op, r;
+        var _a;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:

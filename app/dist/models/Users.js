@@ -190,6 +190,14 @@ UserModel.login = function (data) {
         });
     });
 };
+UserModel.logout = function (token) {
+    return __awaiter(this, void 0, void 0, function () {
+        var logined;
+        return __generator(this, function (_a) {
+            return [2 /*return*/, token];
+        });
+    });
+};
 UserModel.getCurrentUser = function (token) {
     return __awaiter(this, void 0, void 0, function () {
         var logined, r;
