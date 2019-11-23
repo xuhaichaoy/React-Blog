@@ -1,9 +1,10 @@
 .editPublish {
   background: white;
-  padding: 24px;
   box-sizing: border-box;
   border-radius: 8px;
   text-align: right;
+  padding-top: 24px;
+  padding-right: 60px;
 }
 .CodeMirror {
   height: calc(100vh - 250px);

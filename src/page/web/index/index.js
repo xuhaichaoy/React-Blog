@@ -11,7 +11,9 @@ const Time = lazy(() => import('../time/time'))
 const Category = lazy(() => import('../category/category'))
 const Info = lazy(() => import('../introduce/info'))
 const Detail = lazy(() => import('../detail/detail'))
-
+const AdminHome = lazy(() => import('../../admin/home/home'))
+const Publish = lazy(() => import('../../admin/publish/publish'))
+const Article = lazy(() => import('../../admin/push/push'))
 
 class App extends React.Component {
   render() {
@@ -37,6 +39,9 @@ class App extends React.Component {
                       <Route path="/time" component={Time} />
                       <Route path="/category" component={Category} />
                       <Route path="/intro" component={Info} />
+                      <Route path="/adminHome" component={AdminHome} />
+                      <Route path="/publish" component={Publish} />
+                      <Route path="/article" component={Article} />
                       <Route path="/detail/:id" component={Detail} />
                       <Redirect to = "/index"></Redirect>
                     </Switch>

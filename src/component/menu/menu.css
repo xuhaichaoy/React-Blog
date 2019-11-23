@@ -114,9 +114,9 @@ h1 {
     width: 100%;
     z-index: 98;
 }
-.menuDividerStyle {
+/* .menuDividerStyle {
     margin: 8px 0;
-}
+} */
 .userMenuStyle {
     width: 140px;
 }

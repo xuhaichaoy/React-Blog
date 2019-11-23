@@ -160,7 +160,7 @@ class App extends React.Component {
         return (
             <Row gutter={16}>
                 <Col className="gutter-row" xl={24} xxl={20}>
-                    <div className="mainStyle" style={{ padding: 24, background: '#fff' }}>
+                    <div className="mainStyle" style={{ paddingRight: 60, background: '#fff' }}>
                         <h3>Dashboard</h3>
                         <Breadcrumb>
                             <Breadcrumb.Item>Admin</Breadcrumb.Item>

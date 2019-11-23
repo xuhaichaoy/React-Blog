@@ -111,7 +111,6 @@ const api = {
             .catch(err => {
                 return err
             })
-        console.log('11111')
     }
 }
 
