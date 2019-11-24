@@ -143,9 +143,7 @@ class App extends React.Component {
           <Menu.Item key="publish">写文章</Menu.Item>
           <Menu.Item key="adminHome">管理</Menu.Item>
           <Menu.Item key="setting">设置</Menu.Item>
-          <Menu.Item key="article">
-            小说
-          </Menu.Item>
+          <Menu.Item key="article">小说</Menu.Item>
           <Menu.Divider />
           <SubMenu title="关于">
             <Menu.Item key="5">3rd menu item</Menu.Item>
