@@ -115,7 +115,10 @@ UserModel.detail = function (id) {
                             where: {
                                 aid: id
                             },
-                            include: {}
+                            include: {
+                            // 需要联表查询
+                            // todo
+                            }
                         }).then(function (result) {
                             r = {
                                 status: 1,

@@ -48,6 +48,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    // todo 
+    // 登录上 信息变化
+    // 退出登录 信息变化  
+    // 等等 
     const hc_login = localStorage.getItem("hc_login")
     if (hc_login) {
       this.setState({
