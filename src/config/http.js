@@ -111,7 +111,15 @@ const api = {
             .catch(err => {
                 return err
             })
-    }
+    },
+    sendComment: (params, callback) => {
+        axios.post('/sendComment', params)
+        .then(res => {
+            callback(res)
+        }).catch(err => {
+            return err
+        })
+    },
 }
 
 export default api

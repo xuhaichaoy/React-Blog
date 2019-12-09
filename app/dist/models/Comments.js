@@ -39,26 +39,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mysql_1 = __importDefault(require("../config/mysql"));
-var UserModel = mysql_1.default.sequelize.define('artical', {
-    aid: {
+var jwt_1 = __importDefault(require("../config/jwt"));
+var CommentModel = mysql_1.default.sequelize.define('comments', {
+    cid: {
         type: mysql_1.default.Sequelize.INTEGER(11),
         primaryKey: true,
         autoIncrement: true,
     },
-    cid: mysql_1.default.Sequelize.BIGINT,
-    artical_name: mysql_1.default.Sequelize.STRING(100),
-    artical_status: mysql_1.default.Sequelize.BIGINT,
-    tag_id: mysql_1.default.Sequelize.STRING(100),
-    category_id: mysql_1.default.Sequelize.STRING(100),
-    viewCount: mysql_1.default.Sequelize.STRING(100),
-    content: mysql_1.default.Sequelize.TEXT,
+    uid: {
+        type: mysql_1.default.Sequelize.BIGINT,
+        allowNull: false
+    },
+    aid: {
+        type: mysql_1.default.Sequelize.BIGINT,
+        allowNull: false
+    },
     Date: mysql_1.default.Sequelize.BIGINT,
-    comments_id: mysql_1.default.Sequelize.BIGINT //评论内容
+    comments: mysql_1.default.Sequelize.TEXT //评论内容
 }, {
     timestamps: false
 });
-UserModel.sync();
-UserModel.fetch = function (page, search) {
+CommentModel.sync();
+CommentModel.fetch = function (page, search) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, confition, Op, r;
         return __generator(this, function (_b) {
@@ -75,7 +77,7 @@ UserModel.fetch = function (page, search) {
                         };
                     }
                     r = {};
-                    return [4 /*yield*/, UserModel.findAndCountAll({
+                    return [4 /*yield*/, CommentModel.findAndCountAll({
                             // 获取所有信息
                             where: confition,
                             limit: 6,
@@ -103,54 +105,22 @@ UserModel.fetch = function (page, search) {
         });
     });
 };
-UserModel.detail = function (id) {
+CommentModel.sendComment = function (res, token) {
     return __awaiter(this, void 0, void 0, function () {
-        var r;
+        var currentUser, uid, articleId, content, r;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    currentUser = jwt_1.default.check(token.jwt);
+                    uid = currentUser.uid;
+                    articleId = res.articalId;
+                    content = res.content;
                     r = {};
-                    return [4 /*yield*/, UserModel.findAll({
+                    return [4 /*yield*/, CommentModel.create({
                             // 获取所有信息
-                            where: {
-                                aid: id
-                            },
-                            include: {}
-                        }).then(function (result) {
-                            r = {
-                                status: 1,
-                                msg: "success",
-                                list: JSON.parse(JSON.stringify(result))
-                            };
-                        }).catch(function (err) {
-                            r = {
-                                status: -1000,
-                                msg: "error",
-                                data: err
-                            };
-                        })];
-                case 1:
-                    _a.sent();
-                    return [2 /*return*/, r];
-            }
-        });
-    });
-};
-UserModel.publish = function (value) {
-    return __awaiter(this, void 0, void 0, function () {
-        var myDate, r;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    myDate = new Date();
-                    r = {};
-                    return [4 /*yield*/, UserModel.create({
-                            // 获取所有信息
-                            cid: 1,
-                            artical_status: 1,
-                            artical_name: value.artical_name,
-                            content: value.content,
-                            Date: myDate
+                            uid: uid,
+                            aid: articleId,
+                            comments: content
                         }).then(function (result) {
                             r = {
                                 status: 1,
@@ -173,38 +143,4 @@ UserModel.publish = function (value) {
         });
     });
 };
-UserModel.list = function () {
-    return __awaiter(this, void 0, void 0, function () {
-        var r;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    r = {};
-                    return [4 /*yield*/, UserModel.findAll({
-                            attributes: ['aid', 'artical_name'],
-                            // 获取所有信息
-                            limit: 7,
-                            order: [
-                                ['aid', 'DESC'],
-                            ],
-                        }).then(function (result) {
-                            r = {
-                                status: 1,
-                                msg: "success",
-                                list: JSON.parse(JSON.stringify(result))
-                            };
-                        }).catch(function (err) {
-                            r = {
-                                status: -1000,
-                                msg: "error",
-                                data: err
-                            };
-                        })];
-                case 1:
-                    _a.sent();
-                    return [2 /*return*/, r];
-            }
-        });
-    });
-};
-exports.default = UserModel;
+exports.default = CommentModel;

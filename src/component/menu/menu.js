@@ -97,12 +97,14 @@ class App extends React.Component {
       const { data } = r;
       const res = data.data;
       if (res.status === -1) {
+        localStorage.removeItem("hc_login")
         return;
       } else {
         this.setState({
           user: res.data,
           logined: true
         });
+        localStorage.setItem("hc_login", JSON.stringify(res.data))
       }
     });
   };

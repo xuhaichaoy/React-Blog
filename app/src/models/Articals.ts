@@ -14,6 +14,7 @@ const UserModel = obj.sequelize.define('artical', {
     viewCount: obj.Sequelize.STRING(100), // 阅读数量
     content: obj.Sequelize.TEXT, // 文章内容
     Date: obj.Sequelize.BIGINT, // 日期
+    comments_id: obj.Sequelize.BIGINT //评论内容
 }, {
     timestamps: false
 })
@@ -22,14 +23,14 @@ UserModel.fetch = async function (page: number, search: string) {
     search = search.trim()
     let confition = {}
     const Op = obj.Sequelize.Op
-    if(search) {
+    if (search) {
         confition = {
-            artical_name:  {
-                [Op.like]: '%'+search+'%',
+            artical_name: {
+                [Op.like]: '%' + search + '%',
             }
         }
     }
-    
+
     let r = {}
     await UserModel.findAndCountAll({
         // 获取所有信息
@@ -55,12 +56,14 @@ UserModel.fetch = async function (page: number, search: string) {
     return r
 };
 UserModel.detail = async function (id: number) {
-    console.log(id)
     let r = {}
     await UserModel.findAll({
         // 获取所有信息
         where: {
             aid: id
+        },
+        include: {
+            
         }
     }).then(function (result: any) {
         r = {
@@ -129,6 +132,7 @@ UserModel.list = async function () {
     })
     return r
 };
+
 
 
 

@@ -1,6 +1,7 @@
 import React from "react";
-import { Comment, Avatar, Form, Button, List, Input } from "antd";
-import moment from "moment";
+import { Comment, Avatar, Form, Button, List, Input, message } from "antd"
+import moment from "moment"
+import api from '../../config/http'
 
 import "./comment.css";
 
@@ -8,7 +9,7 @@ const { TextArea } = Input;
 
 const CommentList = ({ comments }) => (
   <List
-    className = "listStyle"
+    className="listStyle"
     dataSource={comments}
     header={`${comments.length} ${comments.length > 1 ? "replies" : "reply"}`}
     itemLayout="horizontal"
@@ -41,13 +42,50 @@ class App extends React.Component {
     this.state = {
       comments: [],
       submitting: false,
-      value: ""
+      value: "",
+      hc_login: {}
     };
   }
+
+  componentDidMount() {
+    const hc_login = localStorage.getItem("hc_login")
+    if (hc_login) {
+      this.setState({
+        hc_login: JSON.parse(hc_login)
+      })
+    }else {
+      this.setState({
+        hc_login: {}
+      })
+    }
+  }
+
   handleSubmit = () => {
-    if (!this.state.value) {
+    const _this = this
+    if (!this.state.value.trim()) {
+      message.warning('请填写留言');
       return;
     }
+    const hc_login = localStorage.getItem("hc_login")
+    if (!hc_login) {
+      message.warning('登录后留言');
+      return
+    }
+
+    const params = {
+      articalId: this.props.articalId,
+      content: this.state.value
+    }
+    // axios 请求 数据
+    api.sendComment(params, (r) => {
+      const { data } = r
+      const res = data.data
+      if (res.status === 1) {
+        _this.setState({
+          detailData: res.list[0]
+        })
+      }
+    })
 
     this.setState({
       submitting: true
@@ -59,9 +97,8 @@ class App extends React.Component {
         value: "",
         comments: [
           {
-            author: "Han Solo",
-            avatar:
-              "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+            author: this.state.hc_login.nickName,
+            avatar: this.state.hc_login.image,
             content: <p>{this.state.value}</p>,
             datetime: moment().fromNow()
           },
@@ -83,8 +120,8 @@ class App extends React.Component {
         <Comment
           avatar={
             <Avatar
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              alt="Han Solo"
+              src={this.state.hc_login.image}
+              alt={this.state.hc_login.nickName}
             />
           }
           content={

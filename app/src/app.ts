@@ -3,6 +3,7 @@ import { createExpressServer } from "routing-controllers";
 import { UserController } from "./controllers/UserController";
 import { ArticalController } from "./controllers/ArticalController";
 import { EnterController } from "./controllers/EnterController";
+import { CommentsController } from "./controllers/CommentsController";
 import Schedule from "./config/schedule"
 import serveStatic from "serve-static"
 
@@ -21,7 +22,7 @@ const app = createExpressServer({
       }
    },
    cors: true, // CORS 模块跨域
-   controllers: [UserController, ArticalController, EnterController]
+   controllers: [UserController, ArticalController, EnterController, CommentsController]
 })
 
 Schedule.startSchedule()
