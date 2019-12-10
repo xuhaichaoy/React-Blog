@@ -62,10 +62,10 @@ UserModel.detail = async function (id: number) {
         where: {
             aid: id
         },
-        include: {
-            // 需要联表查询
-            // todo
-        }
+        // include: {
+        //     // 需要联表查询
+        //     // todo
+        // }
     }).then(function (result: any) {
         r = {
             status: 1,
