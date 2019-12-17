@@ -57,7 +57,7 @@ UserModel.fetch = async function (page: number, search: string) {
 };
 UserModel.detail = async function (id: number) {
     let r = {}
-    await UserModel.findAll({
+    await UserModel.findAll({ 
         // 获取所有信息
         where: {
             aid: id
