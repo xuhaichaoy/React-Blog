@@ -62,12 +62,12 @@ class App extends React.Component {
 
   getUrl = (flag, page) => {
     const obj = this.solveUrl()
-    if(page) {
+    if (page) {
       this.getData(page, obj.search)
       return
     }
-    if(obj.point && obj.search) {
-      if(flag) {
+    if (obj.point && obj.search) {
+      if (flag) {
         // true 为刷新 需要重新拉取数据
         this.getData(1, obj.search)
         this.setState({
@@ -75,17 +75,17 @@ class App extends React.Component {
         })
         return
       }
-    }else {
-      if(obj.point) {
+    } else {
+      if (obj.point) {
         // 只有锚点 说明锚点一直在切换
-        if(flag) {
+        if (flag) {
           this.getData(1, obj.search)
           this.setState({
             currentPage: 1
           })
           return
         }
-      }else {
+      } else {
         // 只有 search
         this.getData(1, obj.search)
         this.setState({

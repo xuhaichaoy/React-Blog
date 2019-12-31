@@ -1,4 +1,4 @@
-import { JsonController, Param, Body, Get, Post, Put, Delete, Req, Res, UseBefore, Header, CookieParam, QueryParam } from "routing-controllers";
+import { JsonController, Param, Body, Get, Post, Put, Delete, Req, Res, UseBefore, Header, CookieParam, QueryParam, CookieParams } from "routing-controllers";
 import urlencodedParser from '../config/bodyparser'
 import Artical from '../models/Articals'
 import jsonwebtoken from '../config/jwt'
@@ -65,11 +65,18 @@ export class ArticalController {
       }
    }
 
-   @Put("/users/:id")
-   put(@Param("id") id: number, @Body() user: any) {
-      return "Updating a user...";
+   @Post("/delete")
+   @Header("Access-Control-Allow-Origin", localhost)
+   @Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+   @Header("Access-Control-Allow-Credentials", "true")
+   @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
+   @Header("Content-Type", "text/html; charset=utf-8")
+   async delete(@Body() res: any, @CookieParams() params: any) {
+      const r = await Artical.delete(res, params)
+      return {
+         data: r
+      }
    }
-
    @Delete("/users/:id")
    remove(@Param("id") id: number) {
       return "Removing user...";

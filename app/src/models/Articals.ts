@@ -1,4 +1,5 @@
 import obj from '../config/mysql'
+import jwt from '../config/jwt'
 const UserModel = obj.sequelize.define('artical', {
     aid: {
         type: obj.Sequelize.INTEGER(11),
@@ -124,6 +125,33 @@ UserModel.list = async function () {
             msg: "success",
             list: JSON.parse(JSON.stringify(result))
         }
+    }).catch(function (err: any) {
+        r = {
+            status: -1000,
+            msg: "error",
+            data: err
+        }
+    })
+    return r
+};
+UserModel.delete = async function (value: any, token: any) {
+    const currentUser = jwt.check(token.jwt)
+    const uid = currentUser.uid
+    let r = {}
+    await UserModel.destroy({
+       where: {
+           cid: uid,
+           aid: value.aid
+       }
+    }).then(function (result: any) {
+        r = {
+            status: 1,
+            msg: "success",
+            data: {
+                message: "删除成功"
+            }  // 正常
+        }
+
     }).catch(function (err: any) {
         r = {
             status: -1000,

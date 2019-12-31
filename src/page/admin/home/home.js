@@ -2,7 +2,8 @@ import React from "react";
 import Right from "../../../component/adminRight/right";
 import Echart from "../../../component/echart/echart";
 import Pie from "../../../component/pie/pie";
-import { Breadcrumb, Card, Col, Row, Table, Divider, Tag, Icon } from 'antd';
+import { Breadcrumb, Card, Col, Row, Table, Divider, Tag, Icon, message } from 'antd';
+import api from "../../../config/http";
 import "./home.css";
 
 const columns = [
@@ -51,116 +52,107 @@ const data = [
     }
 ];
 
-const columnsData = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => <a>{text}</a>,
-    },
-    {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-    },
-    {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: tags => (
-            <span>
-                {tags.map(tag => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
-                    if (tag === 'loser') {
-                        color = 'volcano';
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
-            </span>
-        ),
-    },
-    {
-        title: 'Action',
-        key: 'action',
-        render: (text, record) => (
-            <span>
-                <a>Invite {record.name}</a>
-                <Divider type="vertical" />
-                <a>Delete</a>
-            </span>
-        ),
-    },
-];
-
-const tableData = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-    {
-        key: '4',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-    {
-        key: '5',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-    {
-        key: '6',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-    {
-        key: '7',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
 
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            page: 1,
+            userData: [],
+            allCount: 0
+        }
+    }
+
+    componentDidMount() {
+        window.scrollTo(0, 0)
+        this.getUserArticles()
+        // axios 请求 数据
+       
+    }
+
+    getUserArticles = () => {
+        const _this = this
+        const params = {
+            page: _this.state.page,
+            search: ' '
+        }
+        api.allArticals(params, (r) => {
+            const { data } = r
+            const res = data.data
+            if (res.status === 1) {
+                window.scrollTo(0, 0)
+                this.setState({
+                    userData: res.list.rows,
+                    allCount: res.list.count
+                });
+            }
+        })
+    }
+
+    modifyArticle = (record) => {
+        console.log(record)
+        const params = {
+
+        }
+
+        // api.allArticals(params, (r) => {
+        //     console.log(r)
+        //     const { data } = r
+        //     const res = data.data
+        //     if (res.status === 1) {
+        //         window.scrollTo(0, 0)
+        //         console.log(res.list.count)
+        //         this.setState({
+        //             userData: res.list.rows,
+        //             allCount: res.list.count
+        //         });
+        //     }
+        // })
+    }
+
+    deleteArticle = (record) => {
+        const _this = this
+        const params = {
+            aid: record.aid
+        }
+
+        api.deleteArticle(params, (r) => {
+            const { data } = r
+            const res = data.data
+            if (res.status === 1) {
+                window.scrollTo(0, 0)
+                message.success('删除成功！！！');
+                _this.getUserArticles()
+            }
+        })
+    }
 
     render() {
+        const columnsData = [
+            {
+                title: 'Title',
+                dataIndex: 'artical_name',
+                key: 'artical_name',
+                render: text => <a>{text}</a>,
+            },
+            {
+                title: 'Action',
+                dataIndex: 'artical_status',
+                key: 'artical_status',
+                render: (text, record) => (
+                    <span>
+                        <a onClick={this.modifyArticle.bind(this, record)}>Modify</a>
+                        <Divider type="vertical" />
+                        <a onClick={this.deleteArticle.bind(this, record)}>Delete</a>
+                    </span>
+                ),
+            },
+        ];
         return (
             <Row gutter={16}>
                 <Col className="gutter-row" xl={24} xxl={20}>
-                    <div className="mainStyle" style={{ paddingRight: 60, background: '#fff' }}>
+                    <div className="mainStyle" style={{ paddingRight: 10, background: '#fff' }}>
                         <h3>Dashboard</h3>
                         <Breadcrumb>
                             <Breadcrumb.Item>Admin</Breadcrumb.Item>
@@ -227,7 +219,10 @@ class App extends React.Component {
                                 Measure How Fast You’re Growing Monthly Recurring Revenue. &nbsp;
                                             <a href="javascript:;">Learn More</a>
                             </p>
-                            <Table columns={columnsData} dataSource={tableData} style={{ marginTop: "20px" }} />
+                            <Table columns={columnsData} dataSource={this.state.userData} style={{ marginTop: "20px" }} rowKey={row => row.aid} pagination={{
+                                total: this.state.allCount,
+
+                            }} />
                         </div>
                     </div>
                 </Col>

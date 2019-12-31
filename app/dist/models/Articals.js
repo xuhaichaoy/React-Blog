@@ -39,6 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mysql_1 = __importDefault(require("../config/mysql"));
+var jwt_1 = __importDefault(require("../config/jwt"));
 var UserModel = mysql_1.default.sequelize.define('artical', {
     aid: {
         type: mysql_1.default.Sequelize.INTEGER(11),
@@ -191,6 +192,42 @@ UserModel.list = function () {
                                 status: 1,
                                 msg: "success",
                                 list: JSON.parse(JSON.stringify(result))
+                            };
+                        }).catch(function (err) {
+                            r = {
+                                status: -1000,
+                                msg: "error",
+                                data: err
+                            };
+                        })];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, r];
+            }
+        });
+    });
+};
+UserModel.delete = function (value, token) {
+    return __awaiter(this, void 0, void 0, function () {
+        var currentUser, uid, r;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    currentUser = jwt_1.default.check(token.jwt);
+                    uid = currentUser.uid;
+                    r = {};
+                    return [4 /*yield*/, UserModel.destroy({
+                            where: {
+                                cid: uid,
+                                aid: value.aid
+                            }
+                        }).then(function (result) {
+                            r = {
+                                status: 1,
+                                msg: "success",
+                                data: {
+                                    message: "删除成功"
+                                } // 正常
                             };
                         }).catch(function (err) {
                             r = {

@@ -29,7 +29,7 @@ class App extends React.Component {
         const _this = this
         const url = window.location.href
         const params = url.slice(url.lastIndexOf('/') + 1)
-        console.log(params)
+        // console.log(params)
         if (!params) {
             return
         }

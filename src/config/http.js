@@ -120,6 +120,15 @@ const api = {
             return err
         })
     },
+    deleteArticle: (params, callback) => {
+        axios.post('/delete', params)
+            .then(res => {
+                callback(res)
+            })
+            .catch(err => {
+                return err
+            })
+    },
 }
 
 export default api
