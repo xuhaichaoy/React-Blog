@@ -14,6 +14,7 @@ const UserModel = obj.sequelize.define('artical', {
     category_id: obj.Sequelize.STRING(100), // 分类ID
     viewCount: obj.Sequelize.STRING(100), // 阅读数量
     content: obj.Sequelize.TEXT, // 文章内容
+    values: obj.Sequelize.TEXT,
     Date: obj.Sequelize.BIGINT, // 日期
     comments_id: obj.Sequelize.BIGINT //评论内容
 }, {
@@ -35,6 +36,7 @@ UserModel.fetch = async function (page: number, search: string) {
     let r = {}
     await UserModel.findAndCountAll({
         // 获取所有信息
+        attributes: ['aid', 'artical_name', 'content'],
         where: confition,
         limit: 6,
         offset: (page - 1) * 6,
@@ -57,7 +59,6 @@ UserModel.fetch = async function (page: number, search: string) {
     return r
 };
 UserModel.fetchMine = async function (page: number) {
-
     let r = {}
     await UserModel.findAndCountAll({
         // 获取所有信息
@@ -85,6 +86,7 @@ UserModel.fetchMine = async function (page: number) {
 UserModel.detail = async function (id: number) {
     let r = {}
     await UserModel.findAll({ 
+        attributes: ['aid', 'artical_name', 'content'],
         // 获取所有信息
         where: {
             aid: id
@@ -117,6 +119,7 @@ UserModel.publish = async function (value: any) {
         artical_status: 1,
         artical_name: value.artical_name,
         content: value.content,
+        values: value.values,
         Date: myDate
     }).then(function (result: any) {
         r = {

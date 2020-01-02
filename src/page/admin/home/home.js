@@ -90,22 +90,18 @@ class App extends React.Component {
     }
 
     modifyArticle = (record) => {
-        console.log(record)
+        const _this = this
         const params = {
-
+            aid: record.aid
         }
 
-        // api.allArticals(params, (r) => {
-        //     console.log(r)
+        // api.deleteArticle(params, (r) => {
         //     const { data } = r
         //     const res = data.data
         //     if (res.status === 1) {
         //         window.scrollTo(0, 0)
-        //         console.log(res.list.count)
-        //         this.setState({
-        //             userData: res.list.rows,
-        //             allCount: res.list.count
-        //         });
+        //         message.success('删除成功！！！');
+        //         _this.getUserArticles()
         //     }
         // })
     }

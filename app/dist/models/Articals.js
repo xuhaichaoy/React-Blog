@@ -53,6 +53,7 @@ var UserModel = mysql_1.default.sequelize.define('artical', {
     category_id: mysql_1.default.Sequelize.STRING(100),
     viewCount: mysql_1.default.Sequelize.STRING(100),
     content: mysql_1.default.Sequelize.TEXT,
+    values: mysql_1.default.Sequelize.TEXT,
     Date: mysql_1.default.Sequelize.BIGINT,
     comments_id: mysql_1.default.Sequelize.BIGINT //评论内容
 }, {
@@ -78,6 +79,7 @@ UserModel.fetch = function (page, search) {
                     r = {};
                     return [4 /*yield*/, UserModel.findAndCountAll({
                             // 获取所有信息
+                            attributes: ['aid', 'artical_name', 'content'],
                             where: confition,
                             limit: 6,
                             offset: (page - 1) * 6,
@@ -147,6 +149,7 @@ UserModel.detail = function (id) {
                 case 0:
                     r = {};
                     return [4 /*yield*/, UserModel.findAll({
+                            attributes: ['aid', 'artical_name', 'content'],
                             // 获取所有信息
                             where: {
                                 aid: id
@@ -185,6 +188,7 @@ UserModel.publish = function (value) {
                             artical_status: 1,
                             artical_name: value.artical_name,
                             content: value.content,
+                            values: value.values,
                             Date: myDate
                         }).then(function (result) {
                             r = {

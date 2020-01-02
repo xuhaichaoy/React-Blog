@@ -108,6 +108,7 @@ class App extends React.Component {
       const hide = message.loading("Action in progress..", 0);
       const md = converter.makeHtml(this.state.value);
       values["content"] = md;
+      values["values"] = this.state.value;
       api.publishArtical(values, r => {
         const { data } = r;
         const res = data.data;
