@@ -104,6 +104,41 @@ UserModel.fetch = function (page, search) {
         });
     });
 };
+UserModel.fetchMine = function (page) {
+    return __awaiter(this, void 0, void 0, function () {
+        var r;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    r = {};
+                    return [4 /*yield*/, UserModel.findAndCountAll({
+                            // 获取所有信息
+                            attributes: ['aid', 'artical_name'],
+                            limit: 6,
+                            offset: (page - 1) * 6,
+                            order: [
+                                ['aid', 'DESC'],
+                            ],
+                        }).then(function (result) {
+                            r = {
+                                status: 1,
+                                msg: "success",
+                                list: JSON.parse(JSON.stringify(result))
+                            };
+                        }).catch(function (err) {
+                            r = {
+                                status: -1000,
+                                msg: "error",
+                                data: err
+                            };
+                        })];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, r];
+            }
+        });
+    });
+};
 UserModel.detail = function (id) {
     return __awaiter(this, void 0, void 0, function () {
         var r;

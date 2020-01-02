@@ -129,6 +129,17 @@ const api = {
                 return err
             })
     },
+    allUserArticals: (params, callback) => {
+        axios.get('/allUserArticals', {
+            params
+        })
+            .then(res => {
+                callback(res)
+            })
+            .catch(err => {
+                return err
+            })
+    },
 }
 
 export default api

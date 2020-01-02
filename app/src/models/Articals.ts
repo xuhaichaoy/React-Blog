@@ -56,6 +56,32 @@ UserModel.fetch = async function (page: number, search: string) {
     })
     return r
 };
+UserModel.fetchMine = async function (page: number) {
+
+    let r = {}
+    await UserModel.findAndCountAll({
+        // 获取所有信息
+        attributes: ['aid', 'artical_name'],
+        limit: 6,
+        offset: (page - 1) * 6,
+        order: [
+            ['aid', 'DESC'],
+        ],
+    }).then(function (result: any) {
+        r = {
+            status: 1,
+            msg: "success",
+            list: JSON.parse(JSON.stringify(result))
+        }
+    }).catch(function (err: any) {
+        r = {
+            status: -1000,
+            msg: "error",
+            data: err
+        }
+    })
+    return r
+};
 UserModel.detail = async function (id: number) {
     let r = {}
     await UserModel.findAll({ 

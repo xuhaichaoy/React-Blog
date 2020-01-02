@@ -72,6 +72,21 @@ var ArticalController = /** @class */ (function () {
             });
         });
     };
+    ArticalController.prototype.getUser = function (page) {
+        return __awaiter(this, void 0, void 0, function () {
+            var r;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Articals_1.default.fetchMine(page)];
+                    case 1:
+                        r = _a.sent();
+                        return [2 /*return*/, {
+                                data: r
+                            }];
+                }
+            });
+        });
+    };
     ArticalController.prototype.getOne = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var r;
@@ -144,6 +159,15 @@ var ArticalController = /** @class */ (function () {
         routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8"),
         __param(0, routing_controllers_1.QueryParam("page")), __param(1, routing_controllers_1.QueryParam("search"))
     ], ArticalController.prototype, "getAll", null);
+    __decorate([
+        routing_controllers_1.Get("/allUserArticals"),
+        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost_1.default),
+        routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
+        routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
+        routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
+        routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8"),
+        __param(0, routing_controllers_1.QueryParam("page"))
+    ], ArticalController.prototype, "getUser", null);
     __decorate([
         routing_controllers_1.Get("/detailArtical/:id"),
         routing_controllers_1.Header("Access-Control-Allow-Origin", localhost_1.default),

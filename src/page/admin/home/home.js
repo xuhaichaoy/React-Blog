@@ -75,9 +75,8 @@ class App extends React.Component {
         const _this = this
         const params = {
             page: _this.state.page,
-            search: ' '
         }
-        api.allArticals(params, (r) => {
+        api.allUserArticals(params, (r) => {
             const { data } = r
             const res = data.data
             if (res.status === 1) {
