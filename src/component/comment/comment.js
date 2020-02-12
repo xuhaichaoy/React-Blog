@@ -120,7 +120,8 @@ class App extends React.Component {
   render() {
     const { comments, submitting, value } = this.state;
     return (
-      <div>
+      <div style={{ marginTop: "40px" }}>
+        <h3 style={{ marginBottom: "10px" }}>Comments</h3>
         <Comment
           avatar={
             <Avatar
@@ -130,7 +131,7 @@ class App extends React.Component {
           }
           content={
             <Editor
-              onChange={this.handleChange}
+              onChange={this.handleChange}margin
               onSubmit={this.handleSubmit}
               submitting={submitting}
               value={value}
