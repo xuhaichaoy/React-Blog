@@ -91,13 +91,13 @@ UserModel.login = async function (data: any) {
     }).then(function (result: any) {
         if (result.length > 0) {
             jwt.token.sign(JSON.parse(JSON.stringify(result[0])), jwt.secret, (err: any, token: any) => {
+                let res = JSON.parse(JSON.stringify(result[0]))
+                delete res["admin"]
                 r = {
                     data: {
                         status: 1,
                         msg: "success",
-                        data: {
-                            message: "登录成功",
-                        },
+                        data: res
                     },
                     token
                 }
@@ -194,17 +194,20 @@ UserModel.changeData = async function (data: any, token: any) {
     const uid = currentUser.uid
     let r = {}
     let imgfile = data.image
+    let url: any
 
-
-    if (imgfile) {
+    if (imgfile.length > 1000) {
         imgfile = await UserModel.writePic(imgfile)
+        url = 'http://localhost:3000'+imgfile.slice(1)
+    }else {
+        url = data.image
     }
     await UserModel.update({
         nickName: data.nickName,
         Info: data.Info,
         Github: data.Github,
         Chrome: data.Chrome,
-        image: 'http://localhost:3000'+imgfile.slice(1),
+        image: url,
     }, {
         where: {
             uid: uid
@@ -215,8 +218,12 @@ UserModel.changeData = async function (data: any, token: any) {
             status: 1,
             msg: "success",
             data: {
-                message: "修改成功"
-            }  // 正常
+                nickName: data.nickName,
+                Info: data.Info,
+                Github: data.Github,
+                Chrome: data.Chrome,
+                image: url,
+            }
         }
 
     }).catch(function (err: any) {

@@ -1,5 +1,6 @@
 import React from "react"
 import { Drawer, Form, Button, Input, Icon, Upload, message } from 'antd'
+import store from '../../store/index'
 import api from '../../config/http'
 import "./drawer.css"
 
@@ -27,8 +28,16 @@ class DrawerForm extends React.Component {
         this.state = {
             visible: false,
             loading: false,
-            imageUrl: ''
+            imageUrl: '',
+            store: store.getState()
         }
+        store.subscribe(this.storeChange)
+    }
+
+    storeChange = () => {
+        this.setState({
+            store: store.getState()
+        })
     }
 
     componentDidMount() {
@@ -37,7 +46,7 @@ class DrawerForm extends React.Component {
 
     showDrawer = () => {
         this.setState({
-            imageUrl: this.props.user.image
+            imageUrl: this.state.store.useInfo.image
         })
         this.setState({
             visible: true,
@@ -51,8 +60,16 @@ class DrawerForm extends React.Component {
     }
 
     getData = (value) => {
-        api.changData(value, (r) => {
-            console.log(r)
+        api.changData(value, (res) => {
+            const { data } = res.data
+            if (data.status === 1) {
+                const action = {
+                    type: 'userInfo',
+                    useInfo: data.data
+                }
+                store.dispatch(action)
+            }
+            console.log(res)
         })
     }
 
@@ -95,7 +112,7 @@ class DrawerForm extends React.Component {
             labelCol: { span: 3 },
             wrapperCol: { span: 12 },
         };
-        let User = this.props.user
+        let User = this.state.store.useInfo
         return (
             <div>
                 <Drawer

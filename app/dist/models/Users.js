@@ -153,13 +153,13 @@ UserModel.login = function (data) {
                         }).then(function (result) {
                             if (result.length > 0) {
                                 jwt_1.default.token.sign(JSON.parse(JSON.stringify(result[0])), jwt_1.default.secret, function (err, token) {
+                                    var res = JSON.parse(JSON.stringify(result[0]));
+                                    delete res["admin"];
                                     r = {
                                         data: {
                                             status: 1,
                                             msg: "success",
-                                            data: {
-                                                message: "登录成功",
-                                            },
+                                            data: res
                                         },
                                         token: token
                                     };
@@ -251,7 +251,7 @@ UserModel.writePic = function (imgfile) {
 };
 UserModel.changeData = function (data, token) {
     return __awaiter(this, void 0, void 0, function () {
-        var currentUser, uid, r, imgfile;
+        var currentUser, uid, r, imgfile, url;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -259,17 +259,21 @@ UserModel.changeData = function (data, token) {
                     uid = currentUser.uid;
                     r = {};
                     imgfile = data.image;
-                    if (!imgfile) return [3 /*break*/, 2];
+                    if (!(imgfile.length > 1000)) return [3 /*break*/, 2];
                     return [4 /*yield*/, UserModel.writePic(imgfile)];
                 case 1:
                     imgfile = _a.sent();
-                    _a.label = 2;
-                case 2: return [4 /*yield*/, UserModel.update({
+                    url = 'http://localhost:3000' + imgfile.slice(1);
+                    return [3 /*break*/, 3];
+                case 2:
+                    url = data.image;
+                    _a.label = 3;
+                case 3: return [4 /*yield*/, UserModel.update({
                         nickName: data.nickName,
                         Info: data.Info,
                         Github: data.Github,
                         Chrome: data.Chrome,
-                        image: 'http://localhost:3000' + imgfile.slice(1),
+                        image: url,
                     }, {
                         where: {
                             uid: uid
@@ -279,8 +283,12 @@ UserModel.changeData = function (data, token) {
                             status: 1,
                             msg: "success",
                             data: {
-                                message: "修改成功"
-                            } // 正常
+                                nickName: data.nickName,
+                                Info: data.Info,
+                                Github: data.Github,
+                                Chrome: data.Chrome,
+                                image: url,
+                            }
                         };
                     }).catch(function (err) {
                         r = {
@@ -291,7 +299,7 @@ UserModel.changeData = function (data, token) {
                             } // 正常
                         };
                     })];
-                case 3:
+                case 4:
                     _a.sent();
                     return [2 /*return*/, r];
             }

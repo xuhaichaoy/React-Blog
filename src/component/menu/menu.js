@@ -1,5 +1,6 @@
 import React from "react";
 import { Menu, Icon, Input, Row, Col, Divider, Avatar, Dropdown } from "antd";
+import store from '../../store/index'
 import Login from "../login/login";
 import Drawer from "../drawer/drawer";
 import api from "../../config/http";
@@ -11,14 +12,25 @@ const { SubMenu } = Menu;
 const { Search } = Input;
 
 class App extends React.Component {
-  state = {
-    current: "index",
-    logined: false,
-    inputValue: "",
-    search: "",
-    point: "",
-    user: {}
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      current: "index",
+      inputValue: "",
+      search: "",
+      point: "",
+      user: {},
+      store: store.getState()
+    };
+    store.subscribe(this.storeChange)
+  }
+
+  storeChange = () => {
+    this.setState({
+      store: store.getState()
+    })
+  }
+
 
   componentWillMount() {
     const obj = this.solveUrl();
@@ -33,7 +45,6 @@ class App extends React.Component {
     this.setState({
       current: url.slice(num + 1)
     });
-    this.getLogined();
   }
 
   componentWillUpdate(prevProps, prevState) {
@@ -91,45 +102,25 @@ class App extends React.Component {
     return obj;
   };
 
-  getLogined = () => {
-    // 判断当前登录状态
-    api.getCurrentUser({}, r => {
-      const { data } = r;
-      const res = data.data;
-      if (res.status === -1) {
-        localStorage.removeItem("hc_login")
-        return;
-      } else {
-        this.setState({
-          user: res.data,
-          logined: true
-        });
-        localStorage.setItem("hc_login", JSON.stringify(res.data))
-      }
-    });
-  };
-
   getLogout = () => {
     // 判断当前登录状态
-    api.logout({}, r => {
-      const { data } = r;
-      const res = data.data;
-      if (res.status === 1) {
-        this.setState({
-          user: {},
-          logined: false
-        });
-      }
-    });
-  };
-
-  callback = flag => {
-    if (flag) {
-      this.getLogined();
+    if (this.state.store.login) {
+      api.logout({}, r => {
+        const { data } = r;
+        const res = data.data;
+        if (res.status === 1) {
+          const action = {
+            type: 'logined',
+            value: false,
+            useInfo: {}
+          }
+          store.dispatch(action)
+        }
+      });
+    } else {
+      // 当前未登录
     }
-    this.setState({
-      logined: flag
-    });
+
   };
 
   handleClick = e => {
@@ -139,7 +130,7 @@ class App extends React.Component {
   };
 
   userInfo() {
-    if (this.state.logined) {
+    if (this.state.store.login) {
       const menu = () => (
         <Menu className="userMenuStyle" onClick={this.userClick}>
           <Menu.Item key="publish">写文章</Menu.Item>
@@ -166,7 +157,7 @@ class App extends React.Component {
     } else {
       return (
         <div className="user">
-          <Login callback={this.callback} />
+          <Login />
         </div>
       );
     }

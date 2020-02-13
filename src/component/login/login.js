@@ -1,5 +1,6 @@
-import React from "react";
-import { Form, Icon, Input, Button, Checkbox, Modal, message } from "antd";
+import React from "react"
+import { Form, Icon, Input, Button, Checkbox, Modal, message } from "antd"
+import store from '../../store/index'
 import api from '../../config/http'
 import "./login.css";
 
@@ -7,23 +8,36 @@ class NormalLoginForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      store: store.getState()
     }
+    store.subscribe(this.storeChange)
     // 为了在回调函数中使用 this 绑定 this 必不可少
     // this.handleClick = this.handleClick.bind(this)
   }
+
+  storeChange = () => {
+    this.setState({
+      store: store.getState()
+    })
+  }
+
   handleSubmit = e => {
     const that = this
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        api.login(values, function(res) {
-          const {data} = res.data
-          if(data.status === 1) {
+        api.login(values, function (res) {
+          const { data } = res.data
+          if (data.status === 1) {
             message.success('登录成功')
-            that.props.loginState(true)
             that.props.hideModal()
-          }else {
+            const action = {
+              type: 'logined',
+              value: true,
+              useInfo: data.data
+            }
+            store.dispatch(action)
+          } else {
             message.warning('用户名或密码错误')
           }
         })
@@ -115,12 +129,12 @@ class NormalRegForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        api.reg(values, function(res) {
-          const {data} = res.data
-          if(data.status === 1) {
+        api.reg(values, function (res) {
+          const { data } = res.data
+          if (data.status === 1) {
             message.success('注册成功')
             that.props.hideModal()
-          }else {
+          } else {
             message.warning('用户名已存在')
           }
         })
@@ -248,9 +262,11 @@ class App extends React.Component {
     super(props);
     this.state = {
       loginvisible: false,
-      regvisible: false
+      regvisible: false,
     };
   }
+
+
 
   showModal = () => {
     this.setState({
@@ -288,9 +304,6 @@ class App extends React.Component {
     });
   };
 
-  loginState = (flag) => {
-    this.props.callback(flag)
-  }
 
   render() {
     return (
@@ -307,7 +320,7 @@ class App extends React.Component {
           onCancel={this.handleloginCancel}
           footer={null}
         >
-          <WrappedNormalLoginForm showRegModal={this.showRegModal} hideModal={this.hideModal} loginState={this.loginState}/>
+          <WrappedNormalLoginForm showRegModal={this.showRegModal} hideModal={this.hideModal}/>
         </Modal>
         <Modal
           title="注册"
@@ -315,7 +328,7 @@ class App extends React.Component {
           onCancel={this.handleregCancel}
           footer={null}
         >
-          <WrappedNormalRegForm showModal={this.showModal} hideModal={this.hideModal}/>
+          <WrappedNormalRegForm showModal={this.showModal} hideModal={this.hideModal} />
         </Modal>
       </div>
     );
