@@ -64,7 +64,20 @@ const api = {
             })
     },
     detailArtical: (params, callback) => {
-        axios.get('/detailArtical/' + params, {})
+        axios.get('/detailArtical', {
+            params
+        })
+            .then(res => {
+                callback(res)
+            })
+            .catch(err => {
+                return err
+            })
+    },
+    detailComment: (params, callback) => {
+        axios.get('/detailComment', {
+            params
+        })
             .then(res => {
                 callback(res)
             })
@@ -74,17 +87,6 @@ const api = {
     },
     publishArtical: (params, callback) => {
         axios.post('/publishArtical', params)
-            .then(res => {
-                callback(res)
-            })
-            .catch(err => {
-                return err
-            })
-    },
-    getCurrentUser: (params, callback) => {
-        axios.get('/getCurrentUser', {
-            params
-        })
             .then(res => {
                 callback(res)
             })

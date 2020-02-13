@@ -38,31 +38,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var mysql_1 = __importDefault(require("../config/mysql"));
 var jwt_1 = __importDefault(require("../config/jwt"));
 var fs_1 = __importDefault(require("fs"));
-var UserModel = mysql_1.default.sequelize.define('user', {
-    uid: {
-        type: mysql_1.default.Sequelize.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    nickName: mysql_1.default.Sequelize.STRING(100),
-    userName: {
-        type: mysql_1.default.Sequelize.STRING(100),
-        unique: true
-    },
-    passWord: mysql_1.default.Sequelize.STRING(100),
-    Info: mysql_1.default.Sequelize.STRING(100),
-    Github: mysql_1.default.Sequelize.STRING(100),
-    Chrome: mysql_1.default.Sequelize.STRING(100),
-    image: mysql_1.default.Sequelize.TEXT,
-    Date: mysql_1.default.Sequelize.BIGINT,
-    admin: mysql_1.default.Sequelize.BIGINT,
-}, {
-    timestamps: false
-});
-UserModel.sync();
+var mysql_1 = __importDefault(require("../mysql"));
+var UserModel = mysql_1.default.UserModel;
 UserModel.fetch = function () {
     return __awaiter(this, void 0, void 0, function () {
         var r;
@@ -195,35 +174,6 @@ UserModel.logout = function (token) {
         var logined;
         return __generator(this, function (_a) {
             return [2 /*return*/, token];
-        });
-    });
-};
-UserModel.getCurrentUser = function (token) {
-    return __awaiter(this, void 0, void 0, function () {
-        var logined, r;
-        return __generator(this, function (_a) {
-            logined = jwt_1.default.check(token.jwt);
-            delete logined["uid"];
-            delete logined["passWord"];
-            delete logined["admin"];
-            delete logined["iat"];
-            delete logined["userName"];
-            r = {};
-            if (!logined) {
-                r = {
-                    status: -1,
-                    msg: "当前未登录！"
-                };
-            }
-            else {
-                // 登录状态 返回登录人的信息
-                r = {
-                    status: 1,
-                    msg: "当前已登录！",
-                    data: logined
-                };
-            }
-            return [2 /*return*/, r];
         });
     });
 };

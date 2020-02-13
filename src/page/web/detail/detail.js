@@ -16,7 +16,8 @@ class App extends React.Component {
             detailData: {
                 artical_name: '',
                 Date: ''
-            }
+            },
+            commentsData: []
         }
     }
 
@@ -37,7 +38,10 @@ class App extends React.Component {
             articalId: parseInt(params)
         })
         // axios 请求 数据
-        api.detailArtical(parseInt(params), (r) => {
+        api.detailArtical({
+            articalId: params
+        }, (r) => {
+            // 文章内容
             const { data } = r
             const res = data.data
             if (res.status === 1) {
@@ -46,6 +50,7 @@ class App extends React.Component {
                 })
             }
         })
+
     }
 
     render() {
@@ -62,7 +67,7 @@ class App extends React.Component {
                         <div className="detailContent">
                             <p dangerouslySetInnerHTML={{ __html: detail.content }}></p>
                         </div>
-                        <Comment articalId= {this.state.articalId}/>
+                        <Comment articalId={this.state.articalId} />
 
                     </div>
                 </div>

@@ -39,14 +39,14 @@ export class ArticalController {
       }
    }
 
-   @Get("/detailArtical/:id")
+   @Get("/detailArtical")
    @Header("Access-Control-Allow-Origin", localhost)
    @Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
    @Header("Access-Control-Allow-Credentials", "true")
    @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
    @Header("Content-Type", "text/html; charset=utf-8")
-   async getOne(@Param("id") id: number) {
-      const r = await Artical.detail(id)
+   async getOne(@QueryParam("articalId") articalId: number) {
+      const r = await Artical.detail(articalId)
       return {
          data: r
       };

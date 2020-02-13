@@ -1,44 +1,15 @@
-import obj from '../config/mysql'
 import jwt from '../config/jwt'
-const CommentModel = obj.sequelize.define('comments', {
-    cid: {
-        type: obj.Sequelize.INTEGER(11),
-        primaryKey: true,            // 主键
-        autoIncrement: true,         // 自动递增
-        // 文章ID  gindex
-    },
-    uid: {
-        type: obj.Sequelize.BIGINT,
-        allowNull: false
-    }, //用户ID
-    aid: {
-        type: obj.Sequelize.BIGINT,
-        allowNull: false
-    }, // 评论ID
-    Date: obj.Sequelize.BIGINT, // 日期
-    comments: obj.Sequelize.TEXT //评论内容
-}, {
-    timestamps: false
-})
-CommentModel.sync();
-CommentModel.fetch = async function (page: number, search: string) {
-    search = search.trim()
-    let confition = {}
-    const Op = obj.Sequelize.Op
-    if (search) {
-        confition = {
-            artical_name: {
-                [Op.like]: '%' + search + '%',
-            }
-        }
-    }
+import dateBase from '../mysql'
+const CommentModel = dateBase.CommentModel
+
+CommentModel.fetch = async function (articalId: number) {
 
     let r = {}
     await CommentModel.findAndCountAll({
         // 获取所有信息
-        where: confition,
-        limit: 6,
-        offset: (page - 1) * 6,
+        where: {
+            aid: articalId
+        },
         order: [
             ['aid', 'DESC'],
         ],
@@ -68,7 +39,8 @@ CommentModel.sendComment = async function (res: any, token: any) {
         // 获取所有信息
         uid: uid,
         aid: articleId,
-        comments: content
+        comments: content,
+        Date: res.date
     }).then(function (result: any) {
         r = {
             status: 1,

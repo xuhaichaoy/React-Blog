@@ -38,19 +38,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var mysql_1 = __importDefault(require("../config/mysql"));
-var EnterArtical = mysql_1.default.sequelize.define('enterartical', {
-    aid: {
-        type: mysql_1.default.Sequelize.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    artical_name: mysql_1.default.Sequelize.STRING(100),
-    artical_achour: mysql_1.default.Sequelize.STRING(100),
-    artical_href: mysql_1.default.Sequelize.STRING(100),
-}, {
-    timestamps: false
-});
+var mysql_1 = __importDefault(require("../mysql"));
+var EnterArtical = mysql_1.default.EnterArtical;
 EnterArtical.fetch = function () {
     return __awaiter(this, void 0, void 0, function () {
         var r;

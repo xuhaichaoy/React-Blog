@@ -12,7 +12,6 @@ const storage = localStorage.getItem("hc_state")
 if (storage) {
     defaultState = JSON.parse(storage)
 }
-console.log(defaultState)
 export default (state = defaultState, action) => {
     // 只能接收state，不能改变state
     let newState

@@ -38,50 +38,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var mysql_1 = __importDefault(require("../config/mysql"));
 var jwt_1 = __importDefault(require("../config/jwt"));
-var CommentModel = mysql_1.default.sequelize.define('comments', {
-    cid: {
-        type: mysql_1.default.Sequelize.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    uid: {
-        type: mysql_1.default.Sequelize.BIGINT,
-        allowNull: false
-    },
-    aid: {
-        type: mysql_1.default.Sequelize.BIGINT,
-        allowNull: false
-    },
-    Date: mysql_1.default.Sequelize.BIGINT,
-    comments: mysql_1.default.Sequelize.TEXT //评论内容
-}, {
-    timestamps: false
-});
-CommentModel.sync();
-CommentModel.fetch = function (page, search) {
+var mysql_1 = __importDefault(require("../mysql"));
+var CommentModel = mysql_1.default.CommentModel;
+CommentModel.fetch = function (articalId) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, confition, Op, r;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var r;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    search = search.trim();
-                    confition = {};
-                    Op = mysql_1.default.Sequelize.Op;
-                    if (search) {
-                        confition = {
-                            artical_name: (_a = {},
-                                _a[Op.like] = '%' + search + '%',
-                                _a)
-                        };
-                    }
                     r = {};
                     return [4 /*yield*/, CommentModel.findAndCountAll({
                             // 获取所有信息
-                            where: confition,
-                            limit: 6,
-                            offset: (page - 1) * 6,
+                            where: {
+                                aid: articalId
+                            },
                             order: [
                                 ['aid', 'DESC'],
                             ],
@@ -99,7 +70,7 @@ CommentModel.fetch = function (page, search) {
                             };
                         })];
                 case 1:
-                    _b.sent();
+                    _a.sent();
                     return [2 /*return*/, r];
             }
         });
@@ -120,7 +91,8 @@ CommentModel.sendComment = function (res, token) {
                             // 获取所有信息
                             uid: uid,
                             aid: articleId,
-                            comments: content
+                            comments: content,
+                            Date: res.date
                         }).then(function (result) {
                             r = {
                                 status: 1,

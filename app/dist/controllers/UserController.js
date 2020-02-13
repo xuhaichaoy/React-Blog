@@ -122,21 +122,6 @@ var UserController = /** @class */ (function () {
             });
         });
     };
-    UserController.prototype.getCurrentUser = function (params) {
-        return __awaiter(this, void 0, void 0, function () {
-            var r;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, Users_1.default.getCurrentUser(params)];
-                    case 1:
-                        r = _a.sent();
-                        return [2 /*return*/, {
-                                data: r
-                            }];
-                }
-            });
-        });
-    };
     UserController.prototype.logout = function (params, res) {
         return __awaiter(this, void 0, void 0, function () {
             var r;
@@ -194,15 +179,6 @@ var UserController = /** @class */ (function () {
         routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8"),
         __param(0, routing_controllers_1.Body()), __param(1, routing_controllers_1.CookieParams())
     ], UserController.prototype, "changeData", null);
-    __decorate([
-        routing_controllers_1.Get("/getCurrentUser"),
-        routing_controllers_1.Header("Access-Control-Allow-Origin", localhost_1.default),
-        routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
-        routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
-        routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
-        routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8"),
-        __param(0, routing_controllers_1.CookieParams())
-    ], UserController.prototype, "getCurrentUser", null);
     __decorate([
         routing_controllers_1.Get("/logout"),
         routing_controllers_1.Header("Access-Control-Allow-Origin", localhost_1.default),

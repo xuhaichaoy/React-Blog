@@ -68,8 +68,11 @@ class DrawerForm extends React.Component {
                     useInfo: data.data
                 }
                 store.dispatch(action)
+                this.setState({
+                    visible: false,
+                });
+                message.success('修改成功')
             }
-            console.log(res)
         })
     }
 

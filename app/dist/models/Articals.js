@@ -40,27 +40,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var mysql_1 = __importDefault(require("../config/mysql"));
 var jwt_1 = __importDefault(require("../config/jwt"));
-var UserModel = mysql_1.default.sequelize.define('artical', {
-    aid: {
-        type: mysql_1.default.Sequelize.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    cid: mysql_1.default.Sequelize.BIGINT,
-    artical_name: mysql_1.default.Sequelize.STRING(100),
-    artical_status: mysql_1.default.Sequelize.BIGINT,
-    tag_id: mysql_1.default.Sequelize.STRING(100),
-    category_id: mysql_1.default.Sequelize.STRING(100),
-    viewCount: mysql_1.default.Sequelize.STRING(100),
-    content: mysql_1.default.Sequelize.TEXT,
-    values: mysql_1.default.Sequelize.TEXT,
-    Date: mysql_1.default.Sequelize.BIGINT,
-    comments_id: mysql_1.default.Sequelize.BIGINT //评论内容
-}, {
-    timestamps: false
-});
-UserModel.sync();
-UserModel.fetch = function (page, search) {
+var mysql_2 = __importDefault(require("../mysql"));
+var ArticalModel = mysql_2.default.ArticalModel;
+ArticalModel.fetch = function (page, search) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, confition, Op, r;
         return __generator(this, function (_b) {
@@ -77,7 +59,7 @@ UserModel.fetch = function (page, search) {
                         };
                     }
                     r = {};
-                    return [4 /*yield*/, UserModel.findAndCountAll({
+                    return [4 /*yield*/, ArticalModel.findAndCountAll({
                             // 获取所有信息
                             attributes: ['aid', 'artical_name', 'content'],
                             where: confition,
@@ -106,14 +88,14 @@ UserModel.fetch = function (page, search) {
         });
     });
 };
-UserModel.fetchMine = function (page) {
+ArticalModel.fetchMine = function (page) {
     return __awaiter(this, void 0, void 0, function () {
         var r;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     r = {};
-                    return [4 /*yield*/, UserModel.findAndCountAll({
+                    return [4 /*yield*/, ArticalModel.findAndCountAll({
                             // 获取所有信息
                             attributes: ['aid', 'artical_name'],
                             limit: 6,
@@ -141,14 +123,14 @@ UserModel.fetchMine = function (page) {
         });
     });
 };
-UserModel.detail = function (id) {
+ArticalModel.detail = function (id) {
     return __awaiter(this, void 0, void 0, function () {
         var r;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     r = {};
-                    return [4 /*yield*/, UserModel.findAll({
+                    return [4 /*yield*/, ArticalModel.findAll({
                             attributes: ['aid', 'artical_name', 'content'],
                             // 获取所有信息
                             where: {
@@ -174,7 +156,7 @@ UserModel.detail = function (id) {
         });
     });
 };
-UserModel.publish = function (value) {
+ArticalModel.publish = function (value) {
     return __awaiter(this, void 0, void 0, function () {
         var myDate, r;
         return __generator(this, function (_a) {
@@ -182,7 +164,7 @@ UserModel.publish = function (value) {
                 case 0:
                     myDate = new Date();
                     r = {};
-                    return [4 /*yield*/, UserModel.create({
+                    return [4 /*yield*/, ArticalModel.create({
                             // 获取所有信息
                             cid: 1,
                             artical_status: 1,
@@ -212,14 +194,14 @@ UserModel.publish = function (value) {
         });
     });
 };
-UserModel.list = function () {
+ArticalModel.list = function () {
     return __awaiter(this, void 0, void 0, function () {
         var r;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     r = {};
-                    return [4 /*yield*/, UserModel.findAll({
+                    return [4 /*yield*/, ArticalModel.findAll({
                             attributes: ['aid', 'artical_name'],
                             // 获取所有信息
                             limit: 7,
@@ -246,7 +228,7 @@ UserModel.list = function () {
         });
     });
 };
-UserModel.delete = function (value, token) {
+ArticalModel.delete = function (value, token) {
     return __awaiter(this, void 0, void 0, function () {
         var currentUser, uid, r;
         return __generator(this, function (_a) {
@@ -255,7 +237,7 @@ UserModel.delete = function (value, token) {
                     currentUser = jwt_1.default.check(token.jwt);
                     uid = currentUser.uid;
                     r = {};
-                    return [4 /*yield*/, UserModel.destroy({
+                    return [4 /*yield*/, ArticalModel.destroy({
                             where: {
                                 cid: uid,
                                 aid: value.aid
@@ -282,4 +264,4 @@ UserModel.delete = function (value, token) {
         });
     });
 };
-exports.default = UserModel;
+exports.default = ArticalModel;

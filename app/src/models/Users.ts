@@ -1,29 +1,8 @@
-import obj from '../config/mysql'
 import jwt from '../config/jwt'
 import fs from "fs"
+import dateBase from '../mysql'
+const UserModel = dateBase.UserModel
 
-const UserModel = obj.sequelize.define('user', {
-    uid: {
-        type: obj.Sequelize.INTEGER(11),
-        primaryKey: true,            // 主键
-        autoIncrement: true,         // 自动递增
-    },
-    nickName: obj.Sequelize.STRING(100),
-    userName: {
-        type: obj.Sequelize.STRING(100),
-        unique: true
-    },
-    passWord: obj.Sequelize.STRING(100),
-    Info: obj.Sequelize.STRING(100),
-    Github: obj.Sequelize.STRING(100),
-    Chrome: obj.Sequelize.STRING(100),
-    image: obj.Sequelize.TEXT,
-    Date: obj.Sequelize.BIGINT,
-    admin: obj.Sequelize.BIGINT,
-}, {
-    timestamps: false
-})
-UserModel.sync();
 UserModel.fetch = async function () {
     let r = {}
     await UserModel.findAll({
@@ -150,31 +129,6 @@ UserModel.logout = async function (token: any) {
     // return r
 };
 
-UserModel.getCurrentUser = async function (token: any) {
-    let logined = jwt.check(token.jwt)
-    delete logined["uid"]
-    delete logined["passWord"]
-    delete logined["admin"]
-    delete logined["iat"]
-    delete logined["userName"]
-
-    let r = {}
-    if (!logined) {
-        r = {
-            status: -1,
-            msg: "当前未登录！"
-        }
-    } else {
-        // 登录状态 返回登录人的信息
-        r = {
-            status: 1,
-            msg: "当前已登录！",
-            data: logined
-        }
-    }
-    return r
-};
-
 UserModel.writePic = async function (imgfile: any) {
     var base64Data = imgfile.replace(/^data:image\/\w+;base64,/, "");
     var dataBuffer = Buffer.from(base64Data, 'base64');
@@ -186,7 +140,7 @@ UserModel.writePic = async function (imgfile: any) {
         }
     });
     return url
-    
+
 }
 
 UserModel.changeData = async function (data: any, token: any) {
@@ -198,8 +152,8 @@ UserModel.changeData = async function (data: any, token: any) {
 
     if (imgfile.length > 1000) {
         imgfile = await UserModel.writePic(imgfile)
-        url = 'http://localhost:3000'+imgfile.slice(1)
-    }else {
+        url = 'http://localhost:3000' + imgfile.slice(1)
+    } else {
         url = data.image
     }
     await UserModel.update({

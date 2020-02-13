@@ -44,7 +44,7 @@ class App extends React.Component {
       comments: [],
       submitting: false,
       value: "",
-      store: store.getState()
+      store: store.getState(),
     };
     store.subscribe(this.storeChange)
   }
@@ -53,6 +53,34 @@ class App extends React.Component {
     this.setState({
       store: store.getState()
     })
+  }
+
+  componentDidMount() {
+    // todo 
+    // 路由变化时 需要重新拉数据
+    const _this = this
+
+    api.detailComment({
+      articalId: this.props.articalId
+    }, (r) => {
+      // 评论
+      const { data } = r.data
+      const res = data
+      if (res.status === 1) {
+
+        let arr = res.list.rows
+        for (let i = 0; i < arr.length; i++) {
+          arr[i].author = arr[i].uid
+          arr[i].avatar = arr[i].uid
+          arr[i].content = arr[i].comments
+          arr[i].datetime = arr[i].Date
+        }
+        _this.setState({
+          comments: arr
+        })
+      }
+    })
+
   }
 
   handleSubmit = () => {
@@ -68,7 +96,8 @@ class App extends React.Component {
 
     const params = {
       articalId: this.props.articalId,
-      content: this.state.value
+      content: this.state.value,
+      date: new Date().getTime()
     }
     // axios 请求 数据
     api.sendComment(params, (r) => {
@@ -121,7 +150,7 @@ class App extends React.Component {
           }
           content={
             <Editor
-              onChange={this.handleChange} margin
+              onChange={this.handleChange}
               onSubmit={this.handleSubmit}
               submitting={submitting}
               value={value}

@@ -10,16 +10,15 @@ import localhost from '../config/localhost'
 
 export class CommentsController {
 
-   @Get("/asdasdasd")
+   @Get("/detailComment")
    @Header("Access-Control-Allow-Origin", localhost)
    @Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
    @Header("Access-Control-Allow-Credentials", "true")
    @Header("Access-Control-Allow-Headers", "X-Requested-With, token")
    @Header("Content-Type", "text/html; charset=utf-8")
-   async getAll(@QueryParam("page") page: number, @QueryParam("search") search: any) {
-      // 获取所有文章信息
-      console.log(search)
-      const r = await Comments.fetch(page, search) 
+   async detailComment(@QueryParam("articalId") articalId: number) {
+      // 获取所有文章信息res
+      const r = await Comments.fetch(articalId) 
       return {
          data: r
       }

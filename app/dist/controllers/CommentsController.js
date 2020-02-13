@@ -54,15 +54,12 @@ var localhost_1 = __importDefault(require("../config/localhost"));
 var CommentsController = /** @class */ (function () {
     function CommentsController() {
     }
-    CommentsController.prototype.getAll = function (page, search) {
+    CommentsController.prototype.detailComment = function (articalId) {
         return __awaiter(this, void 0, void 0, function () {
             var r;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        // 获取所有文章信息
-                        console.log(search);
-                        return [4 /*yield*/, Comments_1.default.fetch(page, search)];
+                    case 0: return [4 /*yield*/, Comments_1.default.fetch(articalId)];
                     case 1:
                         r = _a.sent();
                         return [2 /*return*/, {
@@ -94,14 +91,14 @@ var CommentsController = /** @class */ (function () {
         return "Removing user...";
     };
     __decorate([
-        routing_controllers_1.Get("/asdasdasd"),
+        routing_controllers_1.Get("/detailComment"),
         routing_controllers_1.Header("Access-Control-Allow-Origin", localhost_1.default),
         routing_controllers_1.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"),
         routing_controllers_1.Header("Access-Control-Allow-Credentials", "true"),
         routing_controllers_1.Header("Access-Control-Allow-Headers", "X-Requested-With, token"),
         routing_controllers_1.Header("Content-Type", "text/html; charset=utf-8"),
-        __param(0, routing_controllers_1.QueryParam("page")), __param(1, routing_controllers_1.QueryParam("search"))
-    ], CommentsController.prototype, "getAll", null);
+        __param(0, routing_controllers_1.QueryParam("articalId"))
+    ], CommentsController.prototype, "detailComment", null);
     __decorate([
         routing_controllers_1.Post("/sendComment"),
         routing_controllers_1.Header("Access-Control-Allow-Origin", localhost_1.default),

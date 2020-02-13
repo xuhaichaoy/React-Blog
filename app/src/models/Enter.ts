@@ -1,18 +1,5 @@
-import obj from '../config/mysql'
-
-const EnterArtical = obj.sequelize.define('enterartical', {
-    aid: {
-        type: obj.Sequelize.INTEGER(11),
-        primaryKey: true,            // 主键
-        autoIncrement: true,         // 自动递增
-        // 文章ID
-    },
-    artical_name: obj.Sequelize.STRING(100),
-    artical_achour: obj.Sequelize.STRING(100),
-    artical_href: obj.Sequelize.STRING(100),
-}, {
-    timestamps: false
-})
+import dateBase from '../mysql'
+const EnterArtical = dateBase.EnterArtical
 
 
 EnterArtical.fetch = async function () {

@@ -1,27 +1,9 @@
 import obj from '../config/mysql'
 import jwt from '../config/jwt'
-const UserModel = obj.sequelize.define('artical', {
-    aid: {
-        type: obj.Sequelize.INTEGER(11),
-        primaryKey: true,            // 主键
-        autoIncrement: true,         // 自动递增
-        // 文章ID
-    },
-    cid: obj.Sequelize.BIGINT, // 作者ID
-    artical_name: obj.Sequelize.STRING(100), // 文章名
-    artical_status: obj.Sequelize.BIGINT, // 文章状态
-    tag_id: obj.Sequelize.STRING(100), // 标签ID
-    category_id: obj.Sequelize.STRING(100), // 分类ID
-    viewCount: obj.Sequelize.STRING(100), // 阅读数量
-    content: obj.Sequelize.TEXT, // 文章内容
-    values: obj.Sequelize.TEXT,
-    Date: obj.Sequelize.BIGINT, // 日期
-    comments_id: obj.Sequelize.BIGINT //评论内容
-}, {
-    timestamps: false
-})
-UserModel.sync();
-UserModel.fetch = async function (page: number, search: string) {
+import dateBase from '../mysql'
+const ArticalModel = dateBase.ArticalModel
+
+ArticalModel.fetch = async function (page: number, search: string) {
     search = search.trim()
     let confition = {}
     const Op = obj.Sequelize.Op
@@ -34,7 +16,7 @@ UserModel.fetch = async function (page: number, search: string) {
     }
 
     let r = {}
-    await UserModel.findAndCountAll({
+    await ArticalModel.findAndCountAll({
         // 获取所有信息
         attributes: ['aid', 'artical_name', 'content'],
         where: confition,
@@ -58,9 +40,9 @@ UserModel.fetch = async function (page: number, search: string) {
     })
     return r
 };
-UserModel.fetchMine = async function (page: number) {
+ArticalModel.fetchMine = async function (page: number) {
     let r = {}
-    await UserModel.findAndCountAll({
+    await ArticalModel.findAndCountAll({
         // 获取所有信息
         attributes: ['aid', 'artical_name'],
         limit: 6,
@@ -83,9 +65,9 @@ UserModel.fetchMine = async function (page: number) {
     })
     return r
 };
-UserModel.detail = async function (id: number) {
+ArticalModel.detail = async function (id: number) {
     let r = {}
-    await UserModel.findAll({ 
+    await ArticalModel.findAll({
         attributes: ['aid', 'artical_name', 'content'],
         // 获取所有信息
         where: {
@@ -110,10 +92,10 @@ UserModel.detail = async function (id: number) {
     })
     return r
 }
-UserModel.publish = async function (value: any) {
+ArticalModel.publish = async function (value: any) {
     const myDate = new Date()
     let r = {}
-    await UserModel.create({
+    await ArticalModel.create({
         // 获取所有信息
         cid: 1,
         artical_status: 1,
@@ -139,9 +121,9 @@ UserModel.publish = async function (value: any) {
     })
     return r
 };
-UserModel.list = async function () {
+ArticalModel.list = async function () {
     let r = {}
-    await UserModel.findAll({
+    await ArticalModel.findAll({
         attributes: ['aid', 'artical_name'],
         // 获取所有信息
         limit: 7,
@@ -163,15 +145,15 @@ UserModel.list = async function () {
     })
     return r
 };
-UserModel.delete = async function (value: any, token: any) {
+ArticalModel.delete = async function (value: any, token: any) {
     const currentUser = jwt.check(token.jwt)
     const uid = currentUser.uid
     let r = {}
-    await UserModel.destroy({
-       where: {
-           cid: uid,
-           aid: value.aid
-       }
+    await ArticalModel.destroy({
+        where: {
+            cid: uid,
+            aid: value.aid
+        }
     }).then(function (result: any) {
         r = {
             status: 1,
@@ -194,4 +176,4 @@ UserModel.delete = async function (value: any, token: any) {
 
 
 
-export default UserModel
+export default ArticalModel
