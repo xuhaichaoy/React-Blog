@@ -80,7 +80,7 @@ var UserController = /** @class */ (function () {
                         res.cookie('jwt', r.token, {
                             domain: 'localhost',
                             path: '/',
-                            maxAge: 1000 * 60 * 60 * 1,
+                            maxAge: 1000 * 60 * 60 * 10,
                             // expires:new Date('2019-07-06'),
                             httpOnly: true,
                             overwrite: false

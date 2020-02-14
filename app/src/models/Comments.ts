@@ -35,6 +35,7 @@ CommentModel.sendComment = async function (res: any, token: any) {
     const articleId = res.articalId
     const content = res.content
     let r = {}
+    
     await CommentModel.create({
         // 获取所有信息
         uid: uid,

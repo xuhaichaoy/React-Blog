@@ -8,7 +8,7 @@ let defaultState = {
         'Ant-Design'
     ]
 }
-const storage = localStorage.getItem("hc_state")
+const storage = sessionStorage.getItem("hc_state")
 if (storage) {
     defaultState = JSON.parse(storage)
 }
@@ -27,7 +27,7 @@ export default (state = defaultState, action) => {
     }
 
     if (newState) {
-        localStorage.setItem("hc_state", JSON.stringify(newState))
+        sessionStorage.setItem("hc_state", JSON.stringify(newState))
         return newState
     }
 

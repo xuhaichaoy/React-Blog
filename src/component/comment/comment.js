@@ -45,6 +45,7 @@ class App extends React.Component {
       submitting: false,
       value: "",
       store: store.getState(),
+      articalId: 0
     };
     store.subscribe(this.storeChange)
   }
@@ -55,13 +56,29 @@ class App extends React.Component {
     })
   }
 
+  componentWillReceiveProps(prevProps, prevState) {
+    // var index = parseInt(window.location.href.slice(window.location.href.lastIndexOf('/') + 1))
+    // this.setState({
+    //   articalId: index
+    // })
+    // if (index !== prevProps.articalId) {
+     
+    // }
+    // this.componentDidMount()
+  }
+
   componentDidMount() {
     // todo 
     // 路由变化时 需要重新拉数据
+    // 接口数据拉取两次
     const _this = this
-
+    var index = parseInt(window.location.href.slice(window.location.href.lastIndexOf('/') + 1))
+    this.setState({
+      articalId: index
+    })
+    console.log(this.state.articalId)
     api.detailComment({
-      articalId: this.props.articalId
+      articalId: this.state.articalId
     }, (r) => {
       // 评论
       const { data } = r.data
@@ -95,7 +112,7 @@ class App extends React.Component {
     }
 
     const params = {
-      articalId: this.props.articalId,
+      articalId: this.state.articalId,
       content: this.state.value,
       date: new Date().getTime()
     }
