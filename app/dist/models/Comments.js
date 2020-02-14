@@ -40,7 +40,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var jwt_1 = __importDefault(require("../config/jwt"));
 var mysql_1 = __importDefault(require("../mysql"));
+var mysql_2 = __importDefault(require("../config/mysql"));
 var CommentModel = mysql_1.default.CommentModel;
+var UserModel = mysql_1.default.UserModel;
+var Op = mysql_2.default.Sequelize.Op;
 CommentModel.fetch = function (articalId) {
     return __awaiter(this, void 0, void 0, function () {
         var r;
@@ -54,14 +57,61 @@ CommentModel.fetch = function (articalId) {
                                 aid: articalId
                             },
                             order: [
-                                ['aid', 'DESC'],
+                                ['cid', 'DESC'],
                             ],
                         }).then(function (result) {
-                            r = {
-                                status: 1,
-                                msg: "success",
-                                list: JSON.parse(JSON.stringify(result))
-                            };
+                            return __awaiter(this, void 0, void 0, function () {
+                                var _a, arr, obj, array, i, key, confition;
+                                return __generator(this, function (_b) {
+                                    switch (_b.label) {
+                                        case 0:
+                                            arr = JSON.parse(JSON.stringify(result)).rows;
+                                            obj = {};
+                                            array = [];
+                                            for (i = 0; i < arr.length; i++) {
+                                                obj[arr[i].uid] = 1;
+                                            }
+                                            for (key in obj) {
+                                                array.push(parseInt(key));
+                                            }
+                                            confition = {
+                                                uid: (_a = {},
+                                                    _a[Op.in] = array,
+                                                    _a)
+                                            };
+                                            return [4 /*yield*/, UserModel.findAll({
+                                                    attributes: ['nickName', 'image', 'uid'],
+                                                    where: confition,
+                                                }).then(function (result) {
+                                                    var userArr = JSON.parse(JSON.stringify(result));
+                                                    var userObj = {};
+                                                    for (var i = 0; i < userArr.length; i++) {
+                                                        userObj[userArr[i].uid] = userArr[i];
+                                                    }
+                                                    for (var i = 0; i < arr.length; i++) {
+                                                        arr[i]['user'] = userObj[arr[i].uid];
+                                                    }
+                                                }).catch(function (err) {
+                                                    r = {
+                                                        status: -1000,
+                                                        msg: "error",
+                                                        data: err // 正常
+                                                    };
+                                                })];
+                                        case 1:
+                                            _b.sent();
+                                            r = {
+                                                status: 1,
+                                                msg: "success",
+                                                list: {
+                                                    count: JSON.parse(JSON.stringify(result)).count,
+                                                    rows: arr
+                                                },
+                                            };
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            });
                         }).catch(function (err) {
                             r = {
                                 status: -1000,
@@ -92,7 +142,7 @@ CommentModel.sendComment = function (res, token) {
                             uid: uid,
                             aid: articleId,
                             comments: content,
-                            Date: res.date
+                            Date: res.date,
                         }).then(function (result) {
                             r = {
                                 status: 1,

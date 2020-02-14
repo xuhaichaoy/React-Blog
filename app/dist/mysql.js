@@ -80,6 +80,4 @@ var dateBase = {
 dateBase.ArticalModel.sync();
 dateBase.CommentModel.sync();
 dateBase.UserModel.sync();
-// todo
-// 需要联表查询
 exports.default = dateBase;

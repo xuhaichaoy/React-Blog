@@ -45,7 +45,6 @@ class App extends React.Component {
       submitting: false,
       value: "",
       store: store.getState(),
-      articalId: 0
     };
     store.subscribe(this.storeChange)
   }
@@ -56,29 +55,13 @@ class App extends React.Component {
     })
   }
 
-  componentWillReceiveProps(prevProps, prevState) {
-    // var index = parseInt(window.location.href.slice(window.location.href.lastIndexOf('/') + 1))
-    // this.setState({
-    //   articalId: index
-    // })
-    // if (index !== prevProps.articalId) {
-     
-    // }
-    // this.componentDidMount()
-  }
-
   componentDidMount() {
     // todo 
     // 路由变化时 需要重新拉数据
-    // 接口数据拉取两次
     const _this = this
-    var index = parseInt(window.location.href.slice(window.location.href.lastIndexOf('/') + 1))
-    this.setState({
-      articalId: index
-    })
-    console.log(this.state.articalId)
+
     api.detailComment({
-      articalId: this.state.articalId
+      articalId: this.props.articalId
     }, (r) => {
       // 评论
       const { data } = r.data
@@ -87,8 +70,8 @@ class App extends React.Component {
 
         let arr = res.list.rows
         for (let i = 0; i < arr.length; i++) {
-          arr[i].author = arr[i].uid
-          arr[i].avatar = arr[i].uid
+          arr[i].author = arr[i].user.nickName ? arr[i].user.nickName : "游客"
+          arr[i].avatar = arr[i].user.image ? arr[i].user.image: 'https://avatar.csdnimg.cn/D/5/7/3_qq_34648151.jpg'
           arr[i].content = arr[i].comments
           arr[i].datetime = arr[i].Date
         }
@@ -112,7 +95,7 @@ class App extends React.Component {
     }
 
     const params = {
-      articalId: this.state.articalId,
+      articalId: this.props.articalId,
       content: this.state.value,
       date: new Date().getTime()
     }
