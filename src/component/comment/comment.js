@@ -63,8 +63,8 @@ class App extends React.Component {
     // todo
     // 执行了两次 
     // 需要优化
-    console.log(11111111111111111)
     this.getDetail()
+
   }
 
   getDetail = () => {

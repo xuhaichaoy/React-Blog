@@ -42,20 +42,30 @@ var mysql_1 = __importDefault(require("../config/mysql"));
 var jwt_1 = __importDefault(require("../config/jwt"));
 var mysql_2 = __importDefault(require("../mysql"));
 var ArticalModel = mysql_2.default.ArticalModel;
+var Op = mysql_1.default.Sequelize.Op;
 ArticalModel.fetch = function (page, search) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, confition, Op, r;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var _a, _b, _c, confition, r;
+        return __generator(this, function (_d) {
+            switch (_d.label) {
                 case 0:
                     search = search.trim();
                     confition = {};
-                    Op = mysql_1.default.Sequelize.Op;
                     if (search) {
                         confition = {
                             artical_name: (_a = {},
                                 _a[Op.like] = '%' + search + '%',
-                                _a)
+                                _a),
+                            aid: (_b = {},
+                                _b[Op.ne] = 99999,
+                                _b)
+                        };
+                    }
+                    else {
+                        confition = {
+                            aid: (_c = {},
+                                _c[Op.ne] = 99999,
+                                _c)
                         };
                     }
                     r = {};
@@ -82,7 +92,7 @@ ArticalModel.fetch = function (page, search) {
                             };
                         })];
                 case 1:
-                    _b.sent();
+                    _d.sent();
                     return [2 /*return*/, r];
             }
         });
@@ -196,9 +206,9 @@ ArticalModel.publish = function (value) {
 };
 ArticalModel.list = function () {
     return __awaiter(this, void 0, void 0, function () {
-        var r;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var _a, r;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
                     r = {};
                     return [4 /*yield*/, ArticalModel.findAll({
@@ -208,6 +218,11 @@ ArticalModel.list = function () {
                             order: [
                                 ['aid', 'DESC'],
                             ],
+                            where: {
+                                aid: (_a = {},
+                                    _a[Op.ne] = 99999,
+                                    _a)
+                            }
                         }).then(function (result) {
                             r = {
                                 status: 1,
@@ -222,7 +237,7 @@ ArticalModel.list = function () {
                             };
                         })];
                 case 1:
-                    _a.sent();
+                    _b.sent();
                     return [2 /*return*/, r];
             }
         });

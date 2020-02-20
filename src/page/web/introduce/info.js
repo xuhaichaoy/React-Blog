@@ -27,7 +27,7 @@ class App extends React.Component {
             <Descriptions.Item label="Occupation" span={3}>前端 | 全栈 开发</Descriptions.Item>
             <Descriptions.Item label="采用的技术" span={3}>React + Antd + Redux + Nodejs + MySQL + TypeScript + Routing-Controllers + Sequelize</Descriptions.Item>
           </Descriptions>
-          <Comments></Comments>
+          <Comments articalId={ 99999 }></Comments>
         </div>
       </div>
     );

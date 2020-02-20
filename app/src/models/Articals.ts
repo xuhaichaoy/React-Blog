@@ -2,17 +2,26 @@ import obj from '../config/mysql'
 import jwt from '../config/jwt'
 import dateBase from '../mysql'
 const ArticalModel = dateBase.ArticalModel
+const Op = obj.Sequelize.Op
 
 ArticalModel.fetch = async function (page: number, search: string) {
     search = search.trim()
     let confition = {}
-    const Op = obj.Sequelize.Op
     if (search) {
         confition = {
             artical_name: {
                 [Op.like]: '%' + search + '%',
+            },
+            aid: {
+                [Op.ne]: 99999
             }
         }
+    }else {
+        confition = {
+            aid: {
+                [Op.ne]: 99999
+            }
+        } 
     }
 
     let r = {}
@@ -130,6 +139,11 @@ ArticalModel.list = async function () {
         order: [
             ['aid', 'DESC'],
         ],
+        where: {
+            aid: {
+                [Op.ne]: 99999
+            }
+        }
     }).then(function (result: any) {
         r = {
             status: 1,
