@@ -56,8 +56,18 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // todo 
-    // 路由变化时 需要重新拉数据
+    this.getDetail()
+  }
+
+  componentWillReceiveProps(prevProps, prevState) {
+    // todo
+    // 执行了两次 
+    // 需要优化
+    console.log(11111111111111111)
+    this.getDetail()
+  }
+
+  getDetail = () => {
     const _this = this
 
     api.detailComment({
@@ -71,16 +81,15 @@ class App extends React.Component {
         let arr = res.list.rows
         for (let i = 0; i < arr.length; i++) {
           arr[i].author = arr[i].user.nickName ? arr[i].user.nickName : "游客"
-          arr[i].avatar = arr[i].user.image ? arr[i].user.image: 'https://avatar.csdnimg.cn/D/5/7/3_qq_34648151.jpg'
+          arr[i].avatar = arr[i].user.image ? arr[i].user.image: '//localhost:3000/upload/1582165807470.png'
           arr[i].content = arr[i].comments
-          arr[i].datetime = arr[i].Date
+          arr[i].datetime = moment(parseInt(arr[i].Date)).format('MMMM Do YYYY, h:mm:ss a')
         }
         _this.setState({
           comments: arr
         })
       }
     })
-
   }
 
   handleSubmit = () => {

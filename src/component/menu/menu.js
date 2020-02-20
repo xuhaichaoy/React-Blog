@@ -6,7 +6,6 @@ import Drawer from "../drawer/drawer";
 import api from "../../config/http";
 import { BrowserRouter as Router, Link, withRouter } from "react-router-dom";
 import "./menu.css";
-import Img from "../../static/1.jpeg";
 
 const { SubMenu } = Menu;
 const { Search } = Input;
@@ -150,7 +149,7 @@ class App extends React.Component {
         <div className="user">
           <Icon type="bell" className="bell" />
           <Dropdown overlay={menu} trigger={["click"]} className="userImg">
-            <Avatar className="avatar ant-dropdown-link" src={Img} />
+            <Avatar className="avatar ant-dropdown-link" src={this.state.store.useInfo.image} />
           </Dropdown>
         </div>
       );

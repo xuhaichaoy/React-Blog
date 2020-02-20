@@ -22,7 +22,6 @@ class App extends React.Component {
     api.getmine({}, (r) => {
       const { data } = r
       const res = data.data
-      console.log(res)
     })
 
 
