@@ -142,6 +142,17 @@ const api = {
                 return err
             })
     },
+    getTime: (params, callback) => {
+        axios.get('/getTime', {
+            params
+        })
+            .then(res => {
+                callback(res)
+            })
+            .catch(err => {
+                return err
+            }) 
+    }
 }
 
 export default api

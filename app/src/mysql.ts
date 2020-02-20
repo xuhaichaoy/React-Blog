@@ -74,12 +74,27 @@ const dateBase = {
         admin: obj.Sequelize.BIGINT,
     }, {
         timestamps: false
-    })
+    }),
+    TimeModel: obj.sequelize.define('time', {
+        tid: {
+            type: obj.Sequelize.INTEGER(11),
+            primaryKey: true,            // 主键
+            autoIncrement: true,         // 自动递增
+            // 时间轴ID  gindex
+        },
+        special: obj.Sequelize.INTEGER(2),
+        status: obj.Sequelize.STRING(10), // 时间点状态  red green grey
+        Date: obj.Sequelize.STRING(30), // 日期
+        content: obj.Sequelize.TEXT //评论内容
+    }, {
+        timestamps: false
+    }),
 
 
 }
 dateBase.ArticalModel.sync();
 dateBase.CommentModel.sync();
 dateBase.UserModel.sync();
+dateBase.TimeModel.sync();
 
 export default dateBase

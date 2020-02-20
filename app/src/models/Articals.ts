@@ -59,6 +59,11 @@ ArticalModel.fetchMine = async function (page: number) {
         order: [
             ['aid', 'DESC'],
         ],
+        where: {
+            aid: {
+                [Op.ne]: 99999
+            }
+        }
     }).then(function (result: any) {
         r = {
             status: 1,

@@ -75,9 +75,23 @@ var dateBase = {
         admin: mysql_1.default.Sequelize.BIGINT,
     }, {
         timestamps: false
-    })
+    }),
+    TimeModel: mysql_1.default.sequelize.define('time', {
+        tid: {
+            type: mysql_1.default.Sequelize.INTEGER(11),
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        special: mysql_1.default.Sequelize.INTEGER(2),
+        status: mysql_1.default.Sequelize.STRING(10),
+        Date: mysql_1.default.Sequelize.STRING(30),
+        content: mysql_1.default.Sequelize.TEXT //评论内容
+    }, {
+        timestamps: false
+    }),
 };
 dateBase.ArticalModel.sync();
 dateBase.CommentModel.sync();
 dateBase.UserModel.sync();
+dateBase.TimeModel.sync();
 exports.default = dateBase;

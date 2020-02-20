@@ -9,6 +9,7 @@ var UserController_1 = require("./controllers/UserController");
 var ArticalController_1 = require("./controllers/ArticalController");
 var EnterController_1 = require("./controllers/EnterController");
 var CommentsController_1 = require("./controllers/CommentsController");
+var TimeController_1 = require("./controllers/TimeController");
 var schedule_1 = __importDefault(require("./config/schedule"));
 var serve_static_1 = __importDefault(require("serve-static"));
 var app = routing_controllers_1.createExpressServer({
@@ -23,7 +24,7 @@ var app = routing_controllers_1.createExpressServer({
         }
     },
     cors: true,
-    controllers: [UserController_1.UserController, ArticalController_1.ArticalController, EnterController_1.EnterController, CommentsController_1.CommentsController]
+    controllers: [UserController_1.UserController, ArticalController_1.ArticalController, EnterController_1.EnterController, CommentsController_1.CommentsController, TimeController_1.TimesController]
 });
 schedule_1.default.startSchedule();
 app.use(serve_static_1.default(__dirname));

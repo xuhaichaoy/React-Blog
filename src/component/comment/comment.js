@@ -64,7 +64,6 @@ class App extends React.Component {
     // 执行了两次 
     // 需要优化
     this.getDetail()
-
   }
 
   getDetail = () => {

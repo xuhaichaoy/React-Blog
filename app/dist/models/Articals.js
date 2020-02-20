@@ -100,9 +100,9 @@ ArticalModel.fetch = function (page, search) {
 };
 ArticalModel.fetchMine = function (page) {
     return __awaiter(this, void 0, void 0, function () {
-        var r;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var _a, r;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
                     r = {};
                     return [4 /*yield*/, ArticalModel.findAndCountAll({
@@ -113,6 +113,11 @@ ArticalModel.fetchMine = function (page) {
                             order: [
                                 ['aid', 'DESC'],
                             ],
+                            where: {
+                                aid: (_a = {},
+                                    _a[Op.ne] = 99999,
+                                    _a)
+                            }
                         }).then(function (result) {
                             r = {
                                 status: 1,
@@ -127,7 +132,7 @@ ArticalModel.fetchMine = function (page) {
                             };
                         })];
                 case 1:
-                    _a.sent();
+                    _b.sent();
                     return [2 /*return*/, r];
             }
         });

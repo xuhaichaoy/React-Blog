@@ -146,7 +146,7 @@ class App extends React.Component {
         ];
         return (
             <Row gutter={16}>
-                <Col className="gutter-row" xl={24} xxl={20}>
+                <Col className="gutter-row" xl={24} xxl={19}>
                     <div className="mainStyle" style={{ paddingRight: 10, background: '#fff' }}>
                         <h3>Dashboard</h3>
                         <Breadcrumb>
@@ -221,7 +221,7 @@ class App extends React.Component {
                         </div>
                     </div>
                 </Col>
-                <Col className="gutter-row" xl={0} xxl={4}>
+                <Col className="gutter-row" xl={0} xxl={5}>
                     <div className="rightBar">
                         <Right />
                     </div>
