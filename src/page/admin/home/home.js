@@ -2,23 +2,26 @@ import React from "react";
 import Right from "../../../component/adminRight/right";
 import Echart from "../../../component/echart/echart";
 import Pie from "../../../component/pie/pie";
-import { Breadcrumb, Card, Col, Row, Table, Divider, Tag, Icon, message } from 'antd';
+import { Breadcrumb, Card, Col, Row, Table, Divider, Tag, Icon, message, Modal, Button, Form, Input, Select } from 'antd';
 import api from "../../../config/http";
 import "./home.css";
 
+const { Option } = Select;
+
 const columns = [
     {
-        title: 'Name',
+        title: 'TimeID',
         dataIndex: 'name',
         key: 'name',
         width: 150,
         render: text => <a>{text}</a>,
     },
     {
-        title: 'Age',
+        title: 'Content',
         dataIndex: 'age',
         key: 'age',
         width: 150,
+        render: text => <div style={{ textAlign: 'left' }}>{text}</div>,
     },
     {
         title: 'Action',
@@ -52,6 +55,134 @@ const data = [
     }
 ];
 
+let id = 0;
+
+class DynamicFieldSet extends React.Component {
+    remove = k => {
+        const { form } = this.props;
+        // can use data-binding to get
+        const keys = form.getFieldValue('keys');
+        // We need at least one content
+        if (keys.length === 1) {
+            return;
+        }
+
+        // can use data-binding to set
+        form.setFieldsValue({
+            keys: keys.filter(key => key !== k),
+        });
+    };
+
+    add = () => {
+        const { form } = this.props;
+        // can use data-binding to get
+        const keys = form.getFieldValue('keys');
+        const nextKeys = keys.concat(id++);
+        // can use data-binding to set
+        // important! notify form to detect changes
+        form.setFieldsValue({
+            keys: nextKeys,
+        });
+    };
+
+    handleSubmit = e => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                const { keys, names } = values;
+                console.log('Received values of form: ', values);
+                console.log('Merged values:', keys.map(key => names[key]));
+            }
+        });
+    };
+
+    render() {
+        const { getFieldDecorator, getFieldValue } = this.props.form;
+        const formItemLayout = {
+            labelCol: {
+                xs: { span: 24 },
+                sm: { span: 4 },
+            },
+            wrapperCol: {
+                xs: { span: 24 },
+                sm: { span: 20 },
+            },
+        };
+        const formItemLayoutWithOutLabel = {
+            wrapperCol: {
+                xs: { span: 24, offset: 0 },
+                sm: { span: 20, offset: 4 },
+            },
+        };
+        getFieldDecorator('keys', { initialValue: [] });
+        const keys = getFieldValue('keys');
+        const formItems = keys.map((k, index) => (
+            <Form.Item
+                {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
+                label={index === 0 ? 'Content' : ''}
+                required={true}
+                key={k}
+            >
+                {getFieldDecorator(`names[${k}]`, {
+                    validateTrigger: ['onChange', 'onBlur'],
+                    rules: [
+                        {
+                            required: true,
+                            whitespace: true,
+                            message: "Please input content or delete this field.",
+                        },
+                    ],
+                })(<Input placeholder="contents" style={{ width: '60%', marginRight: 8 }} />)}
+                {keys.length > 1 ? (
+                    <Icon
+                        className="dynamic-delete-button"
+                        type="minus-circle-o"
+                        onClick={() => this.remove(k)}
+                    />
+                ) : null}
+            </Form.Item>
+        ));
+        return (
+            <Form>
+                <Form.Item
+                    {...formItemLayout}
+                    label={'Color'}
+                >
+                    {getFieldDecorator('Color', {
+                        rules: [{ required: true, message: 'Please select your Color!', whitespace: true }],
+                        initialValue: "grey",
+                    })(<Select style={{ width: '60%' }}>
+                            <Option value="grey">Normal</Option>
+                            <Option value="green">Success</Option>
+                            <Option value="red">Red</Option>
+                        </Select>)}
+                </Form.Item>
+
+                <Form.Item
+                    {...formItemLayout}
+                    label={'Special'}
+                >
+                    {getFieldDecorator('Special', {
+                        rules: [{ required: true, message: 'Please select your Special!', whitespace: true }],
+                        initialValue: "0",
+                    })(<Select style={{ width: '60%' }}>
+                        <Option value="0">False</Option>
+                        <Option value="1">True</Option>
+                    </Select>)}
+                </Form.Item>
+                {formItems}
+                <Form.Item {...formItemLayoutWithOutLabel}>
+                    <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
+                        <Icon type="plus" /> Add field
+                    </Button>
+                </Form.Item>
+            </Form>
+        );
+    }
+}
+
+const WrappedDynamicFieldSet = Form.create({ name: 'dynamic_form_item' })(DynamicFieldSet);
+
 
 
 class App extends React.Component {
@@ -60,7 +191,8 @@ class App extends React.Component {
         this.state = {
             page: 1,
             userData: [],
-            allCount: 0
+            allCount: 0,
+            visible: false
         }
     }
 
@@ -68,7 +200,7 @@ class App extends React.Component {
         window.scrollTo(0, 0)
         this.getUserArticles()
         // axios 请求 数据
-       
+
     }
 
     getUserArticles = () => {
@@ -122,6 +254,27 @@ class App extends React.Component {
             }
         })
     }
+
+    addTime = () => {
+        console.log(1111)
+        this.setState({
+            visible: true,
+        });
+    }
+
+    handleOk = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
+
+    handleCancel = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
 
     render() {
         const columnsData = [
@@ -195,8 +348,16 @@ class App extends React.Component {
                                 <h3>Statistics Report</h3>
                                 <p>
                                     Measure How Fast You’re Growing Monthly Recurring Revenue. &nbsp;
-                                                <a href="javascript:;">Learn More</a>
+                                                <a href="javascript:;" onClick={this.addTime.bind(this)}>AddTimeline</a>
                                 </p>
+                                <Modal
+                                    title="AddTimeline Modal"
+                                    visible={this.state.visible}
+                                    onOk={this.handleOk}
+                                    onCancel={this.handleCancel}
+                                >
+                                    <WrappedDynamicFieldSet />
+                                </Modal>
                                 <Table columns={columns} scroll={{ y: 318 }} dataSource={data} pagination={false} className="tableStyle" />
                             </div>
                             <div className="userCharts">
