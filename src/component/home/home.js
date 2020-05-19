@@ -138,7 +138,7 @@ class App extends React.Component {
             }}
             footer={
               <div className="listFoot">
-                <b>haichao</b> 2019
+                <b>haichao</b> 2020
               </div>
             }
             renderItem={(item, index) => (

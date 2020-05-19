@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Sequelize = require('sequelize');
 // Option 1: Passing parameters separately
-var sequelize = new Sequelize('blog', 'root', 'haichao', {
-    host: '106.13.113.36',
+var sequelize = new Sequelize('blog', 'root', 'haichao6909', {
+    host: '117.51.139.177',
     dialect: 'mysql',
+    port: 3308,
     pool: {
         max: 5,
         min: 0,

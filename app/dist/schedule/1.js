@@ -34,33 +34,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var mysql_1 = __importDefault(require("../config/mysql"));
 var puppeteer = require('puppeteer');
 var Pupperteer = {
     fetch: function () {
         return __awaiter(this, void 0, void 0, function () {
-            var EnterArtical, browser, page, UA, chapter_list_url, content, err_1;
+            var browser, page, UA, chapter_list_url, content, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 6, , 7]);
-                        EnterArtical = mysql_1.default.sequelize.define('enterartical', {
-                            aid: {
-                                type: mysql_1.default.Sequelize.INTEGER(11),
-                                primaryKey: true,
-                                autoIncrement: true,
-                            },
-                            artical_name: mysql_1.default.Sequelize.STRING(100),
-                            artical_achour: mysql_1.default.Sequelize.STRING(100),
-                            artical_href: mysql_1.default.Sequelize.STRING(100),
-                        }, {
-                            timestamps: false
-                        });
-                        EnterArtical.sync();
                         return [4 /*yield*/, puppeteer.launch({
                                 // 是否不显示浏览器， 为true则不显示
                                 'headless': true,
@@ -90,22 +73,24 @@ var Pupperteer = {
                         // let chapter_list_url = ``
                         // 打开章节列表
                         _a.sent();
-                        return [4 /*yield*/, page.$eval('#jgyc_div table', function (el) {
-                                var body = document.querySelectorAll('#jgyc_div table tr td:nth-child(9)');
+                        return [4 /*yield*/, page.$eval('.main', function (el) {
+                                var body = document.querySelectorAll('.main table:nth-child(2) td:last-child');
+                                console.log(body);
                                 var arr = [];
                                 for (var i = 0; i < body.length; i++) {
-                                    var obj_1 = {
+                                    var obj = {
                                         artical_name: body[i].childNodes[0].innerText,
                                         artical_href: body[i].childNodes[0].href,
                                         artical_achour: body[i].innerText
                                     };
-                                    arr.push(obj_1);
+                                    arr.push(obj);
                                 }
                                 return arr;
                             })];
                     case 5:
                         content = _a.sent();
-                        EnterArtical.bulkCreate(content);
+                        content.length = 19;
+                        console.log(content);
                         return [3 /*break*/, 7];
                     case 6:
                         err_1 = _a.sent();
@@ -124,4 +109,5 @@ var Pupperteer = {
         });
     },
 };
+Pupperteer.fetch();
 exports.default = Pupperteer;

@@ -40,12 +40,12 @@ const Pupperteer = {
                 // 设置页面视口的大小
             ]);
             // 地址 
-            // let chapter_list_url = `https://www.bqg5200.com/all.html`
-            let chapter_list_url = ``
+            let chapter_list_url = `http://f10.eastmoney.com/ProfitForecast/Index?type=web&code=SZ002223`
+            // let chapter_list_url = ``
             // 打开章节列表
             await page.goto(chapter_list_url);
-            let content = await page.$eval('#main .listlie', (el: any) => {
-                const body = document.querySelectorAll('#main .listlie ul li')
+            let content = await page.$eval('#jgyc_div table', (el: any) => {
+                const body = document.querySelectorAll('#jgyc_div table tr td:nth-child(9)')
                 let arr = []
                 for (let i = 0; i < body.length; i++) {
                     let obj = {

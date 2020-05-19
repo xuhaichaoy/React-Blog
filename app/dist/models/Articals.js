@@ -173,11 +173,10 @@ ArticalModel.detail = function (id) {
 };
 ArticalModel.publish = function (value) {
     return __awaiter(this, void 0, void 0, function () {
-        var myDate, r;
+        var r;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    myDate = new Date();
                     r = {};
                     return [4 /*yield*/, ArticalModel.create({
                             // 获取所有信息
@@ -186,7 +185,6 @@ ArticalModel.publish = function (value) {
                             artical_name: value.artical_name,
                             content: value.content,
                             values: value.values,
-                            Date: myDate
                         }).then(function (result) {
                             r = {
                                 status: 1,

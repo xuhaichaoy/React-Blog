@@ -22,7 +22,7 @@ class App extends React.Component {
             <Descriptions.Item label="Origin" span={3}>山东省 威海市</Descriptions.Item>
             <Descriptions.Item label="University" span={3}>烟台大学</Descriptions.Item>
             <Descriptions.Item label="Specialty" span={3}>软件工程</Descriptions.Item>
-            <Descriptions.Item label="Address" span={3}>北京市 海定区 西二旗</Descriptions.Item>
+            <Descriptions.Item label="Address" span={3}>北京市 海淀区 西二旗</Descriptions.Item>
             <Descriptions.Item label="Company" span={3}>北京六趣网络科技有限公司</Descriptions.Item>
             <Descriptions.Item label="Occupation" span={3}>前端 | 全栈 开发</Descriptions.Item>
             <Descriptions.Item label="采用的技术" span={3}>React + Antd + Redux + Nodejs + MySQL + TypeScript + Routing-Controllers + Sequelize</Descriptions.Item>

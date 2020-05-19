@@ -107,7 +107,7 @@ ArticalModel.detail = async function (id: number) {
     return r
 }
 ArticalModel.publish = async function (value: any) {
-    const myDate = new Date()
+    // const myDate = new Date()
     let r = {}
     await ArticalModel.create({
         // 获取所有信息
@@ -116,7 +116,7 @@ ArticalModel.publish = async function (value: any) {
         artical_name: value.artical_name,
         content: value.content,
         values: value.values,
-        Date: myDate
+        // Date: myDate
     }).then(function (result: any) {
         r = {
             status: 1,
